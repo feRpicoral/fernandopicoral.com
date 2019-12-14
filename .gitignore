@@ -1,3 +1,7 @@
+##WebStorm .gitignore
+.idea/
+
+##Node .gitignore
 # Logs
 logs
 *.log

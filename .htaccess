@@ -1,33 +1,39 @@
-//Rewrite to www
+#Rewrite to www
 Options +FollowSymLinks
 RewriteEngine on
 RewriteCond %{HTTP_HOST} ^fernandopicoral.com[nc]
 RewriteRule ^(.*)$ http://www.fernandopicoral.com/$1 [r=301,nc]
 
-//Custom 403 errors
+#Custom 403 errors
 ErrorDocument 403 /403.html
 
-//Custom 404 errors
+#Custom 404 errors
 ErrorDocument 404 /404.html
 
-//Custom 500 errors
+#Custom 500 errors
 ErrorDocument 500 /500.html
 
-//Prevent viewing of .htaccess file
+#Prevent viewing of .htaccess file
 <Files .htaccess>
 order allow,deny
 deny from all
 </Files>
 
-//Prevent directory listings
+#Prevent directory listings
 Options All -Indexes
 
-//Remove file extension .html & .php
+#Remove file extension .html & .php
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.*)$ $1.html
 
- RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*)$ $1.php
+
+#Deny access to .git files
+<FilesMatch "\.(gitignore|gitattributes)$">
+Order allow,deny
+Deny from all
+</FilesMatch>

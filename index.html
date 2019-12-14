@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!--    TODO Refazer baseado nesse site https://magnetis.com.br/-->
+
+
+    <script src="js/importer.js"></script>
+    <script>
+        let I = new Importer();I.init();
+    </script>
+
+    <!--Custom Fonts and CSS/JS-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,400&display=swap" rel="stylesheet">
+    <script async src="js/main.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/main.css">
+
+    <!--Meta Tags-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+
+    <title>Picoral</title>
+
+</head>
+<body>
+
+
+
+<div id="panels-wrap">
+
+    <span class="trigger"></span>
+    <nav id="main-nav" class="navbar navbar-expand-md navbar-dark text-uppercase  sticky-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links" aria-controls="navbar-links" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-links">
+                <ul class="navbar-nav ml-auto mr-auto">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="first-panel" class="panel">
+        <div class="container-fluid text-center">
+            <h1 id="title">Picoral</h1>
+            <hr id="fst-separator">
+            <h2 id="sub-title">i like to build things</h2>
+            <div id="scroll-anim-wrap" class="d-flex justify-content-center">
+                <p id="scroll-anim">
+                    scroll down
+                    <i class="fal fa-chevron-down d-block pt-2"></i>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="second-panel" class="panel">
+
+
+
+        <div id="projects" class="container-fluid">
+            <h1 class="text-uppercase mb-5" data-aos="fade-right" data-aos-duration="2000">projects</h1>
+
+            <div class="row align-items-center" id="projects-grid">
+
+<!--                TODO Align spacing between arrows and content -->
+                <div class="col-1 d-none d-xl-flex pr-5 pl-0">
+                    <a href="" class="next-project"><i class="fal fa-chevron-circle-left"></i></a>
+                </div>
+
+                <div class="col-12 col-xl-5">
+                    <div class="project card border-primary bg-transparent" data-aos="fade-right-down" data-aos-anchor-placement="center-bottom">
+                        <div class="card-body ">
+
+                        </div>
+                        <div class="card-footer d-flex align-items-end justify-content-center">
+                            <div class="btns-wrap">
+                                <a href="#" class="btn btn-outline-success btn-lg demo">Demo</a>
+                                <a href="#" class="btn p-0 pl-3 git"><i class="fab fa-github git"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-xl-5">
+                    <div class="project card border-primary bg-transparent" data-aos="fade-left">
+
+                    </div>
+                </div>
+
+                <div class="col-1 d-none d-xl-flex pl-5 pr-0">
+                    <a href="" class="next-project"><i class="fal fa-chevron-circle-right"></i></a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <section id="c" class="panel">Scrolling-Panel 2</section>
+    <section id="d" class="panel">Scrolling-Panel 3</section>
+
+</div>
+
+
+</body>
+</html>
