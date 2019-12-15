@@ -1,14 +1,21 @@
 /*
 * Copyright (c) 2019 Fernando Picoral
 *
-* Auto Importer
+* Auto Importer v0.2
 *
 * Usage:
 *
-* <script src="js/importer.js"></script>
-* <script>
-*   let I = new Importer();I.init();
-* </script>
+* Set to 'true' the libraries you want to import on lines 16 to 21
+* Link this script to you .html file using <script src='...' type='text/javascript'><script/>
+* If needed alter the CDNs URLs and other configs on lines 28 to 53
+*
+* Default Values:
+* - Everything is set to 'true'
+* - jQuery 3.4.1
+* - Popper 1.16.0
+* - BS4 4.4.1
+* - FA Pro 5.11.2
+* - AOS.init({ once: true });
 *
 */
 
@@ -16,14 +23,13 @@ let Importer = class  {
 
     constructor(config = {
         jquery: true,
-        popper: true,
+        popper: true, //BS4 requirement
         bs4_js: true,
         bs4_css: true,
         fa_pro: true,
-        aos: true
+        aos: true //AOS Animations
     }) {
 
-        let cdn, integrity, crossorigin, aos_config;
         this.config = config;
 
         this.cdn = {
@@ -159,6 +165,18 @@ let Importer = class  {
         }
     }
 };
+
+//Self Init
+(function(){
+    let head = document.getElementsByTagName('head')[0];
+    let comment = document.createComment('');
+    let script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.text = "let I = new Importer();I.init();";
+    comment.data = "Importer Init";
+    head.appendChild(comment);
+    head.appendChild(script);
+})();
 
 
 
