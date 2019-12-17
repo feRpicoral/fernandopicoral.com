@@ -219,10 +219,37 @@ header {
     height: 500px;
 }
 
+.project-content {
+
+}
+
 .project > .row {
     border: 1px solid var(--light-main-color);
     height: 100%;
     border-radius: 10px;
+}
+
+.page-dot {
+    cursor: pointer;
+    color: var(--light-main-color);
+    font-size: .8rem;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    transition: all .2s ease-in-out;
+}
+
+.page-dot-active, .page-dot-active:hover {
+    cursor: default !important;
+    font-size: .8rem !important;
+}
+
+.page-dot:hover {
+    font-size: 1rem;
+}
+
+.page-dot-active {
+    color: var(--light-blue);
 }
 
 .a-btn-col {
