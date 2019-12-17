@@ -33,7 +33,7 @@ let Importer = class  {
         this.config = config;
 
         this.cdn = {
-            jquery: 'https://code.jquery.com/jquery-3.4.1.slim.min.js',
+            jquery: 'https://code.jquery.com/jquery-3.4.1.min.js',
             popper: 'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js',
             bs4_js: 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js',
             bs4_css: 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css',
@@ -43,7 +43,7 @@ let Importer = class  {
         };
 
         this.integrity = {
-            jquery: 'sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n',
+            jquery: 'sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=',
             popper: 'sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo',
             bs4_js: 'sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6',
             bs4_css: 'sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh'
@@ -78,7 +78,7 @@ let Importer = class  {
             let comment = document.createComment('');
             let script = document.createElement('script');
             script.type = 'text/javascript';
-            script.async = true;
+            script.async = false;
 
             script.src = cdn.jquery;
             script.integrity = integrity.jquery;
@@ -91,7 +91,7 @@ let Importer = class  {
             let comment = document.createComment('');
             let script = document.createElement('script');
             script.type = 'text/javascript';
-            script.async = true;
+            script.async = false;
 
             script.src = cdn.popper;
             script.integrity = integrity.popper;
