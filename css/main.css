@@ -406,7 +406,53 @@ header {
     font-weight: 700;
 }
 
+.other-wrap {
+    background: linear-gradient(44.64deg,#159ce4,#e078d6);
+    height: 100%;
+    padding: 3rem;
+}
+
+.other > h1 {
+    font-family: var(--primary-font);
+    font-weight: 500;
+    margin: 0 0 0 0;
+}
+
+.other > p {
+    font-family: var(--secondary-font);
+    font-size: 1.15rem;
+    line-height: 2rem;
+    font-weight: 400;
+    margin: 0 0 2rem 0;
+}
+
+.other > a {
+    padding: .5rem 1.25rem .5rem 1.25rem;
+    display: inline-block !important;
+    border-radius: 1.6rem;
+    font-family: var(--primary-font);
+    font-weight: 500;
+    font-size: 1.7rem;
+    background: var(--main-gradient);
+    color: var(--moon-color);
+    transition: all .3s ease-in-out;
+}
+
+.other > a:hover {
+    transform: scale(1.2);
+    text-decoration: none;
+}
+
+.other > h1 > span {
+    color: #ffc3f9;
+}
+
+.other > p {
+    display: block !important;
+}
+
 footer {
+    position: sticky;
     z-index: 20;
     background: #384248;
     height: 100%;
@@ -415,7 +461,8 @@ footer {
     border-image-slice: 1;
     border-top-style: solid;
     border-top-width: 5px;
-    margin-top: 150px;
+    margin-top: 135px;
+    bottom: 0;
 }
 
 footer > h1{
@@ -452,6 +499,7 @@ footer > ul > a {
 footer > ul > a:hover {
     cursor: pointer;
     transform: scale(1.25);
+    color: var(--light-blue);
 }
 
 footer > p {
