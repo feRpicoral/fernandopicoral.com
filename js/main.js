@@ -141,13 +141,13 @@ let projects = {
     //Projects HTML storage
     list: {
         istudi: {
-            innerHtml: "<h1 style=\"color: black; font-size: 50px\">iStudi</h1>\n<p class=\"mt-5\" style=\"color: black; font-size: 40px\">And I'm the content of this project!</p>"
+            innerHtml: "<h1 style=\"color: #ffffff; font-size: 50px\">iStudi</h1>\n<p class=\"mt-5\" style=\"color: #ffffff; font-size: 40px\">And I'm the content of this project!</p>"
         },
         codeIt: {
-            innerHtml: "<h1 style=\"color: black; font-size: 50px\">Code-It</h1>\n<p class=\"mt-5\" style=\"color: black; font-size: 40px\">And I'm the content of this other project!</p>"
+            innerHtml: "<h1 style=\"color: #ffffff; font-size: 50px\">Code-It</h1>\n<p class=\"mt-5\" style=\"color: #ffffff; font-size: 40px\">And I'm the content of this other project!</p>"
         },
         restaurantSystem: {
-            innerHtml: "<h1 style=\"color: black; font-size: 50px\">Restaurant</h1>\n<p class=\"mt-5\" style=\"color: black; font-size: 40px\">And I'm the content of this last project!</p>"
+            innerHtml: "<h1 style=\"color: #ffffff; font-size: 50px\">Restaurant</h1>\n<p class=\"mt-5\" style=\"color: #ffffff; font-size: 40px\">And I'm the content of this last project!</p>"
 
         }
     },
@@ -322,5 +322,4 @@ let projects = {
     }
 
 })();
-
 

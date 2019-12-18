@@ -6,8 +6,9 @@
     --main-color-variant: rgb(35, 40, 43);
     --main-gradient: linear-gradient(to left,#9cf184,#3db5eb);
     --pink-gradient: linear-gradient(44.64deg,#159ce4,#e078d6);
+    --pink-green-gradient: linear-gradient(47.32deg,#d991e0,#00c6d4 60.06%,#00ea60);
     --primary-font: 'Poppins', sans-serif;
-    --secondary-font: 'Lato', sans-serif;
+    --secondary-font: 'Montserrat', sans-serif;
 }
 
 html {
@@ -190,7 +191,7 @@ header {
 }
 
 #projects-wrap {
-    background-color: var(--moon-color);
+    background-color: var(--main-color-variant);
 }
 
 .projects-header {
@@ -224,14 +225,84 @@ header {
 }
 
 .project > .row {
-    border: 1px solid var(--light-main-color);
+    border: 1px solid var(--moon-color);
     height: 100%;
     border-radius: 10px;
 }
 
+.about-wrap {
+    box-shadow: none !important;
+}
+
+.about-col {
+    border-radius: 16px;
+    background-color: var(--moon-color);
+    height: 550px;
+    box-shadow: 15px 15px 30px 0px rgba(0,0,0,0.75);
+}
+
+.about-header {
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    height: 100px;
+}
+
+/*//TODO Change image links*/
+.about-header.front-end-img {
+    background-image: url("/fernandopicoral.com/img/html-code.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-clip: border-box;
+    background-size: cover;
+}
+
+.about-header.back-end-img {
+    background-image: url("/fernandopicoral.com/img/js-code.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-clip: border-box;
+    background-size: cover;
+}
+
+.about-header.center-col {
+    background: var(--pink-green-gradient);
+}
+
+.about-header > h1 {
+    margin: 0;
+    font-family: var(--primary-font);
+    font-weight: 400;
+}
+
+.about-body {
+    font-family: var(--secondary-font);
+    padding: 40px 50px 50px 50px;
+    line-height: 1.9rem;
+    font-weight: 400;
+    color: black;
+}
+
+.about-body > ul {
+    padding: 0;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.about-body > ul > li {
+    display: inline-block !important;
+    list-style-type: none;
+    margin-top: .5rem;
+    font-size: 1.2rem;
+}
+
+.about-body > ul > li > img {
+    display: inline-block;
+    width: 20px;
+}
+
 .page-dot {
     cursor: pointer;
-    color: var(--light-main-color);
+    color: var(--moon-color);
     font-size: .8rem;
     padding-left: 10px;
     padding-right: 10px;
@@ -265,13 +336,14 @@ header {
 }
 
 .a-btn-control {
-    color: var(--light-main-color);
+    color: var(--moon-color);
     font-size: 40px;
 
     transition: all .15s ease-in-out;
 }
 
 .a-btn-control:hover {
+    color: var(--light-blue);
     font-size: 60px;
 }
 
