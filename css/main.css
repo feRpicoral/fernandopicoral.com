@@ -220,8 +220,67 @@ header {
     height: 500px;
 }
 
-.project-content {
+.p-title > h1 {
+    font-size: 75px;
+}
 
+.p-title > h2 {
+    font-weight: 100;
+}
+
+.p-title {
+    margin: 1rem 0 3rem 0;
+}
+
+.project-content p {
+    font-size: 25px;
+}
+
+.demo-btn {
+    font-family: var(--secondary-font);
+    font-weight: 400;
+    font-size: 1rem;
+    border-radius: 15px;
+    padding-right: 20px !important;
+    padding-left: 20px !important;
+}
+
+.github-btn {
+    font-size: 2rem;
+    color: #6e5494;
+    padding: 0 0 3.5px 0;
+    transition: all .3s ease-in-out;
+    transform-origin: center;
+}
+
+.github-btn:hover {
+    color: #6e5494;
+    transform: scale(1.25);
+}
+
+a.btn-see-more {
+    font-size: 1.3rem !important;
+    margin: 1rem 0 1rem 0;
+    border-radius: 10px;
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    width: 13rem;
+}
+
+.btn-see-more > span {
+    color: white;
+    font-family: var(--secondary-font);
+}
+
+.btn-see-more > i {
+    position: relative;
+    left: .5rem;
+    top: 2px;
+}
+
+.img-thumbnail {
+    background-color: var(--moon-color) !important;
+    border-color: var(--moon-color) !important;
 }
 
 .project > .row {

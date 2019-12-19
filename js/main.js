@@ -11,7 +11,10 @@
         }
     });
 
-
+    //Init BS4 tooltips
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
 
     const $dom = {
         menu: $('#menu-screen'),
@@ -109,14 +112,17 @@
     });
 
     window.addEventListener("scroll", (function() {
-            //in or out
-            $dom.fadeOnScroll(document.querySelector(".logo-wrap"), "out")
+            //Fade logo
+            $dom.fadeOnScroll(document.querySelector(".logo-wrap"), "out");
+
         }
     ));
 
     window.addEventListener("scroll", (function() {
-            //in or out
-            $dom.fadeOnScroll(document.querySelector("footer"), "in")
+            //Fade and show (hidden to avoid bugs on page load) footer
+            let f = document.querySelector("footer");
+            $(f).removeClass('invisible');
+            $dom.fadeOnScroll(f, "in");
         }
     ));
 
@@ -152,15 +158,33 @@
                 innerHtml: "<h1 style=\"color: #ffffff; font-size: 50px\">iStudi</h1>\n<p class=\"mt-5\" style=\"color: #ffffff; font-size: 40px\">And I'm the content of this project!</p>"
             },
             codeIt: {
-                innerHtml: "<h1 style=\"color: #ffffff; font-size: 50px\">Code-It</h1>\n<p class=\"mt-5\" style=\"color: #ffffff; font-size: 40px\">And I'm the content of this other project!</p>"
+                innerHtml: "<div class=\"w-100 h-100 project-content \"> <div class=\"p-title\"> <h1>Project Title</h1> <h2>This is the second project</h2> </div> <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores beatae consectetur consequatur corporis deserunt doloremque esse facere fugit illum obcaecati perferendis possimus ratione rerum, sapiente sint sit tempora vel.</p> </div> <div class=\"p-btns d-flex align-items-center justify-content-center mt-5 mb-2\"> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline btn-outline-success demo-btn mr-3\">Demo</a> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline github-btn\"><i class=\"fab fa-github\"></i></a> </div>"
             },
             restaurantSystem: {
-                innerHtml: "<h1 style=\"color: #ffffff; font-size: 50px\">Restaurant</h1>\n<p class=\"mt-5\" style=\"color: #ffffff; font-size: 40px\">And I'm the content of this last project!</p>"
-
+                innerHtml: "<div class=\"w-100 h-100 project-content \"> <div class=\"p-title\"> <h1>Project Title</h1> <h2>This is the third project</h2> </div> <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores beatae consectetur consequatur corporis deserunt doloremque esse facere fugit illum obcaecati perferendis possimus ratione rerum, sapiente sint sit tempora vel.</p> </div> <div class=\"p-btns d-flex align-items-center justify-content-center mt-5 mb-2\"> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline btn-outline-success demo-btn mr-3\">Demo</a> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline github-btn\"><i class=\"fab fa-github\"></i></a> </div>"
             }
         },
         order: ['istudi', 'codeIt', 'restaurantSystem'],
         current: '', //Project being displayed. If empty, the first from order array will be selected
+        showPage: function (wrapId) {
+            if (wrapId[0] !== "#") {
+                wrapId = "#" + wrapId;
+            }
+            let w = $(wrapId);
+            if (w.hasClass('d-none')) {
+                w.removeClass('d-none');
+            }
+        },
+        hidePage: function (wrapId) {
+            if (wrapId[0] !== "#") {
+                wrapId = "#" + wrapId;
+            }
+            let w = $(wrapId);
+            if (!w.hasClass('d-none')) {
+                w.addClass('d-none');
+            }
+        }
+
     };
 
 //Add idSufix to each project. Has to be done this way to avoid repetition and increase compatibility
@@ -173,18 +197,30 @@
 //Add project elements
     (function (wrap = $('.project-content-wrap'), p = projects) {
         for (let el of p.order) {
-            let obj = p.list[el];
-            let div = document.createElement('div');
-            div.id = p.idPrefix + obj.idSufix;
-            div.classList.add("w-100");
-            div.innerHTML = obj.innerHtml;
-            div.classList.add('d-none');
 
-            if (el === p.order[0]) {
-                div.classList.remove('d-none');
+            if (el === "istudi") { //TODO remove this
+                continue
             }
 
-            wrap[0].appendChild(div);
+
+            let obj = p.list[el];
+            let divWrap = document.createElement('div');
+            let divContent = document.createElement('div');
+
+            divWrap.id = p.idPrefix + obj.idSufix;
+            wrap[0].appendChild(divWrap);
+
+            $(divContent).addClass("w-100 h-100 project-content");
+            divContent.innerHTML = obj.innerHtml;
+
+            p.hidePage(divWrap.id);
+
+            if (el === p.order[0]) {
+                //TODO Un comment to work auto
+                //p.showPage(divWrap.id); //TODO Add animations using height: 0 and opacity transitions w/ classes
+            }
+
+            divWrap.appendChild(divContent);
         }
     })();
 
@@ -200,10 +236,6 @@
 
         let projectsArr = p.order.slice();
 
-        // for (let el of p.order) {
-        //     projectsArr.push(p.list[el])
-        // }
-
         div = document.createElement('div');
         div.id = "projects-page-dots-wrap";
         for (let i = 0; i < numOfProjects; i++) {
@@ -215,8 +247,38 @@
         div.children[0].classList.add('page-dot-active');
     })();
 
-//TODO Add mobile compatibility - maybe just scale things nicely, to avoid a headache with dragging
-//Handle next/previous project buttons and dots
+    //Handle see more button
+    (function () {
+
+        let btn = $('.btn-see-more');
+        let el = $('.see-more');
+
+        let text = {
+          current: function () {
+            return btn.find('span').text();
+          },
+          seeMoreHtml: "<span>show more</span><i class=\"fal fa-caret-down\"></i>",
+          seeLessHtml: "<span>show less</span><i class=\"fal fa-caret-up\"></i>"
+        };
+
+        btn.click(function () {
+            //TODO Add animation to button change
+            if (text.current() === 'show more') {
+                //Show
+                btn.html(text.seeLessHtml);
+                el.toggleClass('d-none', false);
+            } else {
+                //Hide
+                btn.html(text.seeMoreHtml);
+                el.toggleClass('d-none', true);
+            }
+        });
+    })();
+
+
+
+    //TODO Add mobile compatibility - maybe just scale things nicely, to avoid a headache with dragging
+    //Handle next/previous project buttons and dots
     (function (pWrap = $('.project-content-wrap'), p = projects) {
 
         let previous;
@@ -229,8 +291,7 @@
             for (let e of $('.project-content-wrap').children()) {
                 e.classList.add('d-none');
             }
-            $(currentPageId).removeClass('d-none');
-
+            p.showPage(currentPageId);
             updateArrows();
             updatePageDot();
         }
@@ -248,8 +309,9 @@
                     $('.a-btn-control.a-btn-nxt').addClass('invisible');
                 }
 
-                $("#" + p.idPrefix + p.list[previous].idSufix).addClass('d-none');
-                $("#" + p.idPrefix + p.list[p.current].idSufix).removeClass('d-none');
+                p.hidePage(p.idPrefix + p.list[previous].idSufix);
+                p.showPage(p.idPrefix + p.list[p.current].idSufix);
+
                 updatePageDot()
 
             }
@@ -268,8 +330,10 @@
                 if (p.current === p.order[0]) {
                     $('.a-btn-control.a-btn-bfr').addClass('invisible');
                 }
-                $("#" + p.idPrefix + p.list[previous].idSufix).addClass('d-none');
-                $("#" + p.idPrefix + p.list[p.current].idSufix).removeClass('d-none');
+
+                p.hidePage(p.idPrefix + p.list[previous].idSufix);
+                p.showPage(p.idPrefix + p.list[p.current].idSufix);
+
                 updatePageDot()
             }
         });
@@ -288,8 +352,8 @@
                     previous = p.current;
                     p.current = linkedPageId.replace('#' + p.idPrefix,'');
 
-                    $("#" + p.idPrefix + p.list[previous].idSufix).addClass('d-none');
-                    $("#" + p.idPrefix + p.list[p.current].idSufix).removeClass('d-none');
+                    p.hidePage(p.idPrefix + p.list[previous].idSufix);
+                    p.showPage(p.idPrefix + p.list[p.current].idSufix);
 
                     updateArrows();
                 }

@@ -2,19 +2,30 @@
 <html lang="en">
 <head>
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="js/importer.js" type="text/javascript"></script> <!--TODO Remove importer and add manually-->
+    <!-- jQuery -->
+    <script type="text/javascript" src="lib/jquery-3.4.1.min.js"></script>
 
-    <!--Custom Fonts and CSS/JS-->
+    <!-- BS4 & Requirements (Popper) -->
+    <script type="text/javascript" src="lib/popper-1.16.min.js"></script>
+    <script type="text/javascript" src="lib/bootstrap-4.4.1.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="lib/bootstrap-4.4.1.min.css">
+
+    <!-- Font Awesome #Not working when using local file -->
+    <link type="text/css" rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.11.2/css/pro.min.css">
+
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:500,600,700|Lato&display=swap" rel="stylesheet">
-    <script async src="js/main.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="css/main.css">
 
-    <!--Meta Tags-->
+    <!-- Custom CSS -->
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+
+    <!-- Custom JS -->
+    <script async type="text/javascript" src="js/main.js"></script>
+
+    <!-- META -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-
+    <meta charset="utf-8">
     <title>Picoral</title>
 
 </head>
@@ -79,8 +90,8 @@
                         <h1>//projects</h1>
                     </div>
 
-                    <div class="project mt-4 pb-4 px-4">
-                        <div class="row align-items-stretch m-auto">
+                    <div class="h-100 project mt-4 pb-4 px-4">
+                        <div class="h-100 row align-items-stretch m-auto">
 
                             <div class="col-1 a-btn-col">
                                 <a href="javascript:void(0)" class="a-btn-control a-btn-bfr pl-3 pr-0 invisible">
@@ -88,8 +99,43 @@
                                 </a>
                             </div>
 
-                            <div class="col p-0 project-content-row text-center">
-                                <div class="container py-3 project-content-wrap"></div>
+                            <div class="h-100 col p-0 project-content-row text-center d-flex align-items-stretch">
+                                <div class="h-100 container py-3 project-content-wrap">
+
+                                    <!--START OF TEST CODE-->
+                                    <div id="project-istudi">
+                                        <!--Start of what should be in projects.list[key].innerHtml-->
+                                        <div class="w-100 h-100 project-content ">
+                                            <div class="p-title">
+                                                <h1>Project Title</h1>
+                                                <h2>This is the first project</h2>
+                                            </div>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores beatae consectetur consequatur corporis deserunt doloremque esse facere fugit illum obcaecati perferendis possimus ratione rerum, sapiente sint sit tempora vel.</p>
+                                        </div>
+
+                                        <a class="btn-see-more btn btn-primary"><span>show more</span><i class="fal fa-caret-down"></i></a>
+
+                                        <div class="see-more w-100 h-100 my-4 d-none">
+                                            <div class="row">
+                                                <div class="col-12 col-md-6">
+                                                    <img src="img/html-code.jpg" class="img-fluid img-thumbnail" alt="">
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <img src="img/html-code.jpg" class="img-fluid img-thumbnail" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+
+<!--                                        TODO Make tooltips look better-->
+                                        <div class="p-btns d-flex align-items-center justify-content-center mt-3 mb-2">
+                                            <a data-toggle="tooltip" data-placement="left" title="Soon" href="#" target="_blank" role="button" class="btn no-outline btn-outline-success demo-btn mr-3">Demo</a>
+                                            <a data-toggle="tooltip" data-placement="right" title="Private project" href="#" target="_blank" role="button" class="btn no-outline github-btn"><i class="fab fa-github"></i></a>
+                                        </div>
+                                        <!--End of what should be in projects.list[key].innerHtml-->
+                                    </div>
+                                    <!--END OF TEST CODE-->
+
+                                </div>
                             </div>
 
                             <div class="col-1 a-btn-col">
@@ -212,14 +258,14 @@
                 <div class="other text-center">
                     <h1>let's <span>build</span> something <span>together.</span></h1>
                     <br>
-                    <p>Do you have an amazing idea and need some help?<br>Reach me out, let's turn this idea into reality, no money involved</p>
+                    <p>Do you have an amazing idea and need some help?<br>Reach me out, let's turn this idea into reality. No money involved.</p>
                     <a href="#contact" role="button" id="lets-go">let's do it</a>
                 </div>
             </section>
 
         </div>
 
-        <footer class="container-fluid text-center">
+        <footer class="container-fluid text-center invisible">
             <h1>Picoral</h1>
             <ul class="text-center">
                 <a href="#" target="_blank"><i class="fab f fa-facebook-square"></i></a>
