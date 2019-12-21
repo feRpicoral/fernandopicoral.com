@@ -20,17 +20,6 @@
         menu: $('#menu-screen'),
         body: $('body:first'),
         html: $('html:first'),
-        fadeOnScroll: function(e,type) {
-            let n, o;
-            const r = window.pageYOffset || document.documentElement.scrollTop;
-            const a = document.documentElement.offsetHeight - window.innerHeight - r + 500;
-
-            (n = 1 - ("in" === type ? a : r) / (e.offsetHeight / 2)) <= 0 ? (n = 0,
-                o = "hidden") : o = "visible",
-            n > 1 && (n = 1),
-                e.style.visibility = o,
-                e.style.opacity = n
-        },
         breakpoint: (function () {
             //Based on BS4 v4.4.1 breakpoints
             const w = document.documentElement.offsetWidth;
@@ -61,6 +50,36 @@
         triedContactSubmission: false,
         contactForm: null,
     };
+
+    function fadeOnScroll(e,type) {
+        let n, o;
+        let r = window.pageYOffset || document.documentElement.scrollTop;
+        let a = document.documentElement.offsetHeight - window.innerHeight - r;
+
+        switch ($dom.breakpoint) {
+            case "sm":
+                a += 1400;
+                break;
+            case "md":
+                a += 1250;
+                break;
+            case "lg":
+                a += 550;
+                break;
+            case "xl":
+                a += 500;
+                break;
+            default:
+                //xs breakpoint
+                a += 1600;
+        }
+
+        (n = 1 - ("in" === type ? a : r) / (e.offsetHeight / 2)) <= 0 ? (n = 0,
+            o = "hidden") : o = "visible",
+        n > 1 && (n = 1),
+            e.style.visibility = o,
+            e.style.opacity = n
+    }
 
     const menu = {
         toggle: function () {
@@ -113,7 +132,7 @@
 
     window.addEventListener("scroll", (function() {
             //Fade logo
-            $dom.fadeOnScroll(document.querySelector(".logo-wrap"), "out");
+            fadeOnScroll(document.querySelector(".logo-wrap"), "out");
 
         }
     ));
@@ -122,7 +141,7 @@
             //Fade and show (hidden to avoid bugs on page load) footer
             let f = document.querySelector("footer");
             $(f).removeClass('invisible');
-            $dom.fadeOnScroll(f, "in");
+            fadeOnScroll(f, "in");
         }
     ));
 
@@ -155,7 +174,7 @@
         list: {
             //TODO Add projects
             istudi: {
-                innerHtml: "<h1 style=\"color: #ffffff; font-size: 50px\">iStudi</h1>\n<p class=\"mt-5\" style=\"color: #ffffff; font-size: 40px\">And I'm the content of this project!</p>"
+                innerHtml: "<div class=\"w-100 h-100 project-content \"> <div class=\"p-title\"> <h1>Project Title</h1> <h2>This is the first project</h2> </div><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores beatae consectetur consequatur corporis deserunt doloremque esse facere fugit illum obcaecati perferendis possimus ratione rerum, sapiente sint sit tempora vel.</p></div><a class=\"btn-see-more btn btn-primary\"><span>show more</span><i class=\"fal fa-caret-down\"></i></a> <div class=\"see-more w-100 my-4 h-100 d-none\"> <div class=\"row\"> <div class=\"col-12 col-lg-6\"> <img src=\"img/html-code.jpg\" class=\"img-fluid img-thumbnail\" alt=\"\"> </div><div class=\"col-12 col-lg-6 mt-4 mt-lg-auto\"> <img src=\"img/html-code.jpg\" class=\"img-fluid img-thumbnail\" alt=\"\"> </div></div></div><div class=\"p-btns d-flex align-items-center justify-content-center mt-3 mb-2\"> <span data-toggle=\"tooltip\" data-placement=\"left\" title=\"Soon\"> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline btn-outline-success demo-btn mr-3 disabled\">Demo</a> </span> <span data-toggle=\"tooltip\" data-placement=\"right\" title=\"Private project\"> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline github-btn disabled\"><i class=\"fab fa-github\"></i></a> </span> </div>"
             },
             codeIt: {
                 innerHtml: "<div class=\"w-100 h-100 project-content \"> <div class=\"p-title\"> <h1>Project Title</h1> <h2>This is the second project</h2> </div> <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores beatae consectetur consequatur corporis deserunt doloremque esse facere fugit illum obcaecati perferendis possimus ratione rerum, sapiente sint sit tempora vel.</p> </div> <div class=\"p-btns d-flex align-items-center justify-content-center mt-5 mb-2\"> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline btn-outline-success demo-btn mr-3\">Demo</a> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline github-btn\"><i class=\"fab fa-github\"></i></a> </div>"
@@ -187,10 +206,10 @@
 
     };
 
-//Add idSufix to each project. Has to be done this way to avoid repetition and increase compatibility
+//Add idSuffix to each project. Has to be done this way to avoid repetition and increase compatibility
     (function (p = projects) {
         for (let [key, value] of Object.entries(p.list)) {
-            p.list[key].idSufix = key;
+            p.list[key].idSuffix = key;
         }
     })();
 
@@ -198,16 +217,17 @@
     (function (wrap = $('.project-content-wrap'), p = projects) {
         for (let el of p.order) {
 
-            if (el === "istudi") { //TODO remove this
-                continue
+            let debugging = false;
+            //Debugger. Set page name being added manually here so it doesn't get duplicated
+            if (el === "istudi" && debugging) {
+                continue;
             }
-
 
             let obj = p.list[el];
             let divWrap = document.createElement('div');
             let divContent = document.createElement('div');
 
-            divWrap.id = p.idPrefix + obj.idSufix;
+            divWrap.id = p.idPrefix + obj.idSuffix;
             wrap[0].appendChild(divWrap);
 
             $(divContent).addClass("w-100 h-100 project-content");
@@ -215,22 +235,21 @@
 
             p.hidePage(divWrap.id);
 
-            if (el === p.order[0]) {
-                //TODO Un comment to work auto
-                //p.showPage(divWrap.id); //TODO Add animations using height: 0 and opacity transitions w/ classes
+            if (el === p.order[0] && !debugging) {
+                p.showPage(divWrap.id);
             }
 
             divWrap.appendChild(divContent);
         }
     })();
 
-//Set projects section on bottom of viewport
+    //Set projects section on bottom of viewport
     (function (pHeader = $('.projects-header'), newMargin) {
         newMargin = (window.innerHeight - pHeader.offset().top - pHeader.innerHeight() + 100) + "px";
         $('#projects-wrap').css('margin-top', newMargin);
     })();
 
-//Add page dots below projects
+    //Add page dots below projects
     (function (p = projects, numOfProjects, div) {
         numOfProjects = p.list.length;
 
@@ -275,7 +294,22 @@
         });
     })();
 
+    //Make sure skills columns are equal height
+    //TODO Make lists aligned by center
+    (function () {
+        let cols = $('.skills-col');
+        let highest = cols[0].offsetHeight;
 
+        for (let col of cols) {
+            if (col.offsetHeight > highest) {
+                highest = col.offsetHeight;
+            }
+        }
+        for (let col of cols) {
+            col.style.minHeight = highest + "px";
+        }
+
+    })();
 
     //TODO Add mobile compatibility - maybe just scale things nicely, to avoid a headache with dragging
     //Handle next/previous project buttons and dots
@@ -286,7 +320,7 @@
         if (p.current == '') {
             p.current = p.order[0]
         } else {
-            let currentPageId = "#" + p.idPrefix + p.list[p.current].idSufix;
+            let currentPageId = "#" + p.idPrefix + p.list[p.current].idSuffix;
 
             for (let e of $('.project-content-wrap').children()) {
                 e.classList.add('d-none');
@@ -309,8 +343,8 @@
                     $('.a-btn-control.a-btn-nxt').addClass('invisible');
                 }
 
-                p.hidePage(p.idPrefix + p.list[previous].idSufix);
-                p.showPage(p.idPrefix + p.list[p.current].idSufix);
+                p.hidePage(p.idPrefix + p.list[previous].idSuffix);
+                p.showPage(p.idPrefix + p.list[p.current].idSuffix);
 
                 updatePageDot()
 
@@ -331,8 +365,8 @@
                     $('.a-btn-control.a-btn-bfr').addClass('invisible');
                 }
 
-                p.hidePage(p.idPrefix + p.list[previous].idSufix);
-                p.showPage(p.idPrefix + p.list[p.current].idSufix);
+                p.hidePage(p.idPrefix + p.list[previous].idSuffix);
+                p.showPage(p.idPrefix + p.list[p.current].idSuffix);
 
                 updatePageDot()
             }
@@ -352,8 +386,8 @@
                     previous = p.current;
                     p.current = linkedPageId.replace('#' + p.idPrefix,'');
 
-                    p.hidePage(p.idPrefix + p.list[previous].idSufix);
-                    p.showPage(p.idPrefix + p.list[p.current].idSufix);
+                    p.hidePage(p.idPrefix + p.list[previous].idSuffix);
+                    p.showPage(p.idPrefix + p.list[p.current].idSuffix);
 
                     updateArrows();
                 }
@@ -364,7 +398,7 @@
         function updatePageDot() {
             if (p.current) {
                 $('.page-dot-active').toggleClass('page-dot-active', false);
-                let currentId = "#" + p.idPrefix + p.list[p.current].idSufix;
+                let currentId = "#" + p.idPrefix + p.list[p.current].idSuffix;
                 for (let dot of $('#projects-page-dots-wrap').children()) {
                     if(dot.getAttribute('data-linked-page') === currentId) {
                         $(dot).addClass('page-dot-active');

@@ -278,6 +278,11 @@ a.btn-see-more {
     top: 2px;
 }
 
+.tooltip {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
 .img-thumbnail {
     background-color: var(--moon-color) !important;
     border-color: var(--moon-color) !important;
