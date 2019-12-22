@@ -1,6 +1,5 @@
 ##WebStorm .gitignore
 .idea/
-old/
 
 ##Node .gitignore
 # Logs

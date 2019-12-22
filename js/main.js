@@ -206,14 +206,14 @@
 
     };
 
-//Add idSuffix to each project. Has to be done this way to avoid repetition and increase compatibility
+    //Add idSuffix to each project. Has to be done this way to avoid repetition and increase compatibility
     (function (p = projects) {
         for (let [key, value] of Object.entries(p.list)) {
             p.list[key].idSuffix = key;
         }
     })();
 
-//Add project elements
+    //Add project elements
     (function (wrap = $('.project-content-wrap'), p = projects) {
         for (let el of p.order) {
 
@@ -428,7 +428,7 @@
         }
     })();
 
-//Handle footer links
+    //Handle footer links
     (function () {
         let f =  $('footer:first');
 

@@ -204,7 +204,8 @@
                     </div>
 
                     <div class="container mt-4">
-                        <form action="/" method="get" class="needs-validation contact-form px-3 py-5" novalidate> <!--TODO Change method-->
+<!--                        TODO Add feedback after submission based on nodemailer response code-->
+                        <form action="/" method="POST" role="form" class="needs-validation contact-form px-3 py-5" novalidate>
                             <div class="form-group">
                                 <label for="contact-name">#name</label>
                                 <input id="contact-name" placeholder="Name" type="text" class="form-control" name="name" required>

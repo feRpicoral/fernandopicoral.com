@@ -1,0 +1,30 @@
+{
+  "name": "fernandopicoral.com",
+  "version": "1.0.0",
+  "description": "Fernando Picoral's personal website.",
+  "private": true,
+  "author": "Fernando Picoral <fernandopicoral@gmail.com> (https://fernandopicoral.com/)",
+  "homepage": "TODO Add homepage",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/feRpicoral/fernandopicoral.com.git"
+  },
+  "bugs": {
+    "url": "https://github.com/feRpicoral/fernandopicoral.com/issues",
+    "email": "fernandopicoral@gmail.com"
+  },
+  "dependencies": {
+    "express": "latest",
+    "body-parser": "latest",
+    "nodemailer": "latest"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "main": "app.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {}
+}

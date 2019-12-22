@@ -33,6 +33,7 @@ RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*)$ $1.php
 
 #Deny access to .git files
+#Todo deny from all package.json & package-lock.json - see if can be done with node_modules
 <FilesMatch "\.(gitignore|gitattributes)$">
 Order allow,deny
 Deny from all
