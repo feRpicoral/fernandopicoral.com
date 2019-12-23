@@ -23,9 +23,8 @@ body {
 }
 
 .icon-menu {
-    /*TODO Change link from WebStorm localhost*/
-    -webkit-mask-image: url(http://localhost:63342/fernandopicoral.com/img/icons/menu-icon.svg);
-    mask-image: url(http://localhost:63342/fernandopicoral.com/img/icons/menu-icon.svg);
+    -webkit-mask-image: url('/img/icons/menu-icon.svg');
+    mask-image: url('/img/icons/menu-icon.svg');
 }
 
 .icon-md {
@@ -311,9 +310,8 @@ a.btn-see-more {
     height: 100px;
 }
 
-/*//TODO Change image links*/
 .skills-header.front-end-img {
-    background-image: url("/fernandopicoral.com/img/html-code.jpg");
+    background-image: url("/img/html-code.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-clip: border-box;
@@ -321,7 +319,7 @@ a.btn-see-more {
 }
 
 .skills-header.back-end-img {
-    background-image: url("/fernandopicoral.com/img/js-code.jpg");
+    background-image: url("/img/js-code.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-clip: border-box;

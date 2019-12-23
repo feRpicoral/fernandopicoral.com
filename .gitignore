@@ -106,3 +106,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+#Ignored Files
+/public/js/importer.js

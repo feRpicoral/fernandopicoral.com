@@ -1,9 +1,20 @@
 const nodemailer = require('nodemailer'),
-    app = require('express')(),
-    bodyParser = require('body-parser');
+      express    = require('express'),
+      app        = express(),
+      ejs        = require('ejs'),
+      bodyParser = require('body-parser');
 
-app.post('/', function (req, res) {
-    console.log(req.body.name);
+//Set root to /public
+app.use(express.static(__dirname + '/public'));
+
+//Handle homepage
+app.get('/', (req, res) => {
+    res.render('index.ejs');
 });
 
-app.listen(63342);
+//Start server
+const listener = app.listen(3000, '127.0.0.1', function () {
+    let port = listener.address().port;
+    let host = listener.address().address;
+    console.log('\n === Server started on http://' + host + ':' + port + ' ===\n');
+});
