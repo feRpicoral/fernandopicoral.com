@@ -1,5 +1,72 @@
+'use-strict';
+
+//Global functions
+
+function getBreakpoint() {
+    //Based on BS4 v4.4.1 breakpoints
+    const w = document.documentElement.offsetWidth;
+    let bp = 'xs';
+    if (w > 576) {
+        bp = 'sm';
+    }
+    if (w > 768) {
+        bp = 'md';
+    }
+    if (w > 992) {
+        bp = 'lg';
+    }
+    if (w > 1200) {
+        bp = 'xl';
+    }
+    return bp;
+}
+
+function fadeOnScroll(e,type) {
+    let n, o;
+    let r = window.pageYOffset || document.documentElement.scrollTop;
+    let a = document.documentElement.offsetHeight - window.innerHeight - r;
+
+    switch (getBreakpoint()) {
+        case "sm":
+            a += 1400;
+            break;
+        case "md":
+            a += 1250;
+            break;
+        case "lg":
+            a += 550;
+            break;
+        case "xl":
+            a += 500;
+            break;
+        default:
+            //xs breakpoint
+            a += 1600;
+    }
+
+    (n = 1 - ("in" === type ? a : r) / (e.offsetHeight / 2)) <= 0 ? (n = 0,
+        o = "hidden") : o = "visible",
+    n > 1 && (n = 1),
+        e.style.visibility = o,
+        e.style.opacity = n
+}
+
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
+
 (function () {
-    'use-strict';
 
     //Shortcut to get object length
     Object.defineProperties(Object.prototype, {
@@ -20,24 +87,7 @@
         menu: $('#menu-screen'),
         body: $('body:first'),
         html: $('html:first'),
-        breakpoint: (function () {
-            //Based on BS4 v4.4.1 breakpoints
-            const w = document.documentElement.offsetWidth;
-            let bp = 'xs';
-            if (w > 576) {
-                bp = 'sm';
-            }
-            if (w > 768) {
-                bp = 'md';
-            }
-            if (w > 992) {
-                bp = 'lg';
-            }
-            if (w > 1200) {
-                bp = 'xl';
-            }
-            return bp;
-        })(),
+        breakpoint: getBreakpoint(),
         getMenuBtn: function (text) {
             let obj;
             $.each($('.menu-link'), function () {
@@ -51,35 +101,7 @@
         contactForm: null,
     };
 
-    function fadeOnScroll(e,type) {
-        let n, o;
-        let r = window.pageYOffset || document.documentElement.scrollTop;
-        let a = document.documentElement.offsetHeight - window.innerHeight - r;
 
-        switch ($dom.breakpoint) {
-            case "sm":
-                a += 1400;
-                break;
-            case "md":
-                a += 1250;
-                break;
-            case "lg":
-                a += 550;
-                break;
-            case "xl":
-                a += 500;
-                break;
-            default:
-                //xs breakpoint
-                a += 1600;
-        }
-
-        (n = 1 - ("in" === type ? a : r) / (e.offsetHeight / 2)) <= 0 ? (n = 0,
-            o = "hidden") : o = "visible",
-        n > 1 && (n = 1),
-            e.style.visibility = o,
-            e.style.opacity = n
-    }
 
     const menu = {
         toggle: function () {
@@ -134,14 +156,6 @@
             //Fade logo
             fadeOnScroll(document.querySelector(".logo-wrap"), "out");
 
-        }
-    ));
-
-    window.addEventListener("scroll", (function() {
-            //Fade and show (hidden to avoid bugs on page load) footer
-            let f = document.querySelector("footer");
-            $(f).removeClass('invisible');
-            fadeOnScroll(f, "in");
         }
     ));
 
@@ -428,44 +442,12 @@
         }
     })();
 
-    //Handle footer links
-    (function () {
-        let f =  $('footer:first');
-
-        f.children('h1').click(function () {
-            window.scrollTo(0,0);
-        });
-
-        for (let a of f.children('ul').children('a')) {
-            let token = $(a).children('i')[0].classList[1];
-            switch (token) {
-                case 'f':
-                    $(a).remove();
-                    a.href = "https://www.facebook.com/fernandopicora";
-                    break;
-                case 't':
-                    $(a).remove();
-                    a.href = "https://twitter.com/fe_picoral";
-                    break;
-                case 'r':
-                    $(a).remove();
-                    a.href = "https://www.reddit.com/u/fpicoral";
-                    break;
-                case 'l':
-                    a.href = "https://www.linkedin.com/in/fernando-picoral-51173a35/";
-                    break;
-                case 'm':
-                    continue;
-                case 'i':
-                    $(a).remove();
-                    a.href = "https://www.instagram.com/fernandopicoral/";
-                    break;
-
-            }
+    //Go to contact form feedback if present
+    window.onload = function () {
+        if (getUrlParameter('contact')) {
+            window.scrollTo(0, document.getElementById('contact-form').offsetTop)
         }
-
-
-    })();
+    }
 
 //END Wrapper function
 })();

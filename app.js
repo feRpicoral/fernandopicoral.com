@@ -11,11 +11,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Set root to /public
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
-app.use('/contact', contact);
+app.use(contact);
 
 //Handle homepage
 app.get('/', (req, res) => {
-    res.render('index');
+    let contact = {};
+
+    //Show contact feedback if present
+    if (req.query.contact) {
+        contact = JSON.parse(decodeURI(req.query.contact));
+    }
+
+    res.render('index', {contact: contact});
 });
 
 

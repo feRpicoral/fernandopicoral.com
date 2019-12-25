@@ -513,67 +513,6 @@ a.btn-see-more {
     display: block !important;
 }
 
-footer {
-    position: sticky;
-    z-index: 20;
-    background: #384248;
-    height: 100%;
-    padding-bottom: 20px;
-    border-image-source: linear-gradient(47.32deg,#d991e0,#00c6d4 60.06%,#00ea60);
-    border-image-slice: 1;
-    border-top-style: solid;
-    border-top-width: 5px;
-    margin-top: 135px;
-    bottom: 0;
-}
-
-footer > h1{
-    color: var(--moon-color);
-    display: inline-block !important;
-    cursor: pointer;
-    font-family: var(--primary-font);
-    font-weight: 500;
-    font-size: 60px;
-    margin-top: 50px;
-}
-
-footer > a:hover {
-    text-decoration: none;
-}
-
-footer > ul {
-    margin: 15px 0 0 0;
-    padding: 0;
-    text-align: center;
-}
-
-footer > ul > a {
-    color: rgba(0, 0, 0, 0.62);
-    position: relative;
-    display: inline-block;
-    margin-right: 25px;
-    list-style-type: none;
-    font-size: 3rem;
-    transform-origin: center;
-    transition: all .3s ease-in-out;
-}
-
-footer > ul > a:hover {
-    cursor: pointer;
-    transform: scale(1.25);
-    color: var(--light-blue);
-}
-
-footer > p {
-    margin: 20px 0 0 0;
-    font-family: var(--secondary-font);
-    font-size: .9rem;
-}
-
-footer > ul > a:nth-child(3) {
-
-}
-
 .scroll-anim {
     font-size: 15px;
     animation-name: scroll-down-anim;

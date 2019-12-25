@@ -13,6 +13,8 @@
     <!-- Font Awesome  -->
     <link type="text/css" rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.11.2/css/pro.min.css">
 
+    <!--reCaptcha-->
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:500,600,700|Lato&display=swap" rel="stylesheet">
@@ -81,7 +83,7 @@
             </div>
         </div>
 
-<!--
+<!--TODO
 1 - When on mobile (xs) change project arrows to the right and left side of the dots and change the font size
 2 - When on mobile (xs) the menu icon is not displayed properly
 -->
@@ -204,8 +206,7 @@
                     </div>
 
                     <div class="container mt-4">
-<!--                        TODO Add feedback after submission based on nodemailer response code-->
-                        <form action="/contact" method="POST" role="form" class="needs-validation contact-form px-3 py-5" novalidate>
+                        <form action="/contact" method="POST" role="form" class="needs-validation contact-form px-3 py-5" id="contact-form" novalidate>
                             <div class="form-group">
                                 <label for="contact-name">#name</label>
                                 <input id="contact-name" placeholder="Name" type="text" class="form-control" name="name" required>
@@ -221,7 +222,9 @@
                                 <div class="invalid-feedback">It looks like you forgot your message</div>
 
                             </div>
-                            <button type="submit" class="btn btn-lg btn-outline-success mt-4 text-capitalize">submit</button>
+                            <p class="contact-status <%=contact.class%>"><%=contact.message%></p>
+
+                            <button type="submit" class="btn btn-lg btn-outline-success mt-3 text-capitalize">submit</button>
                         </form>
                     </div>
                 </div>
@@ -236,24 +239,9 @@
                 </div>
             </section>
 
-        </div>
+</div>
 
-        <footer class="container-fluid text-center invisible">
-            <h1>Picoral</h1>
-            <ul class="text-center">
-                <a href="#" target="_blank"><i class="fab f fa-facebook-square"></i></a>
-                <a href="#" target="_blank"><i class="fab t fa-twitter-square"></i></a>
-                <a href="#" target="_blank"><i class="fab r fa-reddit"></i></a>
-                <a href="#" target="_blank"><i class="fab l fa-linkedin"></i></a>
-                <a href="#contact"><i class="far m fa-envelope"></i></a>
-                <a href="#" target="_blank"><i class="fab i fa-instagram"></i></a>
-            </ul>
-            <p class="text-center">Copyright &copy; Fernando Picoral 2019</p>
-        </footer>
-
-
-
-
+<%- include('templates/footer')%>
 
 </body>
 </html>
