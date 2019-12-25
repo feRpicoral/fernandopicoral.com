@@ -205,7 +205,7 @@
 
                     <div class="container mt-4">
 <!--                        TODO Add feedback after submission based on nodemailer response code-->
-                        <form action="/" method="POST" role="form" class="needs-validation contact-form px-3 py-5" novalidate>
+                        <form action="/contact" method="POST" role="form" class="needs-validation contact-form px-3 py-5" novalidate>
                             <div class="form-group">
                                 <label for="contact-name">#name</label>
                                 <input id="contact-name" placeholder="Name" type="text" class="form-control" name="name" required>
@@ -217,7 +217,7 @@
 
 
                                 <label for="contact-message">#message</label>
-                                <textarea id="contact-message" placeholder="Write your message here" class="form-control" rows="5" required></textarea>
+                                <textarea name="message" id="contact-message" placeholder="Write your message here" class="form-control" rows="5" required></textarea>
                                 <div class="invalid-feedback">It looks like you forgot your message</div>
 
                             </div>
