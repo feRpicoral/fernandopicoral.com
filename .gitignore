@@ -109,3 +109,4 @@ dist
 
 #Ignored Files
 /public/js/importer.js
+/modules/config.js
