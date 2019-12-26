@@ -4,14 +4,6 @@
 
     let f =  $('footer:first');
 
-
-    window.addEventListener("scroll", (function() {
-            //Fade and show (hidden to avoid bugs on page load) footer
-            f.removeClass('invisible');
-            fadeOnScroll(f[0], "in");
-        }
-    ));
-
     f.children('h1').click(function () {
         window.scrollTo(0,0);
     });

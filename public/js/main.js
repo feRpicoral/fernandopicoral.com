@@ -271,11 +271,33 @@ var getUrlParameter = function getUrlParameter(sParam) {
 
         div = document.createElement('div');
         div.id = "projects-page-dots-wrap";
+        $(div).addClass('d-flex align-items-center justify-content-center');
+
+        let mobileLeftArrowAdded = false;
         for (let i = 0; i < numOfProjects; i++) {
+            if (!mobileLeftArrowAdded) {
+                //Left arrow mobile
+                let a = document.createElement('a');
+                $(a).addClass('a-btn-control btn-control-mobile a-btn-bfr d-sm-none mr-2');
+                a.href = 'javascript:void(0)';
+                a.innerHTML = "<i class=\"fal fa-chevron-left\"></i>";
+                mobileLeftArrowAdded = true;
+                div.appendChild(a);
+            }
+
             let linkedPageID = p.idPrefix + projectsArr[0];
             projectsArr.shift();
             div.innerHTML += "<i class=\"fas fa-circle page-dot\" data-linked-page='#" + linkedPageID + "'></i>";
         }
+
+        //Right arrow mobile
+        let a = document.createElement('a');
+        $(a).addClass('a-btn-control btn-control-mobile a-btn-nxt d-sm-none ml-2');
+        a.href = 'javascript:void(0)';
+        a.innerHTML = "<i class=\"fal fa-chevron-right\"></i>";
+        mobileLeftArrowAdded = true;
+        div.appendChild(a);
+
         $('.page-dot-col')[0].appendChild(div);
         div.children[0].classList.add('page-dot-active');
     })();
@@ -309,7 +331,6 @@ var getUrlParameter = function getUrlParameter(sParam) {
     })();
 
     //Make sure skills columns are equal height
-    //TODO Make lists aligned by center
     (function () {
         let cols = $('.skills-col');
         let highest = cols[0].offsetHeight;
@@ -325,7 +346,6 @@ var getUrlParameter = function getUrlParameter(sParam) {
 
     })();
 
-    //TODO Add mobile compatibility - maybe just scale things nicely, to avoid a headache with dragging
     //Handle next/previous project buttons and dots
     (function (pWrap = $('.project-content-wrap'), p = projects) {
 
@@ -389,23 +409,26 @@ var getUrlParameter = function getUrlParameter(sParam) {
         //Handle page dot click
         $.each($('#projects-page-dots-wrap').children(), function (index, item) {
 
-            $(item).click(function () {
-                let active = $('.page-dot-active');
-                if ($(item) !== active) {
-                    active.toggleClass('page-dot-active', false);
-                    $(this).toggleClass('page-dot-active', true);
+            if (!$(item).hasClass('btn-control-mobile')) {
+                $(item).click(function () {
+                    let active = $('.page-dot-active');
+                    if ($(item) !== active) {
+                        active.toggleClass('page-dot-active', false);
+                        $(this).toggleClass('page-dot-active', true);
 
-                    let linkedPageId = $(this).attr('data-linked-page');
+                        let linkedPageId = $(this).attr('data-linked-page');
 
-                    previous = p.current;
-                    p.current = linkedPageId.replace('#' + p.idPrefix,'');
+                        previous = p.current;
+                        p.current = linkedPageId.replace('#' + p.idPrefix,'');
 
-                    p.hidePage(p.idPrefix + p.list[previous].idSuffix);
-                    p.showPage(p.idPrefix + p.list[p.current].idSuffix);
+                        p.hidePage(p.idPrefix + p.list[previous].idSuffix);
+                        p.showPage(p.idPrefix + p.list[p.current].idSuffix);
 
-                    updateArrows();
-                }
-            });
+                        updateArrows();
+                    }
+                });
+            }
+
         });
 
         //Only to be called when changing views using the arrows due to its dependencies
@@ -445,11 +468,48 @@ var getUrlParameter = function getUrlParameter(sParam) {
     //Go to contact form feedback if present
     window.onload = function () {
         if (getUrlParameter('contact')) {
+            $('.contact-status').removeClass('text-primary');
             window.scrollTo(0, document.getElementById('contact-form').offsetTop)
         }
-    }
+    };
+
+    $('#submit-btn').click(function () {
+        let e = $('.contact-status');
+        e[0].innerHTML = 'Hold on, your message is being sent...';
+        e.addClass('text-primary');
+    });
+
+
+    //Edit styles if mobile
+    (function () {
+        if (getBreakpoint() === 'xs') {
+            let main = $('.main-wrap');
+            main.removeClass('container');
+            main.addClass('container-fluid');
+            main.css('padding', '0');
+
+            for (let e of $('.main-card-wrap')) {
+                $(e).addClass('no-br');
+            }
+
+            for (let e of $('.br-16')) {
+                $(e).addClass('no-br');
+            }
+
+            $('.contact-header').addClass('no-br');
+            $('.skills-header').addClass('no-br');
+            $('.projects-header').addClass('no-br');
+
+            for (let e of $('.a-btn-col')) {
+                $(e).remove();
+            }
+        }
+    })();
+
+
 
 //END Wrapper function
+//TODO Refactor this file using ejs partials and organize better the code, the same goes to the css main file
 })();
 
 

@@ -13,9 +13,8 @@
 
 html {
     scroll-behavior: smooth;
-    height: 3000px;
+    height: 100%;
 }
-
 
 body {
     background-color: var(--main-color);
@@ -165,6 +164,19 @@ header {
     font-weight: 100;
 }
 
+/*XS Breakpoint*/
+@media screen and (max-width: 576px) {
+    .logo > hr {
+        width: 80%;
+    }
+    .logo > h1{
+        font-size: 80px;
+    }
+    .logo > h2{
+        font-size: 25px;
+    }
+}
+
 .overflow-h {
     overflow: hidden;
 }
@@ -187,6 +199,10 @@ header {
     -webkit-box-shadow: 15px 15px 30px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 15px 15px 30px 0px rgba(0,0,0,0.75);
     box-shadow: 15px 15px 30px 0px rgba(0,0,0,0.75);
+}
+
+.no-br {
+    border-radius: 0 !important;
 }
 
 #projects-wrap {
@@ -233,6 +249,21 @@ header {
 
 .project-content p {
     font-size: 25px;
+}
+
+/*XS Breakpoint*/
+@media screen and (max-width: 576px) {
+    .p-title > h1 {
+        font-size: 50px;
+    }
+    .p-title > h2 {
+        font-size: 25px;
+    }
+    .project-content p {
+        font-size: 18px;
+    }
+
+
 }
 
 .demo-btn {
@@ -298,7 +329,6 @@ a.btn-see-more {
 }
 
 .skills-col {
-    border-radius: 16px;
     background-color: var(--moon-color);
     height: 550px;
     box-shadow: 15px 15px 30px 0px rgba(0,0,0,0.75);
@@ -393,10 +423,6 @@ a.btn-see-more {
     transition: background-color .5s ease-in-out;
 }
 
-.a-btn-col:hover {
-    /*background-color: rgba(89,113,131,0.6);*/
-}
-
 .a-btn-control {
     color: var(--moon-color);
     font-size: 40px;
@@ -409,12 +435,11 @@ a.btn-see-more {
     font-size: 60px;
 }
 
-.a-btn-nxt {
-
-}
-
-.a-btn-bfr {
-
+/*XS Breakpoint*/
+@media screen and (max-width: 576px) {
+    a.a-btn-control {
+        font-size: 20px !important;
+    }
 }
 
 .contact {
@@ -451,7 +476,7 @@ a.btn-see-more {
 }
 
 .br-16 {
-    border-radius: 16px !important;
+    border-radius: 16px;
 }
 
 .contact-header {
