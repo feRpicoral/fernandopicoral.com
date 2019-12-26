@@ -201,8 +201,12 @@ header {
     box-shadow: 15px 15px 30px 0px rgba(0,0,0,0.75);
 }
 
-.no-br {
-    border-radius: 0 !important;
+/*XS Breakpoint*/
+@media screen and (max-width: 576px) {
+    .main-card-wrap {
+        border-radius: 0 !important;
+    }
+
 }
 
 #projects-wrap {
@@ -211,8 +215,6 @@ header {
 
 .projects-header {
     background: var(--pink-gradient);
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
     height: 150px;
 }
 
@@ -262,7 +264,6 @@ header {
     .project-content p {
         font-size: 18px;
     }
-
 
 }
 
@@ -334,9 +335,19 @@ a.btn-see-more {
     box-shadow: 15px 15px 30px 0px rgba(0,0,0,0.75);
 }
 
-.skills-header {
+.br-top-16 {
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
+}
+
+@media screen and (max-width: 576px) {
+    .br-top-16 {
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+    }
+}
+
+.skills-header {
     height: 100px;
 }
 
@@ -423,6 +434,12 @@ a.btn-see-more {
     transition: background-color .5s ease-in-out;
 }
 
+@media screen and (max-width: 576px) {
+    .a-btn-col {
+        display: none !important;
+    }
+}
+
 .a-btn-control {
     color: var(--moon-color);
     font-size: 40px;
@@ -479,10 +496,15 @@ a.btn-see-more {
     border-radius: 16px;
 }
 
+@media screen and (max-width: 576px) {
+    .br-16 {
+        border-radius: 0 !important;
+    }
+
+}
+
 .contact-header {
     background: var(--main-gradient);
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
     height: 150px;
 }
 

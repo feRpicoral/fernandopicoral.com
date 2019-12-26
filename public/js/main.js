@@ -278,7 +278,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
             if (!mobileLeftArrowAdded) {
                 //Left arrow mobile
                 let a = document.createElement('a');
-                $(a).addClass('a-btn-control btn-control-mobile a-btn-bfr d-sm-none mr-2');
+                $(a).addClass('a-btn-control btn-control-mobile a-btn-bfr d-sm-none mr-2 invisible');
                 a.href = 'javascript:void(0)';
                 a.innerHTML = "<i class=\"fal fa-chevron-left\"></i>";
                 mobileLeftArrowAdded = true;
@@ -299,7 +299,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
         div.appendChild(a);
 
         $('.page-dot-col')[0].appendChild(div);
-        div.children[0].classList.add('page-dot-active');
+        div.children[1].classList.add('page-dot-active');
     })();
 
     //Handle see more button
@@ -470,12 +470,12 @@ var getUrlParameter = function getUrlParameter(sParam) {
     })();
 
     //Go to contact form feedback if present
-    window.onload = function () {
+    (function () {
         if (getUrlParameter('contact')) {
             $('.contact-status').removeClass('text-primary');
             window.scrollTo(0, document.getElementById('contact-form').offsetTop)
         }
-    };
+    })();
 
     $('#submit-btn').click(function () {
         let e = $('.contact-status');
@@ -491,26 +491,8 @@ var getUrlParameter = function getUrlParameter(sParam) {
             main.removeClass('container');
             main.addClass('container-fluid');
             main.css('padding', '0');
-
-            for (let e of $('.main-card-wrap')) {
-                $(e).addClass('no-br');
-            }
-
-            for (let e of $('.br-16')) {
-                $(e).addClass('no-br');
-            }
-
-            $('.contact-header').addClass('no-br');
-            $('.skills-header').addClass('no-br');
-            $('.projects-header').addClass('no-br');
-
-            for (let e of $('.a-btn-col')) {
-                $(e).remove();
-            }
         }
     })();
-
-
 
 //END Wrapper function
 //TODO Refactor this file using ejs partials and organize better the code, the same goes to the css main file
