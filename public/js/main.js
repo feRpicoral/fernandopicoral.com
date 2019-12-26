@@ -332,17 +332,21 @@ var getUrlParameter = function getUrlParameter(sParam) {
 
     //Make sure skills columns are equal height
     (function () {
-        let cols = $('.skills-col');
-        let highest = cols[0].offsetHeight;
+        //Avoid mobile bug
+        if (getBreakpoint() !== 'xs') {
+            let cols = $('.skills-col');
+            let highest = cols[0].offsetHeight;
 
-        for (let col of cols) {
-            if (col.offsetHeight > highest) {
-                highest = col.offsetHeight;
+            for (let col of cols) {
+                if (col.offsetHeight > highest) {
+                    highest = col.offsetHeight;
+                }
+            }
+            for (let col of cols) {
+                col.style.minHeight = highest + "px";
             }
         }
-        for (let col of cols) {
-            col.style.minHeight = highest + "px";
-        }
+
 
     })();
 
