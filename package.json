@@ -23,5 +23,9 @@
   "scripts": {
     "start": "node app.js"
   },
-  "main": "app.js"
+  "main": "app.js",
+  "devDependencies": {
+    "uglify-es": "^3.3.9",
+    "uglifycss": "0.0.29"
+  }
 }

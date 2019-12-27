@@ -206,7 +206,6 @@ class Projects {
         this.idPrefix = "project-";
 
         /*List of projects and their contents*/
-        //TODO Improve way to store and update projects
         this.list = {
             istudi: {
                 innerHtml: "<div class=\"w-100 h-100 project-content \"> <div class=\"p-title\"> <h1>First Project</h1> <h2>This is the first project</h2> </div><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores beatae consectetur consequatur corporis deserunt doloremque esse facere fugit illum obcaecati perferendis possimus ratione rerum, sapiente sint sit tempora vel.</p></div><a class=\"btn-see-more btn btn-primary\"><span>show more</span><i class=\"fal fa-caret-down\"></i></a> <div class=\"see-more w-100 my-4 h-100 d-none\"> <div class=\"row\"> <div class=\"col-12 col-lg-6\"> <img src=\"/img/html-code.jpg\" class=\"img-fluid img-thumbnail\" alt=\"\"> </div><div class=\"col-12 col-lg-6 mt-4 mt-lg-auto\"> <img src=\"/img/html-code.jpg\" class=\"img-fluid img-thumbnail\" alt=\"\"> </div></div></div><div class=\"p-btns d-flex align-items-center justify-content-center mt-3 mb-2\"> <span data-toggle=\"tooltip\" data-placement=\"left\" title=\"Soon\"> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline btn-outline-success demo-btn mr-3 disabled\">Demo</a> </span> <span data-toggle=\"tooltip\" data-placement=\"right\" title=\"Private project\"> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline github-btn disabled\"><i class=\"fab fa-github\"></i></a> </span> </div>"
@@ -474,9 +473,8 @@ class Projects {
     /*
     * Put projects section on the bottom of the viewport.
     *
-    * Change projects section margin-top so it sits at the bottom of the viewport.
+    * Change projects section margin-top so it sits at the bottom of the viewport. Called on resize event.
     *
-    * @todo Run this on resize event
     * @access global
     */
     static setMarginTop() {
@@ -588,9 +586,7 @@ class Contact {
 /*
 * Mobile exclusive methods. Needs initialization.
 *
-* Handles all mobile relate changes and exclusive methods.
-*
-* @todo Create instance on resize event
+* Handles all mobile relate changes and exclusive methods. Re-initialized on window resize.
 *
 * @deprecated CSS already handles the changes
 */
@@ -615,7 +611,6 @@ $(() => {
     new Menu();
     new Projects();
     new Contact($('.contact-form'));
-    new Mobile();
 
     /*Activate Bootstrap 4 tooltips*/
     $('[data-toggle="tooltip"]').tooltip();
@@ -636,8 +631,7 @@ $(() => {
     * Make sure skills columns are equal height.
     *
     * Set min-height of skills columns to the highest's height. Disabled on mobile.
-    *
-    * @todo Run this on resize event
+    * Called on window resize.
     */
     function setSkillsColHeight() {
         if (Utils.getBreakpoint() === 'xs') {
@@ -656,6 +650,10 @@ $(() => {
             col.style.minHeight = highest + "px";
         }
     }
+
+    /*Update elements on window resize*/
+    $(window).resize(() => {
+      Projects.setMarginTop();
+      setSkillsColHeight();
+    });
 });
-
-

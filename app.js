@@ -1,3 +1,7 @@
+//uglifyjs file.js -o output.js -c -m
+//uglifycss --output output.css  file.css
+//TODO Save this commands somewhere else
+
 const nodemailer = require('nodemailer'),
       express    = require('express'),
       app        = express(),

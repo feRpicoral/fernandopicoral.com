@@ -18,10 +18,10 @@
         <link href="https://fonts.googleapis.com/css?family=Poppins:500,600,700|Lato&display=swap" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link type="text/css" rel="stylesheet" href="/css/main.css">
+        <link type="text/css" rel="stylesheet" href="/css/main.min.css">
 
         <!-- Custom JS -->
-        <script type="text/javascript" src="/js/main.js"></script>
+        <script type="text/javascript" src="/js/main.min.js"></script>
 
         <!-- META -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -214,7 +214,6 @@
 
                             </div>
 
-<!--                            TODO Not showing while sending-->
                             <%if(typeof contact != "undefined") {%>
                                 <p class="contact-status <%=contact.class%>"><%=contact.message%></p>
                             <%} else {%>

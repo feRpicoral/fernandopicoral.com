@@ -20,7 +20,7 @@ router.post('/contact', (req, res) => {
             'Mensagem:\n' +
             '%s', req.body.name, req.body.email, req.body.message)
     };
-    //TODO Send confirmation email to sender with html
+    //TODO Send confirmation email to sender with html and sanitize input
     transporter.sendMail(mail, function (err, info) {
         //Handle contact feedback
         let message, textColorClass;
