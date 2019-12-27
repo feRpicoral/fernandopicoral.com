@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
 
-    <!-- jQuery -->
-    <script type="text/javascript" src="/lib/jquery-3.4.1.min.js"></script>
+        <!-- jQuery -->
+        <script type="text/javascript" src="/lib/jquery-3.4.1.min.js"></script>
 
-    <!-- BS4 & Requirements (Popper) -->
-    <script type="text/javascript" src="/lib/popper-1.16.min.js"></script>
-    <script type="text/javascript" src="/lib/bootstrap-4.4.1.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="/lib/bootstrap-4.4.1.min.css">
+        <!-- BS4 & Requirements (Popper) -->
+        <script type="text/javascript" src="/lib/popper-1.16.min.js"></script>
+        <script type="text/javascript" src="/lib/bootstrap-4.4.1.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="/lib/bootstrap-4.4.1.min.css">
 
-    <!-- Font Awesome  -->
-    <link type="text/css" rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.11.2/css/pro.min.css">
+        <!-- Font Awesome  -->
+        <link type="text/css" rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.11.2/css/pro.min.css">
 
-    <!--reCaptcha-->
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:500,600,700|Lato&display=swap" rel="stylesheet">
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:500,600,700|Lato&display=swap" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link type="text/css" rel="stylesheet" href="/css/main.css">
 
-    <!-- Custom CSS -->
-    <link type="text/css" rel="stylesheet" href="/css/main.css">
+        <!-- Custom JS -->
+        <script async type="text/javascript" src="/js/main.js"></script>
 
-    <!-- Custom JS -->
-    <script async type="text/javascript" src="/js/main.js"></script>
+        <!-- META -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <title>Picoral</title>
 
-    <!-- META -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="utf-8">
-    <title>Picoral</title>
+    </head>
 
-</head>
-<body>
-
-
+    <body>
 
         <header class="navbar align-items-center pt-4 fixed-top" id="nav">
             <div class="container">
@@ -103,7 +100,6 @@
 
                             <div class="h-100 col p-0 project-content-row text-center d-flex align-items-stretch">
                                 <div class="h-100 container py-3 project-content-wrap">
-
                                 </div>
                             </div>
 
@@ -160,7 +156,7 @@
                             </div>
                         </div>
                         <div class="h-100 br-16 ml-lg-5 col-12 col-lg p-0 skills-col">
-                            <div class="back-end-img skills-header d-flex justify-content-center align-items-center">
+                            <div class="back-end-img skills-header br-top-16 d-flex justify-content-center align-items-center">
                                 <h1>backEnd(&nbsp;);</h1>
                             </div>
                             <div class="skills-body h-100">
@@ -217,7 +213,12 @@
                                 <div class="invalid-feedback">It looks like you forgot your message</div>
 
                             </div>
-                            <p class="contact-status <%=contact.class%>"><%=contact.message%></p>
+
+<!--                            TODO Not showing while sending-->
+                            <%if(typeof contact != "undefined") {%>
+                                <p class="contact-status <%=contact.class%>"><%=contact.message%></p>
+                            <%}%>
+
 
                             <button id="submit-btn" type="submit" class="btn btn-lg btn-outline-success mt-3 text-capitalize">submit</button>
                         </form>
@@ -229,14 +230,14 @@
                 <div class="other text-center">
                     <h1>let's <span>build</span> something <span>together.</span></h1>
                     <br>
-                    <p>Do you have an amazing idea and need some help?<br>Reach me out, let's turn this idea into reality. No money involved.</p>
+                    <p>Do you have an amazing idea and need some help?<br>Reach me out, let's turn this idea into reality.</p>
                     <a href="#contact" role="button" id="lets-go">let's do it</a>
                 </div>
             </section>
 
-</div>
+        </div>
 
-<%- include('templates/footer')%>
+        <%- include('templates/footer')%>
 
-</body>
+    </body>
 </html>

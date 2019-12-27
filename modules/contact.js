@@ -6,7 +6,7 @@ const nodemailer = require("nodemailer"),
 router.post('/contact', (req, res) => {
     let transporter = nodemailer.createTransport(config.email);
     let mail = {
-        from: 'contact@fernandopicoral.com',
+        from: 'Contato <contact@fernandopicoral.com>',
         to: ['fernandopicoral@gmail.com'],
         replyTo: req.body.email,
         subject: '[CONTATO] Nova mensagem em fernandopicoral.com',

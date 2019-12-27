@@ -15,17 +15,20 @@ app.use(contact);
 
 //Handle homepage
 app.get('/', (req, res) => {
-    let contact = {};
 
     //Show contact feedback if present
     if (req.query.contact) {
-        contact = JSON.parse(decodeURI(req.query.contact));
+        res.render('index', {contact: JSON.parse(decodeURI(req.query.contact))});
+    } else {
+        res.render('index');
     }
-
-    res.render('index', {contact: contact});
 });
 
-
+//404
+app.get('*', (req, res) => {
+   //TODO Create error page
+   res.redirect('/'); //not using render to reset url
+});
 
 
 //Start server

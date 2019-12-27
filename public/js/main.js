@@ -182,23 +182,25 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     });
 
+
     let projects = {
         idPrefix: "project-",
         //Projects HTML storage
         list: {
             //TODO Add projects
             istudi: {
-                innerHtml: "<div class=\"w-100 h-100 project-content \"> <div class=\"p-title\"> <h1>Project Title</h1> <h2>This is the first project</h2> </div><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores beatae consectetur consequatur corporis deserunt doloremque esse facere fugit illum obcaecati perferendis possimus ratione rerum, sapiente sint sit tempora vel.</p></div><a class=\"btn-see-more btn btn-primary\"><span>show more</span><i class=\"fal fa-caret-down\"></i></a> <div class=\"see-more w-100 my-4 h-100 d-none\"> <div class=\"row\"> <div class=\"col-12 col-lg-6\"> <img src=\"/img/html-code.jpg\" class=\"img-fluid img-thumbnail\" alt=\"\"> </div><div class=\"col-12 col-lg-6 mt-4 mt-lg-auto\"> <img src=\"/img/html-code.jpg\" class=\"img-fluid img-thumbnail\" alt=\"\"> </div></div></div><div class=\"p-btns d-flex align-items-center justify-content-center mt-3 mb-2\"> <span data-toggle=\"tooltip\" data-placement=\"left\" title=\"Soon\"> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline btn-outline-success demo-btn mr-3 disabled\">Demo</a> </span> <span data-toggle=\"tooltip\" data-placement=\"right\" title=\"Private project\"> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline github-btn disabled\"><i class=\"fab fa-github\"></i></a> </span> </div>"
+                innerHtml: "<div class=\"w-100 h-100 project-content \"> <div class=\"p-title\"> <h1>First Project</h1> <h2>This is the first project</h2> </div><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores beatae consectetur consequatur corporis deserunt doloremque esse facere fugit illum obcaecati perferendis possimus ratione rerum, sapiente sint sit tempora vel.</p></div><a class=\"btn-see-more btn btn-primary\"><span>show more</span><i class=\"fal fa-caret-down\"></i></a> <div class=\"see-more w-100 my-4 h-100 d-none\"> <div class=\"row\"> <div class=\"col-12 col-lg-6\"> <img src=\"/img/html-code.jpg\" class=\"img-fluid img-thumbnail\" alt=\"\"> </div><div class=\"col-12 col-lg-6 mt-4 mt-lg-auto\"> <img src=\"/img/html-code.jpg\" class=\"img-fluid img-thumbnail\" alt=\"\"> </div></div></div><div class=\"p-btns d-flex align-items-center justify-content-center mt-3 mb-2\"> <span data-toggle=\"tooltip\" data-placement=\"left\" title=\"Soon\"> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline btn-outline-success demo-btn mr-3 disabled\">Demo</a> </span> <span data-toggle=\"tooltip\" data-placement=\"right\" title=\"Private project\"> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline github-btn disabled\"><i class=\"fab fa-github\"></i></a> </span> </div>"
             },
             codeIt: {
-                innerHtml: "<div class=\"w-100 h-100 project-content \"> <div class=\"p-title\"> <h1>Project Title</h1> <h2>This is the second project</h2> </div> <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores beatae consectetur consequatur corporis deserunt doloremque esse facere fugit illum obcaecati perferendis possimus ratione rerum, sapiente sint sit tempora vel.</p> </div> <div class=\"p-btns d-flex align-items-center justify-content-center mt-5 mb-2\"> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline btn-outline-success demo-btn mr-3\">Demo</a> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline github-btn\"><i class=\"fab fa-github\"></i></a> </div>"
+                innerHtml: "<div class=\"w-100 h-100 project-content \"> <div class=\"p-title\"> <h1>Second Project</h1> <h2>This is the second project</h2> </div><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores beatae consectetur consequatur corporis deserunt doloremque esse facere fugit illum obcaecati perferendis possimus ratione rerum, sapiente sint sit tempora vel.</p></div><a class=\"btn-see-more btn btn-primary\"><span>show more</span><i class=\"fal fa-caret-down\"></i></a> <div class=\"see-more w-100 my-4 h-100 d-none\"> <div class=\"row\"> <div class=\"col-12 col-lg-6\"> <img src=\"/img/html-code.jpg\" class=\"img-fluid img-thumbnail\" alt=\"\"> </div><div class=\"col-12 col-lg-6 mt-4 mt-lg-auto\"> <img src=\"/img/html-code.jpg\" class=\"img-fluid img-thumbnail\" alt=\"\"> </div></div></div><div class=\"p-btns d-flex align-items-center justify-content-center mt-3 mb-2\"> <span data-toggle=\"tooltip\" data-placement=\"left\" title=\"Soon\"> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline btn-outline-success demo-btn mr-3 disabled\">Demo</a> </span> <span data-toggle=\"tooltip\" data-placement=\"right\" title=\"Private project\"> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline github-btn disabled\"><i class=\"fab fa-github\"></i></a> </span> </div>"
             },
             restaurantSystem: {
-                innerHtml: "<div class=\"w-100 h-100 project-content \"> <div class=\"p-title\"> <h1>Project Title</h1> <h2>This is the third project</h2> </div> <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores beatae consectetur consequatur corporis deserunt doloremque esse facere fugit illum obcaecati perferendis possimus ratione rerum, sapiente sint sit tempora vel.</p> </div> <div class=\"p-btns d-flex align-items-center justify-content-center mt-5 mb-2\"> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline btn-outline-success demo-btn mr-3\">Demo</a> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline github-btn\"><i class=\"fab fa-github\"></i></a> </div>"
+                innerHtml: "<div class=\"w-100 h-100 project-content \"> <div class=\"p-title\"> <h1>Third Project</h1> <h2>This is the third project</h2> </div><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores beatae consectetur consequatur corporis deserunt doloremque esse facere fugit illum obcaecati perferendis possimus ratione rerum, sapiente sint sit tempora vel.</p></div><a class=\"btn-see-more btn btn-primary\"><span>show more</span><i class=\"fal fa-caret-down\"></i></a> <div class=\"see-more w-100 my-4 h-100 d-none\"> <div class=\"row\"> <div class=\"col-12 col-lg-6\"> <img src=\"/img/html-code.jpg\" class=\"img-fluid img-thumbnail\" alt=\"\"> </div><div class=\"col-12 col-lg-6 mt-4 mt-lg-auto\"> <img src=\"/img/html-code.jpg\" class=\"img-fluid img-thumbnail\" alt=\"\"> </div></div></div><div class=\"p-btns d-flex align-items-center justify-content-center mt-3 mb-2\"> <span data-toggle=\"tooltip\" data-placement=\"left\" title=\"Soon\"> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline btn-outline-success demo-btn mr-3 disabled\">Demo</a> </span> <span data-toggle=\"tooltip\" data-placement=\"right\" title=\"Private project\"> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline github-btn disabled\"><i class=\"fab fa-github\"></i></a> </span> </div>"
             }
         },
         order: ['istudi', 'codeIt', 'restaurantSystem'],
         current: '', //Project being displayed. If empty, the first from order array will be selected
+        //Changed to updatePage(wrapId, method (show or hide))
         showPage: function (wrapId) {
             if (wrapId[0] !== "#") {
                 wrapId = "#" + wrapId;
@@ -222,6 +224,8 @@ var getUrlParameter = function getUrlParameter(sParam) {
 
     //Add idSuffix to each project. Has to be done this way to avoid repetition and increase compatibility
     (function (p = projects) {
+        return;
+
         for (let [key, value] of Object.entries(p.list)) {
             p.list[key].idSuffix = key;
         }
@@ -229,6 +233,8 @@ var getUrlParameter = function getUrlParameter(sParam) {
 
     //Add project elements
     (function (wrap = $('.project-content-wrap'), p = projects) {
+        return;
+
         for (let el of p.order) {
 
             let debugging = false;
@@ -259,12 +265,16 @@ var getUrlParameter = function getUrlParameter(sParam) {
 
     //Set projects section on bottom of viewport
     (function (pHeader = $('.projects-header'), newMargin) {
+        return;
+
         newMargin = (window.innerHeight - pHeader.offset().top - pHeader.innerHeight() + 100) + "px";
         $('#projects-wrap').css('margin-top', newMargin);
     })();
 
     //Add page dots below projects
     (function (p = projects, numOfProjects, div) {
+        return;
+
         numOfProjects = p.list.length;
 
         let projectsArr = p.order.slice();
@@ -295,7 +305,6 @@ var getUrlParameter = function getUrlParameter(sParam) {
         $(a).addClass('a-btn-control btn-control-mobile a-btn-nxt d-sm-none ml-2');
         a.href = 'javascript:void(0)';
         a.innerHTML = "<i class=\"fal fa-chevron-right\"></i>";
-        mobileLeftArrowAdded = true;
         div.appendChild(a);
 
         $('.page-dot-col')[0].appendChild(div);
@@ -304,33 +313,40 @@ var getUrlParameter = function getUrlParameter(sParam) {
 
     //Handle see more button
     (function () {
-
-        let btn = $('.btn-see-more');
-        let el = $('.see-more');
+        return;
+        let btns = $('.btn-see-more');
+        let els = $('.see-more').toArray();
 
         let text = {
-          current: function () {
+          current: function (btn) {
             return btn.find('span').text();
           },
           seeMoreHtml: "<span>show more</span><i class=\"fal fa-caret-down\"></i>",
           seeLessHtml: "<span>show less</span><i class=\"fal fa-caret-up\"></i>"
         };
 
-        btn.click(function () {
-            //TODO Add animation to button change
-            if (text.current() === 'show more') {
-                //Show
-                btn.html(text.seeLessHtml);
-                el.toggleClass('d-none', false);
-            } else {
-                //Hide
-                btn.html(text.seeMoreHtml);
-                el.toggleClass('d-none', true);
-            }
-        });
+        for (let btn of btns) {
+            btn = $(btn); //jQuery
+            btn.click(function () {
+                //TODO Add animation to button change
+
+                let el = $(els[btns.toArray().indexOf(btn[0])]); //btns[0] to get el not jQuery reference
+
+                if (text.current(btn) === 'show more') {
+                    //Show
+                    btn.html(text.seeLessHtml);
+                    el.toggleClass('d-none', false);
+                } else {
+                    //Hide
+                    btn.html(text.seeMoreHtml);
+                    el.toggleClass('d-none', true);
+                }
+            });
+        }
+
     })();
 
-    //Make sure skills columns are equal height
+    //Make sure skills columns are equal height TODO Continue refactoring here
     (function () {
         //Avoid mobile bug
         if (getBreakpoint() !== 'xs') {
