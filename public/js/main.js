@@ -1,22 +1,6 @@
 'use-strict';
 
 /*
-* Add length to Object prototype.
-*
-* Shortcut to Object.keys(o).length.
-*
-* @return {number} Object length
-*/
-Object.defineProperties(Object.prototype, {
-    length: {
-        get() {
-            return Object.keys(this).length;
-        },
-        enumerable: false,
-    }
-});
-
-/*
 * Utilities class with only static methods.
 *
 * @static getBreakpoint, fadeOnScroll, getUrlParameter*/
@@ -294,7 +278,7 @@ class Projects {
         a.href = 'javascript:void(0)';
 
 
-        for (let i = 0; i < this.list.length; i++) {
+        for (let i = 0; i < Object.keys(this.list).length; i++) {
             /*Mobile left arrow*/
             if (!mobileLeftArrowAdded) {
                 $(a).addClass('a-btn-bfr');
@@ -533,20 +517,29 @@ class Contact {
 
         /*Message to be displayed while sending*/
         this.message = 'Hold on, your message is being sent...';
+        this.captchaMsg = 'Please check the captcha';
 
         this.bs4Validation();
         this.validateOnChange();
         this.handleSubmitBtn();
         this.goToForm();
+
+
     }
 
     /*Add event listener to validate the inputs before submission using BS4 validation method.*/
     bs4Validation() {
         this.form[0].addEventListener('submit', (event) => {
-            if (!this.form[0].checkValidity()) {
+            let r = grecaptcha.getResponse();
+            if (!this.form[0].checkValidity() || !r) {
                 event.preventDefault();
                 event.stopPropagation();
                 this.triedSubmission = true;
+
+                if (!r) {
+                    this.status[0].innerHTML = this.captchaMsg;
+                    this.status.addClass('text-danger');
+                }
             }
             this.form.addClass('was-validated');
         });
@@ -568,8 +561,9 @@ class Contact {
     /*Add sending feedback text on successful submission attempt*/
     handleSubmitBtn() {
         $('#submit-btn').click(() => {
-            if (this.form[0].checkValidity()) {
+            if (this.form[0].checkValidity() && grecaptcha.getResponse()) {
                 this.status[0].innerHTML = this.message;
+                this.status.removeClass('text-danger');
                 this.status.addClass('text-primary');
             }
         });
@@ -581,6 +575,8 @@ class Contact {
             window.scrollTo(0, this.form[0].offsetTop);
         }
     }
+
+
 }
 
 /*
@@ -608,9 +604,9 @@ class Mobile {
 
 /*DOM ready and safe to manipulate*/
 $(() => {
-    new Menu();
-    new Projects();
-    new Contact($('.contact-form'));
+    let m = new Menu();
+    let p = new Projects();
+    let c = new Contact($('.contact-form'));
 
     /*Activate Bootstrap 4 tooltips*/
     $('[data-toggle="tooltip"]').tooltip();
@@ -656,4 +652,13 @@ $(() => {
       Projects.setMarginTop();
       setSkillsColHeight();
     });
+
+    window.captchaCallback = function () {
+        const status = $('.contact-status');
+        if (status[0].innerHTML === 'Please check the captcha') {
+            status[0].innerHTML = '';
+            status.removeClass('text-danger');
+        }
+    };
+
 });

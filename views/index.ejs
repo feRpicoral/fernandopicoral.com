@@ -21,12 +21,16 @@
         <link type="text/css" rel="stylesheet" href="/css/main.min.css">
 
         <!-- Custom JS -->
-        <script type="text/javascript" src="/js/main.min.js"></script>
+        <script type="text/javascript" src="/js/main.js"></script>
 
         <!-- META -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
         <title>Picoral</title>
+
+        <!-- reCaptcha v2 -->
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 
     </head>
 
@@ -213,6 +217,8 @@
                                 <div class="invalid-feedback">It looks like you forgot your message</div>
 
                             </div>
+
+                            <div class="g-recaptcha mt-4 mb-2" data-callback="captchaCallback" data-theme="light" data-sitekey="6Ld0AMoUAAAAAJ6dQsAJGxn8bPqQJ5mBtoxZV9JR"></div>
 
                             <%if(typeof contact != "undefined") {%>
                                 <p class="contact-status <%=contact.class%>"><%=contact.message%></p>

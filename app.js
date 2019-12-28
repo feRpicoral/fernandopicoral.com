@@ -1,13 +1,11 @@
-//uglifyjs file.js -o output.js -c -m
-//uglifycss --output output.css  file.css
-//TODO Save this commands somewhere else
-
-const nodemailer = require('nodemailer'),
-      express    = require('express'),
+//Dependencies
+const express    = require('express'),
       app        = express(),
       ejs        = require('ejs'),
-      bodyParser = require('body-parser'),
-      contact    = require('./modules/contact.js');
+      bodyParser = require('body-parser');
+
+//Custom modules
+const contact    = require('./modules/contact.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,8 +16,7 @@ app.set('view engine', 'ejs');
 app.use(contact);
 
 //Handle homepage
-app.get('/', (req, res) => {
-
+app.get('/', (req, res, next) => {
     //Show contact feedback if present
     if (req.query.contact) {
         res.render('index', {contact: JSON.parse(decodeURI(req.query.contact))});
