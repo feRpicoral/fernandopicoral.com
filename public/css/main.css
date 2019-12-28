@@ -315,9 +315,20 @@ a.btn-see-more {
     top: 2px;
 }
 
-.tooltip {
-    margin-right: 10px;
+.bs-tooltip-right {
     margin-left: 10px;
+}
+
+.bs-tooltip-left {
+    margin-right: 10px;
+}
+
+.bs-tooltip-top {
+    margin-bottom: 15px;
+}
+
+.bs-tooltip-bottom {
+    margin-top: 15px;
 }
 
 .img-thumbnail {
@@ -366,7 +377,7 @@ a.btn-see-more {
 }
 
 .skills-header.back-end-img {
-    background-image: url("/img/js-code.jpg");
+    background-image: url("/img/php-code.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-clip: border-box;

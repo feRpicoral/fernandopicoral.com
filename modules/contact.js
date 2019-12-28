@@ -51,7 +51,7 @@ router.post('/contact', (req, res, next) => {
         else {
             // Redisplay the form. TODO Redisplay with the fields filled in as they were before
             let contact = {
-                message: 'Your message couldn\'t be delivered due to the missing captcha.',
+                message: 'Your message couldn\'t be delivered due to a recaptcha error: ' + error_code,
                 class: 'text-danger'
             };
             res.redirect('/?contact=' + encodeURI(JSON.stringify(contact)));
