@@ -27,8 +27,7 @@ app.get('/', (req, res, next) => {
 
 //404
 app.get('*', (req, res) => {
-   //TODO Create error page
-   res.redirect('/'); //not using render to reset url
+    res.status(404).render('templates/error', {status:404});
 });
 
 

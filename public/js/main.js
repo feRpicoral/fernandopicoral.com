@@ -320,7 +320,7 @@ class Projects {
     }
 
     /* Handles the see more button
-    *  @todo Add animation on button change
+    *  @todo Add animation on button change - jQueryUI
     */
     handleSeeMore() {
         const btns = $('.btn-see-more');
@@ -609,7 +609,6 @@ $(() => {
     *
     * Fade out the main logo when scrolled by.
     *
-    * @todo Move this to ejs partial file
     */
     window.addEventListener("scroll", (function() {
             Utils.fadeOnScroll(document.querySelector(".logo-wrap"), "out");

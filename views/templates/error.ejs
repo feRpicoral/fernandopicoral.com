@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <!-- BS4 -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap-4.4.1.min.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:500,600,700|Lato&display=swap" rel="stylesheet">
+
+    <!-- META -->
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta charset="utf-8">
+
+    <%
+    const codes = {
+        300: {
+        title: "Multiple Choices",
+        message: "Multiple choices found"
+        },
+        301: {
+        title: "Moved Permanently",
+        message: "This page was moved permanently"
+        },
+        400: {
+        title: "Bad Request", 
+        message: ""
+        },
+        401: {
+        title: "Unauthorized",
+        message: "You need to be authenticated to see this page"
+        },
+        403: {
+        title: "Forbidden",
+        message: "You don't have permission to see this page"
+        },
+        404: {
+        title: "Not Found",
+        message: "We couldn't find the page you are looking for"
+        },
+        500: {
+        title: "Internal Error",
+        message: "Server internal error"
+        },
+        503: {
+        title: "Unavailable",
+        message: "Service currently unavailable"
+        },
+        550: {
+        title: "Denied",
+        message: ""
+        }
+    }
+    %>
+
+    <title><%='Error | ' + codes[status].title%></title>
+
+    <style type="text/css">
+        body {
+            background: #1c2124;
+            color: #f6f7f8;
+        }
+        div[class*='container'] {
+            margin-top: 3rem;
+        }
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 150px;
+            margin-bottom: 0;
+        }
+        h2 {
+            font-size: 40px;
+            margin-top: -20px;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        h3 {
+            font-weight: 100;
+        }
+        .header-logo {
+            font-family: 'Poppins', sans-serif;
+            color: inherit;
+            font-size: 2rem;
+        }
+        .header-logo:hover {
+            color: #f6f7f8;
+            text-decoration: none;
+        }
+        .header-code-icon {
+            color: #159ce4;
+        }
+        .header-code-icon > span {
+            font-size: 80%;
+            color: inherit;
+        }
+        .rainbow-text {
+            background: linear-gradient(to left,#9cf184,#3db5eb);
+            background-size: 200% auto;
+            color: transparent;
+            text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow 3s ease infinite;
+        }
+        a,
+        a:hover,
+        a:active {
+            text-decoration: none;
+            outline: none;
+        }
+        .btns > a,
+        .btns > a:hover,
+        .btns > a:active {
+            color: #597183;
+            font-family: 'Poppins', sans-serif;
+            font-size: 45px;
+            font-weight: 600;
+        }
+        @keyframes rainbow {
+            0%{background-position:0 82%}
+            50%{background-position:100% 19%}
+            100%{background-position:0 82%}
+        }
+
+    </style>
+
+</head>
+
+    <body>
+        <header class="pt-4 container">
+            <a href="/" class="header-logo"><span class="header-code-icon">&lt</span> Picoral <span class="header-code-icon"><span>/</span>&gt</span></a>
+        </header>
+
+        <div class="container text-center">
+            <h1><%=status%></h1>
+            <h2><%=codes[status].title%></h2>
+            <h3><%=codes[status].message%></h3>
+            <div class="text-center btns mt-5">
+                <a class="mr-5" href="/">home</a>
+                <a href="/#contact">contact</a>
+            </div>
+        </div>
+    </body>
+
+<script type="text/javascript">
+    const c = 'rainbow-text';
+    for (let a of document.getElementsByClassName('btns')[0].children) {
+        a.onmouseover = function () {
+            if (!a.classList.contains(c)) {
+                a.classList.add(c);
+            }
+        }
+        a.onmouseout = function () {
+            if (a.classList.contains(c)) {
+                a.classList.remove(c);
+            }
+        }
+    }
+</script>
+
+</html>
