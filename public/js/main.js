@@ -290,7 +290,7 @@ class Projects {
         let mobileLeftArrowAdded = false;
 
         var a = document.createElement('a');
-        $(a).addClass('a-btn-control btn-control-mobile d-sm-none mr-2 invisible');
+        $(a).addClass('a-btn-control btn-control-mobile d-md-none mr-2 invisible');
         a.href = 'javascript:void(0)';
 
 
@@ -592,29 +592,6 @@ class Contact {
         }
     }
 
-
-}
-
-/*
-* Mobile exclusive methods. Needs initialization.
-*
-* Handles all mobile relate changes and exclusive methods. Re-initialized on window resize.
-*
-* @deprecated CSS already handles the changes
-*/
-class Mobile {
-    constructor() {
-        let main = $('.main-wrap');
-        /*Make sure only works on mobile*/
-        if (Utils.getBreakpoint() === 'xs') {
-            main.removeClass('container');
-            main.addClass('container-fluid');
-        } else {
-            /*Revert changes. Done to return to previous state on resize event*/
-            main.addClass('container');
-            main.removeClass('container-fluid');
-        }
-    }
 
 }
 
