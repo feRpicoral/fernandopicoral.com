@@ -1,15 +1,69 @@
 <%//Depends on jQuery and BS4. It's assumed that the libs are already instantiated%>
 <footer class="container-fluid text-center border-bottom-0 border-left-0 border-right-0">
-    <link rel="stylesheet" href="/css/templates/footer.css">
     <h1>Picoral</h1>
     <ul class="text-center">
-        <a href="#" target="_blank"><i class="fab f fa-facebook-square"></i></a>
-        <a href="#" target="_blank"><i class="fab t fa-twitter-square"></i></a>
-        <a href="#" target="_blank"><i class="fab r fa-reddit"></i></a>
-        <a href="#" target="_blank"><i class="fab l fa-linkedin"></i></a>
+        <a href="https://www.linkedin.com/in/fernando-picoral-51173a35/" target="_blank"><i class="fab l fa-linkedin"></i></a>
         <a href="#contact"><i class="far m fa-envelope"></i></a>
-        <a href="#" target="_blank"><i class="fab i fa-instagram"></i></a>
     </ul>
     <p class="text-center">Copyright &copy; Fernando Picoral 2019</p>
 </footer>
-<script async src="/js/templates/footer.js"></script>
+<style type="text/css">
+    footer {
+        background: #384248;
+        height: 100%;
+        padding-bottom: 20px;
+        border-image-source: linear-gradient(47.32deg,#d991e0,#00c6d4 60.06%,#00ea60);
+        border-image-slice: 1;
+        border-top-style: solid;
+        border-top-width: 5px;
+        margin-top: 5rem;
+        bottom: 0;
+        border-bottom: none;
+        border-left: none;
+        border-right: none;
+    }
+    footer > h1{
+        color: #f6f7f8;
+        display: inline-block !important;
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+        font-size: 60px;
+        margin-top: 50px;
+    }
+    footer > a:hover {
+        text-decoration: none;
+    }
+    footer > ul {
+        margin: 15px 0 0 0;
+        padding: 0;
+        text-align: center;
+    }
+    footer > ul > a {
+        color: rgba(0, 0, 0, 0.62);
+        position: relative;
+        display: inline-block;
+        margin-right: 25px;
+        list-style-type: none;
+        font-size: 3rem;
+        transform-origin: center;
+        transition: all .3s ease-in-out;
+    }
+    footer > ul > a:hover {
+        cursor: pointer;
+        transform: scale(1.25);
+        color: #159ce4;
+    }
+    footer > p {
+        margin: 20px 0 0 0;
+        font-family: 'Montserrat', sans-serif;
+        font-size: .9rem;
+    }
+</style>
+<script type="text/javascript">
+    let f =  $('footer:first');
+
+    f.children('h1').click(function () {
+        window.scrollTo(0,0);
+    });
+</script>

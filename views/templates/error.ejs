@@ -13,50 +13,72 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta charset="utf-8">
 
-    <%
-    const codes = {
-        300: {
-        title: "Multiple Choices",
-        message: "Multiple choices found"
-        },
-        301: {
-        title: "Moved Permanently",
-        message: "This page was moved permanently"
-        },
-        400: {
-        title: "Bad Request", 
-        message: ""
-        },
-        401: {
-        title: "Unauthorized",
-        message: "You need to be authenticated to see this page"
-        },
-        403: {
-        title: "Forbidden",
-        message: "You don't have permission to see this page"
-        },
-        404: {
-        title: "Not Found",
-        message: "We couldn't find the page you are looking for"
-        },
-        500: {
-        title: "Internal Error",
-        message: "Server internal error"
-        },
-        503: {
-        title: "Unavailable",
-        message: "Service currently unavailable"
-        },
-        550: {
-        title: "Denied",
-        message: ""
-        }
-    }
-    %>
+    <title>Unknown Error</title>
 
-    <title><%='Error | ' + codes[status].title%></title>
+
+    <script type='text/javascript'>
+        const codes = {
+            300: {
+                title: "Multiple Choices",
+                message: "Multiple choices found"
+            },
+            301: {
+                title: "Moved Permanently",
+                message: "This page was moved permanently"
+            },
+            400: {
+                title: "Bad Request",
+                message: ""
+            },
+            401: {
+                title: "Unauthorized",
+                message: "You need to be authenticated to see this page"
+            },
+            403: {
+                title: "Forbidden",
+                message: "You don't have permission to see this page"
+            },
+            404: {
+                title: "Not Found",
+                message: "We couldn't find the page you are looking for"
+            },
+            500: {
+                title: "Internal Error",
+                message: "Server internal error"
+            },
+            503: {
+                title: "Unavailable",
+                message: "Service currently unavailable"
+            },
+            550: {
+                title: "Denied",
+                message: ""
+            }
+        };
+
+        var statusCode = <%= err %>
+        const url = new URL(window.location.href);
+        if(url.searchParams.get('e') && !Object.keys(codes).includes(statusCode.toString())) {
+            statusCode = url.searchParams.get('e');
+        }
+
+        if (!Object.keys(codes).includes(statusCode.toString())) {
+            statusCode = undefined;
+        }
+
+        if (statusCode) {
+            var msgTitle = codes[statusCode].title;
+            var msg = codes[statusCode].message;
+            window.document.title = 'Error | ' + msgTitle;
+        }
+
+    </script>
 
     <style type="text/css">
+        html,
+        body {
+            height: 100%;
+        }
         body {
             background: #1c2124;
             color: #f6f7f8;
@@ -66,8 +88,8 @@
         }
         h1 {
             font-family: 'Poppins', sans-serif;
-            font-size: 150px;
-            margin-bottom: 0;
+            font-size: 120px;
+            margin-bottom: 30px;
         }
         h2 {
             font-size: 40px;
@@ -127,21 +149,21 @@
 
 </head>
 
-    <body>
-        <header class="pt-4 container">
-            <a href="/" class="header-logo"><span class="header-code-icon">&lt</span> Picoral <span class="header-code-icon"><span>/</span>&gt</span></a>
-        </header>
+<body>
+    <header class="pt-4 container">
+        <a href="/" class="header-logo"><span class="header-code-icon">&lt</span> Picoral <span class="header-code-icon"><span>/</span>&gt</span></a>
+    </header>
 
-        <div class="container text-center">
-            <h1><%=status%></h1>
-            <h2><%=codes[status].title%></h2>
-            <h3><%=codes[status].message%></h3>
-            <div class="text-center btns mt-5">
-                <a class="mr-5" href="/">home</a>
-                <a href="/#contact">contact</a>
-            </div>
+    <div class="container text-center">
+        <h1>Ops...</h1>
+        <h2>Unknown Error</h2>
+        <h3>Something went wrong</h3>
+        <div class="text-center btns mt-5">
+            <a class="mr-5" href="/">home</a>
+            <a href="/#contact">contact</a>
         </div>
-    </body>
+    </div>
+</body>
 
 <script type="text/javascript">
     const c = 'rainbow-text';
@@ -150,12 +172,20 @@
             if (!a.classList.contains(c)) {
                 a.classList.add(c);
             }
-        }
+        };
         a.onmouseout = function () {
             if (a.classList.contains(c)) {
                 a.classList.remove(c);
             }
-        }
+        };
+    }
+
+    if (statusCode) {
+        document.querySelector('h1').innerHTML = statusCode;
+        document.querySelector('h1').style.marginBottom = "0px";
+        document.querySelector('h1').style.fontSize = "150px";
+        document.querySelector('h2').innerHTML = msgTitle;
+        document.querySelector('h3').innerHTML = msg;
     }
 </script>
 

@@ -1,3 +1,4 @@
+/*TODO In the future, use express-subdomain for backend of subdomains*/
 //Dependencies
 const express    = require('express'),
       app        = express(),
@@ -5,7 +6,7 @@ const express    = require('express'),
       bodyParser = require('body-parser');
 
 //Custom modules
-const contact    = require('./modules/contact.js');
+const contact = require('./modules/contact.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -13,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Set root to /public
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
-app.use(contact);
+app.use('/contact', contact);
 
 //Handle homepage
 app.get('/', (req, res, next) => {
@@ -27,7 +28,7 @@ app.get('/', (req, res, next) => {
 
 //404
 app.get('*', (req, res) => {
-    res.status(404).render('templates/error', {status:404});
+    res.status(404).render('templates/error', {err: 404});
 });
 
 

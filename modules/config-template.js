@@ -11,6 +11,10 @@ const config = {
         tls: {
             rejectUnauthorized: true
         }
+    },
+    recaptcha: {
+        siteKey: '',
+        privateKey: ''
     }
 };
 
