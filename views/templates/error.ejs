@@ -56,10 +56,10 @@
             }
         };
 
-        var statusCode = <%= err %>
+        var statusCode = <%=err%>;
         const url = new URL(window.location.href);
-        if(url.searchParams.get('e') && !Object.keys(codes).includes(statusCode.toString())) {
-            statusCode = url.searchParams.get('e');
+        if(url.searchParams.get('err') && Object.keys(codes).includes(url.searchParams.get('err'))) {
+            statusCode = url.searchParams.get('err');
         }
 
         if (!Object.keys(codes).includes(statusCode.toString())) {

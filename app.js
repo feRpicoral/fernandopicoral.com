@@ -1,36 +1,21 @@
-/*TODO In the future, use express-subdomain for backend of subdomains*/
-//Dependencies
 const express    = require('express'),
       app        = express(),
       ejs        = require('ejs'),
-      bodyParser = require('body-parser');
+      bodyParser = require('body-parser'),
+      subdomain  = require('express-subdomain');
 
-//Custom modules
-const contact = require('./modules/contact.js');
-
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-//Set root to /public
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
+
+const contact = require('./routes/contact.js'),
+      index   = require('./routes/index');
+
+//YelpCamp TODO Add this when YelpCamp is finished
+//app.use(require('./hosted/YelpCamp/app.js'));
+
 app.use('/contact', contact);
-
-//Handle homepage
-app.get('/', (req, res, next) => {
-    //Show contact feedback if present
-    if (req.query.contact) {
-        res.render('index', {contact: JSON.parse(decodeURI(req.query.contact))});
-    } else {
-        res.render('index');
-    }
-});
-
-//404
-app.get('*', (req, res) => {
-    res.status(404).render('templates/error', {err: 404});
-});
-
+app.use('/', index);
 
 //Start server
 const listener = app.listen(30000, '127.0.0.1', function () {

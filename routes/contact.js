@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer"),
       router     = require('express').Router(),
-      config     = require('./config'),
+      config     = require('../modules/config'),
       util       = require('util'),
       recaptchaV2  = require('recaptcha-v2').Recaptcha;
 

@@ -109,3 +109,4 @@ dist
 
 #Ignored Files
 modules/config.js
+hosted/

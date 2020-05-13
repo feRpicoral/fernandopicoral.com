@@ -17,6 +17,7 @@
     "body-parser": "~1.19.0",
     "ejs": "~3.0.1",
     "express": "~4.17.1",
+    "express-subdomain": "^1.0.5",
     "nodemailer": "~6.4.2",
     "recaptcha-v2": "~0.1.3",
     "util": "^0.12.1"

@@ -202,6 +202,9 @@ class Projects {
             },
             website: {
                 innerHtml: "<div class=\"p-title\"> <h1>Website</h1> <h2>This personal website</h2> </div><div class=\"p-body\"> <p>Want to have a peak on the inner workings of this website? Be my guest!</p></div><div class=\"p-footer mt-3 mb-2 d-flex justify-content-center\"> <div class=\"p-btns\"> <span data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"\" data-original-title=\"Soon\"> <a href=\"//github.com/feRpicoral/fernandopicoral.com\" target=\"_blank\" role=\"button\" class=\"btn no-outline github-btn disabled\"><i class=\"fab fa-github\"></i></a> </span> </div></div>"
+            },
+            yelpCamp: {
+                innerHtml: "<div class=\"p-title\"> <h1>YelpCamp</h1> <h2>A fictional camping site</h2> </div><div class=\"p-body\"> <p>This is my version of Colt Steele's YelpCamp project, a fictional camping website. This application is built using mainly NodeJS, MongoDB, Bootstrap 4 and jQuery.</p></div><a class=\"btn-see-more btn btn-primary d-none\"><span>show more</span><i class=\"fal fa-caret-down\"></i></a><div class=\"see-more w-100 my-4 h-100 d-none\"> <div class=\"row\"> <div class=\"col-12 col-lg-6\"> <img src=\"/img/html-code.jpg\" class=\"img-fluid img-thumbnail\" alt=\"\"> </div><div class=\"col-12 col-lg-6 mt-4 mt-lg-auto\"> <img src=\"/img/html-code.jpg\" class=\"img-fluid img-thumbnail\" alt=\"\"> </div></div></div><div class=\"p-footer mt-3 mb-2 d-flex justify-content-center\"> <div class=\"p-btns\"> <span data-toggle=\"tooltip\" data-placement=\"left\" title=\"\" data-original-title=\"Soon\"> <a href=\"#\" target=\"_blank\" role=\"button\" class=\"btn no-outline btn-outline-success demo-btn mr-3 disabled\">Demo</a> </span> <span data-toggle=\"tooltip\" data-placement=\"right\" title=\"\" data-original-title=\"See on GitHub\"> <a href=\"https://github.com/feRpicoral/YelpCamp\" target=\"_blank\" role=\"button\" class=\"btn no-outline github-btn\"><i class=\"fab fa-github\"></i></a> </span> </div></div>"
             }
         };
 
@@ -212,7 +215,7 @@ class Projects {
 
         /* Order to be displayed the projects. Names as in this.list keys. If not empty must include all projects.
         *  If empty, order will be the same as this.list*/
-        this.order = ['codeIt', 'restaurantSystem', 'istudi', 'website'];
+        this.order = ['codeIt', 'restaurantSystem', 'istudi', 'yelpCamp', 'website'];
 
         /*Project being displayed currently. If empty the first of this.order will be selected.*/
         this.current = '';
