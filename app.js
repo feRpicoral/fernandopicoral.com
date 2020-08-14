@@ -11,11 +11,13 @@ app.set('view engine', 'ejs');
 const contact = require('./routes/contact.js'),
       index   = require('./routes/index');
 
-//YelpCamp TODO Add this when YelpCamp is finished
-//app.use(require('./hosted/YelpCamp/app.js'));
-
 app.use('/contact', contact);
 app.use('/', index);
+
+//TODO
+//Admin page with diferent layouts/templates
+//Yelpcamp subdomain
+
 
 //Start server
 const listener = app.listen(30000, '127.0.0.1', function () {
