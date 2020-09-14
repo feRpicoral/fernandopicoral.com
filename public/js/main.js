@@ -600,9 +600,12 @@ class Contact {
 
 /*DOM ready and safe to manipulate*/
 $(() => {
-    let m = new Menu();
-    let p = new Projects();
-    let c = new Contact($('.contact-form'));
+    new Menu();
+    new Projects();
+    new Contact($('.contact-form'));
+
+    Projects.setMarginTop();
+    setSkillsColHeight();
 
     /*Activate Bootstrap 4 tooltips*/
     $('[data-toggle="tooltip"]').tooltip();
@@ -638,8 +641,11 @@ $(() => {
             }
         }
         for (let col of cols) {
-            col.style.minHeight = highest + "px";
+            // col.style.minHeight = highest + "px";
+            col.setAttribute("style", "height: " + highest + "px !important");
         }
+
+
     }
 
     /*Update elements on window resize*/
