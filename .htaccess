@@ -4,8 +4,16 @@
     Header set Pragma "no-cache"
     Header set Expires 0
 </IfModule>
+
 # FORCE HTTPS
 RewriteEngine On
 RewriteCond %{HTTPS} off
-RewriteCond %{HTTP_HOST} !=/(.*?)/.fernandopicoral.com #Don't force HTTPS on subdomains
+RewriteCond %{HTTP_HOST} !=/(.*?)/.fernandopicoral.com
 RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+RewriteCond %{HTTP_HOST} ^fernandopicoral\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.fernandopicoral\.com$
+
+# REMOVE A2 HOSTING DIRS ACCESS
+RewriteRule ^cgi-bin/(.*)$ /error\?err\=403 [R=301,NC,L]
+RewriteRule ^cpanel/(.*)$ /error\?err\=403 [R=301,NC,L] # NOT WORKING
+RewriteRule ^webmail/(.*)$ /error\?err\=403 [R=301,NC,L] # NOT WORKING

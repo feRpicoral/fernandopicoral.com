@@ -1,4 +1,3 @@
-
 const config = {
     email: {
         host: 'host.domain.com',

@@ -1,35 +1,36 @@
-const nodemailer = require("nodemailer"),
-      router     = require('express').Router(),
-      config     = require('../modules/config'),
-      util       = require('util'),
-      recaptchaV2  = require('recaptcha-v2').Recaptcha;
+const nodemailer  = require("nodemailer"), // Email package
+      router      = require("express").Router(), // Express router
+      config      = require("../modules/config"), // Config file
+      util        = require("util"),  // Node utils
+      recaptchaV2 = require("recaptcha-v2").Recaptcha; // Google"s reCaptchaV2
 
-/*
-    * Returns the a URI-ready feedback for the contact form.
-    *
-    * @param {String} message Text to be displayed as feedback
-    * @param {String} color Color of the text. Red, blue, or green.
-    *
-    * @return {Object} URI encoded JSON object with keys 'message' and 'class'
-    */
+// TODO Implement logging for error and successful emails
+
+/**
+ * Returns a URI-ready feedback for the contact form.
+ *
+ * @param {string} message Text to be displayed as feedback
+ * @param {string} color Color of the text. Red, blue, or green or BS4 equivalents
+ * @return {string}
+ */
 function getUriFeedback(message, color) {
     let c;
     switch (color.toLowerCase()) {
-        case 'red':
-        case 'text-danger':
-            c = 'text-danger';
+        case "red":
+        case "text-danger":
+            c = "text-danger";
             break;
-        case 'blue':
-        case 'text-primary':
-            c = 'text-primary';
+        case "blue":
+        case "text-primary":
+            c = "text-primary";
             break;
         default:
-        case 'green':
-        case 'text-success':
-            c = 'text-success'
+        case "green":
+        case "text-success":
+            c = "text-success";
     }
 
-    let contact = {
+    const contact = {
         message: message,
         class: c
     };
@@ -37,12 +38,28 @@ function getUriFeedback(message, color) {
     return encodeURI(JSON.stringify(contact));
 }
 
+/**
+ * Static class to handle input sanitization
+ */
 class Sanitize {
+    /**
+     * Returns true if and only if the given email is a valid email address based on a regex
+     *
+     * @param email {string} email to be tested
+     * @returns {boolean} true if the given email is valid
+     */
     static email(email) {
         email = String(email).toLowerCase();
-        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
     }
+
+    /**
+     * Returns if the given string contains at least 2 characters and does not contain accents
+     *
+     * @param name {string} Name to be testes
+     * @returns {boolean} True if the conditions are not met
+     */
     static name(name) {
         name = String(name).toString();
         return !(
@@ -51,6 +68,13 @@ class Sanitize {
             /[^a-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff\s]+/ig.test(name) === true
         );
     }
+
+    /**
+     * Returns true if the given string does not contain characters
+     *
+     * @param msg {string} Message to be tested
+     * @returns {boolean} True if the conditions are not met
+     */
     static message(msg) {
         msg = String(msg).toString();
         return !(
@@ -59,27 +83,43 @@ class Sanitize {
             /[a-z]+/ig.test(msg) === false
         );
     }
+
+    /**
+     * Returns true if all the parameters are valid based on the other validation functions
+     *
+     * @param email {string} Email to be tested
+     * @param name {string} Name to be tested
+     * @param message {string} Message to be tested
+     * @returns {boolean} True if all the parameters are valid
+     */
     static isInputValid(email, name, message) {
         const s = Sanitize;
         return s.email(email) && s.name(name) && s.message(message);
     }
 }
 
+// Handling of the POST request to the index page
 router.post('/', (req, res, next) => {
 
     req.body.name = req.body.name.toLowerCase();
     req.body.email = req.body.email.toLowerCase();
 
-    let recaptcha = new recaptchaV2(config.recaptcha.siteKey, config.recaptcha.privateKey, {
+    const recaptcha = new recaptchaV2(config.recaptcha.siteKey, config.recaptcha.privateKey, {
         remoteip: req.connection.remoteAddress,
         response: req.body["g-recaptcha-response"],
         secret: config.recaptcha.privateKey
     });
 
+    /**
+     * Sends the message if all the inputs are valid
+     */
     function sendMessage() {
-        if (Sanitize.isInputValid(req.body.email, req.body.name, req.body.message)) {
-            let transporter = nodemailer.createTransport(config.email);
 
+        if (Sanitize.isInputValid(req.body.email, req.body.name, req.body.message)) {
+
+            const transporter = nodemailer.createTransport(config.email);
+
+            // Notification email that goes to me
             const mail = {
                 from: 'Contato <contact@fernandopicoral.com>',
                 to: ['fernandopicoral@gmail.com'],
@@ -91,6 +131,7 @@ router.post('/', (req, res, next) => {
                 )
             };
 
+            // Send email to me and - in case of success - a confirmation message to the sender
             transporter.sendMail(mail, (err, info) => {
                 if (err) {
                     res.redirect('/?contact=' + getUriFeedback("Your message couldn't be delivered. Error: " + err, "red"));
@@ -98,45 +139,64 @@ router.post('/', (req, res, next) => {
                     sendConfirmationEmail();
                 }
             });
+
             transporter.close();
+
         } else {
-            //TODO Specify which input had invalid chars
+
+            // TODO Specify which input had invalid chars
             res.redirect('/?contact=' + getUriFeedback("Your message couldn't be delivered due to invalid characters on the input.", "red"));
+
         }
     }
 
+    /**
+     * Sends an confirmation message to the original sender
+     */
     function sendConfirmationEmail() {
-        let transporter = nodemailer.createTransport(config.email);
 
-        let mail = {
-            from: 'Contact <noreply@fernandopicoral.com>',
+        const transporter = nodemailer.createTransport(config.email);
+
+        const mail = {
+            from: "Contact <noreply@fernandopicoral.com>",
             to: [req.body.email],
-            subject: 'Thank you for your message!',
-            text: 'Your browser doesn\'t support HTML emails.\n\nWe have received your message at fernandopicoral.com and will respond as soon as possible!\n\nThank you!',
+            subject: "Thank you for your message!",
+            text: "Your browser doesn't support HTML emails.\n\nWe have received your message at fernandopicoral.com and will respond as soon as possible!\n\nThank you!",
             html: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\" style=\"heigth: 100%;\"><head> <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"> <style>@font-face{font-family: 'Lato'; font-style: normal; font-weight: 400; font-display: swap; src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v16/S6uyw4BMUTPHjx4wWw.ttf) format('truetype');}@font-face{font-family: 'Poppins'; font-style: normal; font-weight: 500; font-display: swap; src: local('Poppins Medium'), local('Poppins-Medium'), url(https://fonts.gstatic.com/s/poppins/v9/pxiByp8kv8JHgFVrLGT9Z1xlEA.ttf) format('truetype');}@font-face{font-family: 'Poppins'; font-style: normal; font-weight: 600; font-display: swap; src: local('Poppins SemiBold'), local('Poppins-SemiBold'), url(https://fonts.gstatic.com/s/poppins/v9/pxiByp8kv8JHgFVrLEj6Z1xlEA.ttf) format('truetype');}@font-face{font-family: 'Poppins'; font-style: normal; font-weight: 700; font-display: swap; src: local('Poppins Bold'), local('Poppins-Bold'), url(https://fonts.gstatic.com/s/poppins/v9/pxiByp8kv8JHgFVrLCz7Z1xlEA.ttf) format('truetype');}@media screen and (max-width: 576px){.icon{display: none;}}</style> <style type=\"text/css\"> .ExternalClass{width:100%}.ExternalClass,.ExternalClass p,.ExternalClass span,.ExternalClass font,.ExternalClass td,.ExternalClass div{line-height:150%}a{text-decoration:none}@media screen and (max-width: 600px){table.row th.col-lg-1,table.row th.col-lg-2,table.row th.col-lg-3,table.row th.col-lg-4,table.row th.col-lg-5,table.row th.col-lg-6,table.row th.col-lg-7,table.row th.col-lg-8,table.row th.col-lg-9,table.row th.col-lg-10,table.row th.col-lg-11,table.row th.col-lg-12{display:block;width:100% !important}.d-mobile{display:block !important}.d-desktop{display:none !important}.w-lg-25{width:auto !important}.w-lg-25>tbody>tr>td{width:auto !important}.w-lg-50{width:auto !important}.w-lg-50>tbody>tr>td{width:auto !important}.w-lg-75{width:auto !important}.w-lg-75>tbody>tr>td{width:auto !important}.w-lg-100{width:auto !important}.w-lg-100>tbody>tr>td{width:auto !important}.w-lg-auto{width:auto !important}.w-lg-auto>tbody>tr>td{width:auto !important}.w-25{width:25% !important}.w-25>tbody>tr>td{width:25% !important}.w-50{width:50% !important}.w-50>tbody>tr>td{width:50% !important}.w-75{width:75% !important}.w-75>tbody>tr>td{width:75% !important}.w-100{width:100% !important}.w-100>tbody>tr>td{width:100% !important}.w-auto{width:auto !important}.w-auto>tbody>tr>td{width:auto !important}.p-lg-0>tbody>tr>td{padding:0 !important}.pt-lg-0>tbody>tr>td,.py-lg-0>tbody>tr>td{padding-top:0 !important}.pr-lg-0>tbody>tr>td,.px-lg-0>tbody>tr>td{padding-right:0 !important}.pb-lg-0>tbody>tr>td,.py-lg-0>tbody>tr>td{padding-bottom:0 !important}.pl-lg-0>tbody>tr>td,.px-lg-0>tbody>tr>td{padding-left:0 !important}.p-lg-1>tbody>tr>td{padding:0 !important}.pt-lg-1>tbody>tr>td,.py-lg-1>tbody>tr>td{padding-top:0 !important}.pr-lg-1>tbody>tr>td,.px-lg-1>tbody>tr>td{padding-right:0 !important}.pb-lg-1>tbody>tr>td,.py-lg-1>tbody>tr>td{padding-bottom:0 !important}.pl-lg-1>tbody>tr>td,.px-lg-1>tbody>tr>td{padding-left:0 !important}.p-lg-2>tbody>tr>td{padding:0 !important}.pt-lg-2>tbody>tr>td,.py-lg-2>tbody>tr>td{padding-top:0 !important}.pr-lg-2>tbody>tr>td,.px-lg-2>tbody>tr>td{padding-right:0 !important}.pb-lg-2>tbody>tr>td,.py-lg-2>tbody>tr>td{padding-bottom:0 !important}.pl-lg-2>tbody>tr>td,.px-lg-2>tbody>tr>td{padding-left:0 !important}.p-lg-3>tbody>tr>td{padding:0 !important}.pt-lg-3>tbody>tr>td,.py-lg-3>tbody>tr>td{padding-top:0 !important}.pr-lg-3>tbody>tr>td,.px-lg-3>tbody>tr>td{padding-right:0 !important}.pb-lg-3>tbody>tr>td,.py-lg-3>tbody>tr>td{padding-bottom:0 !important}.pl-lg-3>tbody>tr>td,.px-lg-3>tbody>tr>td{padding-left:0 !important}.p-lg-4>tbody>tr>td{padding:0 !important}.pt-lg-4>tbody>tr>td,.py-lg-4>tbody>tr>td{padding-top:0 !important}.pr-lg-4>tbody>tr>td,.px-lg-4>tbody>tr>td{padding-right:0 !important}.pb-lg-4>tbody>tr>td,.py-lg-4>tbody>tr>td{padding-bottom:0 !important}.pl-lg-4>tbody>tr>td,.px-lg-4>tbody>tr>td{padding-left:0 !important}.p-lg-5>tbody>tr>td{padding:0 !important}.pt-lg-5>tbody>tr>td,.py-lg-5>tbody>tr>td{padding-top:0 !important}.pr-lg-5>tbody>tr>td,.px-lg-5>tbody>tr>td{padding-right:0 !important}.pb-lg-5>tbody>tr>td,.py-lg-5>tbody>tr>td{padding-bottom:0 !important}.pl-lg-5>tbody>tr>td,.px-lg-5>tbody>tr>td{padding-left:0 !important}.p-0>tbody>tr>td{padding:0 !important}.pt-0>tbody>tr>td,.py-0>tbody>tr>td{padding-top:0 !important}.pr-0>tbody>tr>td,.px-0>tbody>tr>td{padding-right:0 !important}.pb-0>tbody>tr>td,.py-0>tbody>tr>td{padding-bottom:0 !important}.pl-0>tbody>tr>td,.px-0>tbody>tr>td{padding-left:0 !important}.p-1>tbody>tr>td{padding:4px !important}.pt-1>tbody>tr>td,.py-1>tbody>tr>td{padding-top:4px !important}.pr-1>tbody>tr>td,.px-1>tbody>tr>td{padding-right:4px !important}.pb-1>tbody>tr>td,.py-1>tbody>tr>td{padding-bottom:4px !important}.pl-1>tbody>tr>td,.px-1>tbody>tr>td{padding-left:4px !important}.p-2>tbody>tr>td{padding:8px !important}.pt-2>tbody>tr>td,.py-2>tbody>tr>td{padding-top:8px !important}.pr-2>tbody>tr>td,.px-2>tbody>tr>td{padding-right:8px !important}.pb-2>tbody>tr>td,.py-2>tbody>tr>td{padding-bottom:8px !important}.pl-2>tbody>tr>td,.px-2>tbody>tr>td{padding-left:8px !important}.p-3>tbody>tr>td{padding:16px !important}.pt-3>tbody>tr>td,.py-3>tbody>tr>td{padding-top:16px !important}.pr-3>tbody>tr>td,.px-3>tbody>tr>td{padding-right:16px !important}.pb-3>tbody>tr>td,.py-3>tbody>tr>td{padding-bottom:16px !important}.pl-3>tbody>tr>td,.px-3>tbody>tr>td{padding-left:16px !important}.p-4>tbody>tr>td{padding:24px !important}.pt-4>tbody>tr>td,.py-4>tbody>tr>td{padding-top:24px !important}.pr-4>tbody>tr>td,.px-4>tbody>tr>td{padding-right:24px !important}.pb-4>tbody>tr>td,.py-4>tbody>tr>td{padding-bottom:24px !important}.pl-4>tbody>tr>td,.px-4>tbody>tr>td{padding-left:24px !important}.p-5>tbody>tr>td{padding:48px !important}.pt-5>tbody>tr>td,.py-5>tbody>tr>td{padding-top:48px !important}.pr-5>tbody>tr>td,.px-5>tbody>tr>td{padding-right:48px !important}.pb-5>tbody>tr>td,.py-5>tbody>tr>td{padding-bottom:48px !important}.pl-5>tbody>tr>td,.px-5>tbody>tr>td{padding-left:48px !important}.s-lg-1>tbody>tr>td,.s-lg-2>tbody>tr>td,.s-lg-3>tbody>tr>td,.s-lg-4>tbody>tr>td,.s-lg-5>tbody>tr>td{font-size:0 !important;line-height:0 !important;height:0 !important}.s-0>tbody>tr>td{font-size:0 !important;line-height:0 !important;height:0 !important}.s-1>tbody>tr>td{font-size:4px !important;line-height:4px !important;height:4px !important}.s-2>tbody>tr>td{font-size:8px !important;line-height:8px !important;height:8px !important}.s-3>tbody>tr>td{font-size:16px !important;line-height:16px !important;height:16px !important}.s-4>tbody>tr>td{font-size:24px !important;line-height:24px !important;height:24px !important}.s-5>tbody>tr>td{font-size:48px !important;line-height:48px !important;height:48px !important}}@media yahoo{.d-mobile{display:none !important}.d-desktop{display:block !important}.w-lg-25{width:25% !important}.w-lg-25>tbody>tr>td{width:25% !important}.w-lg-50{width:50% !important}.w-lg-50>tbody>tr>td{width:50% !important}.w-lg-75{width:75% !important}.w-lg-75>tbody>tr>td{width:75% !important}.w-lg-100{width:100% !important}.w-lg-100>tbody>tr>td{width:100% !important}.w-lg-auto{width:auto !important}.w-lg-auto>tbody>tr>td{width:auto !important}.p-lg-0>tbody>tr>td{padding:0 !important}.pt-lg-0>tbody>tr>td,.py-lg-0>tbody>tr>td{padding-top:0 !important}.pr-lg-0>tbody>tr>td,.px-lg-0>tbody>tr>td{padding-right:0 !important}.pb-lg-0>tbody>tr>td,.py-lg-0>tbody>tr>td{padding-bottom:0 !important}.pl-lg-0>tbody>tr>td,.px-lg-0>tbody>tr>td{padding-left:0 !important}.p-lg-1>tbody>tr>td{padding:4px !important}.pt-lg-1>tbody>tr>td,.py-lg-1>tbody>tr>td{padding-top:4px !important}.pr-lg-1>tbody>tr>td,.px-lg-1>tbody>tr>td{padding-right:4px !important}.pb-lg-1>tbody>tr>td,.py-lg-1>tbody>tr>td{padding-bottom:4px !important}.pl-lg-1>tbody>tr>td,.px-lg-1>tbody>tr>td{padding-left:4px !important}.p-lg-2>tbody>tr>td{padding:8px !important}.pt-lg-2>tbody>tr>td,.py-lg-2>tbody>tr>td{padding-top:8px !important}.pr-lg-2>tbody>tr>td,.px-lg-2>tbody>tr>td{padding-right:8px !important}.pb-lg-2>tbody>tr>td,.py-lg-2>tbody>tr>td{padding-bottom:8px !important}.pl-lg-2>tbody>tr>td,.px-lg-2>tbody>tr>td{padding-left:8px !important}.p-lg-3>tbody>tr>td{padding:16px !important}.pt-lg-3>tbody>tr>td,.py-lg-3>tbody>tr>td{padding-top:16px !important}.pr-lg-3>tbody>tr>td,.px-lg-3>tbody>tr>td{padding-right:16px !important}.pb-lg-3>tbody>tr>td,.py-lg-3>tbody>tr>td{padding-bottom:16px !important}.pl-lg-3>tbody>tr>td,.px-lg-3>tbody>tr>td{padding-left:16px !important}.p-lg-4>tbody>tr>td{padding:24px !important}.pt-lg-4>tbody>tr>td,.py-lg-4>tbody>tr>td{padding-top:24px !important}.pr-lg-4>tbody>tr>td,.px-lg-4>tbody>tr>td{padding-right:24px !important}.pb-lg-4>tbody>tr>td,.py-lg-4>tbody>tr>td{padding-bottom:24px !important}.pl-lg-4>tbody>tr>td,.px-lg-4>tbody>tr>td{padding-left:24px !important}.p-lg-5>tbody>tr>td{padding:48px !important}.pt-lg-5>tbody>tr>td,.py-lg-5>tbody>tr>td{padding-top:48px !important}.pr-lg-5>tbody>tr>td,.px-lg-5>tbody>tr>td{padding-right:48px !important}.pb-lg-5>tbody>tr>td,.py-lg-5>tbody>tr>td{padding-bottom:48px !important}.pl-lg-5>tbody>tr>td,.px-lg-5>tbody>tr>td{padding-left:48px !important}.s-lg-0>tbody>tr>td{font-size:0 !important;line-height:0 !important;height:0 !important}.s-lg-1>tbody>tr>td{font-size:4px !important;line-height:4px !important;height:4px !important}.s-lg-2>tbody>tr>td{font-size:8px !important;line-height:8px !important;height:8px !important}.s-lg-3>tbody>tr>td{font-size:16px !important;line-height:16px !important;height:16px !important}.s-lg-4>tbody>tr>td{font-size:24px !important;line-height:24px !important;height:24px !important}.s-lg-5>tbody>tr>td{font-size:48px !important;line-height:48px !important;height:48px !important}}</style></head><body style=\"outline: 0; width: 100%; min-width: 100%; height: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: Helvetica, Arial, sans-serif; line-height: 24px; font-weight: normal; font-size: 16px; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; margin: 0; padding: 0; border: 0;\"><div class=\"preview\" style=\"display: none; max-height: 0px; overflow: hidden;\"> We received your message!                                                                           </div><table valign=\"top\" class=\"bg-light body\" style=\"outline: 0; width: 100%; min-width: 100%; height: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: Helvetica, Arial, sans-serif; line-height: 24px; font-weight: normal; font-size: 16px; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-spacing: 0px; border-collapse: collapse; margin: 0; padding: 0; border: 0;\" bgcolor=\"#f8f9fa\"> <tbody> <tr> <td valign=\"top\" style=\"border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 16px; margin: 0;\" align=\"left\" bgcolor=\"#f8f9fa\"> <table class=\"container\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"font-family: Helvetica, Arial, sans-serif; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-spacing: 0px; border-collapse: collapse; width: 100%;\"> <tbody> <tr> <td align=\"center\" style=\"border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 16px; margin: 0; padding: 0 16px;\"><!--[if (gte mso 9)|(IE)]> <table align=\"center\"> <tbody> <tr> <td width=\"600\"><![endif]--> <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"font-family: Helvetica, Arial, sans-serif; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-spacing: 0px; border-collapse: collapse; width: 100%; max-width: 600px; margin: 0 auto;\"> <tbody> <tr> <td style=\"border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 16px; margin: 0;\" align=\"left\"> <table class=\"p-0\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"font-family: Helvetica, Arial, sans-serif; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-spacing: 0px; border-collapse: collapse;\"> <tbody> <tr> <td style=\"border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 16px; margin: 0; padding: 0;\" align=\"left\"> <div class=\"wrap center-screen \" style=\"margin-top: 3rem; margin-bottom: 3rem; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 2px solid #171a1d;\" align=\"center\"> <table class=\"p-5\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"font-family: Helvetica, Arial, sans-serif; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-spacing: 0px; border-collapse: collapse;\"> <tbody> <tr> <td style=\"border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 16px; margin: 0; padding: 48px;\" align=\"left\"> <div class=\"\"> <h1 id=\"logo\" class=\"text-center\" style=\"margin-top: 0; margin-bottom: 0; font-weight: 500; color: inherit; vertical-align: baseline; font-size: 70px; line-height: 43.2px; font-family: 'Poppins', sans-serif;\" align=\"center\"> <span class=\"icon\" style=\"color: #159ce4;\">&lt;</span> Picoral <span class=\"icon\" style=\"color: #159ce4;\">/</span><span class=\"icon\" style=\"color: #159ce4;\">&gt;</span> </h1> <table class=\"s-4 w-100\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width: 100%;\"> <tbody> <tr> <td height=\"24\" style=\"border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 24px; width: 100%; height: 24px; margin: 0;\" align=\"left\">   </td></tr></tbody> </table> <h2 id=\"sub-title\" class=\"text-center \" style=\"margin-top: 0; margin-bottom: 0; font-weight: 100; color: inherit; vertical-align: baseline; font-size: 25px; line-height: 38.4px;\" align=\"center\">We received your message</h2> <table class=\"s-5 w-100\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width: 100%;\"> <tbody> <tr> <td height=\"48\" style=\"border-spacing: 0px; border-collapse: collapse; line-height: 48px; font-size: 48px; width: 100%; height: 48px; margin: 0;\" align=\"left\">   </td></tr></tbody> </table> <p class=\"lead text-center\" style=\"line-height: 24px; font-size: 16px; font-weight: 100; margin: 0;\" align=\"center\">We just wanted to let you know that we received the message you sent us. We will reply to it as soon as possible! Below you can find a copy of your message if you are not remembering it.</p><table class=\"s-5 w-100\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width: 100%;\"> <tbody> <tr> <td height=\"48\" style=\"border-spacing: 0px; border-collapse: collapse; line-height: 48px; font-size: 48px; width: 100%; height: 48px; margin: 0;\" align=\"left\">   </td></tr></tbody> </table> <p class=\"name text-center\" style=\"line-height: 24px; font-size: 35px; margin: 0;\" align=\"center\"><strong><span>NAME_HOLDER</span>'s</strong> message:</p><table class=\"s-4 w-100\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width: 100%;\"> <tbody> <tr> <td height=\"24\" style=\"border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 24px; width: 100%; height: 24px; margin: 0;\" align=\"left\">   </td></tr></tbody> </table> <p class=\"message \" style=\"line-height: 24px; font-size: 16px; font-weight: 100; margin: 0;\" align=\"justify\">MESSAGE_HOLDER</p></div></td></tr></tbody> </table> </div></td></tr></tbody> </table> </td></tr></tbody> </table><!--[if (gte mso 9)|(IE)]> </td></tr></tbody> </table><![endif]--> </td></tr></tbody> </table> </td></tr></tbody></table></body></html>"
         };
 
+        // Update the placeholders from the email's HTML
         mail.html = mail.html.replace("NAME_HOLDER", req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1).split(' ')[0]);
         mail.html = mail.html.replace("MESSAGE_HOLDER", req.body.message);
 
         transporter.sendMail(mail, (err, info) => {
-            if (err) {
-                const date  = new Date(),
-                      sec   = String(date.getSeconds()),
-                      min   = String(date.getMinutes()),
-                      day   = String(date.getDate()).padStart(2, '0'),
-                      month = String(date.getMonth() + 1).padStart(2, '0'),
-                      year  = date.getFullYear().toString().substr(-2);
 
+            // Error when sending the email
+            if (err) {
+
+                // Get current time
+                const date  = new Date();
+                const min   = String(date.getMinutes());
+                const hours = String(date.getHours());
+                const day   = String(date.getDate()).padStart(2, '0');
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const year  = date.getFullYear().toString().substr(-2);
+
+                // Log error to the console
+                // TODO Use actual logger
                 console.log(util.format("[%s/%s/%s - %s:%s] A contact confirmation message couldn't be delivered to '%s'. Error: %s",
-                    month, day, year, req.body.email, err));
+                    month, day, year, hours, min, req.body.email, err));
             }
         });
+
         transporter.close();
     }
 
+    // Only send the message if the recaptcha was valid
     recaptcha.verify((success, error_code) => {
         if (success) {
+            // TODO even if and error occurs during sendMessage() it will show positive feedback
+            // Actually, since it's using res.redirect, I'm not really sure it will return a false-positive
             sendMessage();
             next();
         } else {
@@ -144,8 +204,11 @@ router.post('/', (req, res, next) => {
         }
     });
 
-}, (req, res) => {
-    res.redirect('/?contact=' + getUriFeedback('Your message was submitted!', 'green'));
+}, (req, res, next) => {
+    // Called when the next() function is called - therefore, only if the email was sent successfully
+    res.redirect("/?contact=" + getUriFeedback("Your message was submitted!", "green"));
+    next();
 });
 
+// Export the router
 module.exports = router;
