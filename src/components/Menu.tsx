@@ -1,23 +1,24 @@
 import styled from 'styled-components';
 import React from 'react';
 import MenuIcon from '@icons/menu.svg';
+import { useRouter } from 'next/router';
 
 const MenuContainer = styled.div<{ open: boolean }>`
     position: fixed;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     opacity: ${props => (props.open ? 1 : 0)};
     right: ${props => (props.open ? '0' : '-100vw')};
     transition: all 0.5s;
     z-index: 1000;
     background-color: ${props => props.theme.colors.background};
+    margin-top: -5px; /* Fix gap between nav and menu */
 `;
 
 const MenuBtnWrap = styled.div`
     display: flex;
     align-items: center;
     cursor: pointer;
-    z-index: 10000;
 `;
 
 const MenuBtn = styled.span`
@@ -83,28 +84,25 @@ export interface MenuProps {
 }
 
 const Menu = ({ isOpen, setOpen }: MenuProps) => {
-    const handleClick = (sectionIndex: number) => {
+    const router = useRouter();
+
+    const handleClick = (url: string) => {
         setOpen(!isOpen);
-        let offset = 0;
-        if (sectionIndex > 0) {
-            const section = document.getElementsByTagName('section')[
-                sectionIndex
-            ];
-            offset = section?.offsetTop - 98; // Navbar compensation
-        }
-        window.scrollTo({
-            behavior: 'smooth',
-            top: offset
-        });
+        // Change the URL without reloading/re-rendering the page
+        router.push(url, undefined, { shallow: true });
     };
 
     return (
         <MenuContainer open={isOpen}>
             <MenuItemWrap>
-                <MenuItem onClick={() => handleClick(0)}>home</MenuItem>
-                <MenuItem onClick={() => handleClick(1)}>projects</MenuItem>
-                <MenuItem onClick={() => handleClick(2)}>about</MenuItem>
-                <MenuItem onClick={() => handleClick(3)}>contact</MenuItem>
+                <MenuItem onClick={() => handleClick('/')}>home</MenuItem>
+                <MenuItem onClick={() => handleClick('/projects')}>
+                    projects
+                </MenuItem>
+                <MenuItem onClick={() => handleClick('/about')}>about</MenuItem>
+                <MenuItem onClick={() => handleClick('/contact')}>
+                    contact
+                </MenuItem>
             </MenuItemWrap>
         </MenuContainer>
     );
