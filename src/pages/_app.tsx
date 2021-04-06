@@ -1,7 +1,7 @@
 import React from 'react';
 import { SWRConfig } from 'swr';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import dark from '@themes/dark';
+import light from '@themes/light';
 import { AppProps } from 'next/app';
 import axios from 'axios';
 
@@ -33,7 +33,7 @@ const swrFetcher = (url: string) =>
 
 const App = ({ Component, pageProps }: AppProps) => (
     <>
-        <ThemeProvider theme={dark}>
+        <ThemeProvider theme={light}>
             <GlobalStyle />
             <SWRConfig value={{ fetcher: swrFetcher }}>
                 <Component {...pageProps} />
