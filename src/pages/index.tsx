@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
-import Menu, { MenuButton } from '@components/menu';
+import Menu from '@components/Menu';
+import Navbar from '@components/Navbar';
+import Head from 'next/head';
 
 const Container = styled.div`
     margin: 0 auto;
-    padding: 80px 125px;
     min-width: 100%;
     min-height: 100%;
     text-align: center;
     color: ${props => props.theme.colors.text};
+    padding: 0 15px;
 `;
 
 const Section = styled.section`
@@ -17,7 +19,7 @@ const Section = styled.section`
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 20vh;
+    margin-bottom: 10vh;
 `;
 
 const MoveUpDown = keyframes`
@@ -129,7 +131,7 @@ const AboutDescription = styled.span`
 `;
 
 const ContactSection = styled(Section)`
-    margin-bottom: 0;
+    padding-bottom: 10vh;
 `;
 
 const ContactItem = styled.div`
@@ -159,6 +161,10 @@ const ContactLink = styled.a`
     }
 `;
 
+const IndexSection = styled(Section)`
+    margin-top: 100px;
+`;
+
 const Home = () => {
     const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -172,11 +178,14 @@ const Home = () => {
 
     return (
         <>
+            <Head>
+                <title>Picoral</title>
+            </Head>
             <OverflowClasses />
             <Menu isOpen={isMenuOpen} setOpen={setMenuOpen} />
+            <Navbar isOpen={isMenuOpen} setOpen={setMenuOpen} />
             <Container>
-                <MenuButton onClick={() => setMenuOpen(!isMenuOpen)} />
-                <Section>
+                <IndexSection>
                     <TitleWrap>
                         <Title>picoral</Title>
                         <Subtitle>i enjoy building things</Subtitle>
@@ -185,7 +194,7 @@ const Home = () => {
                         <ScrollDown>scroll down</ScrollDown>
                         <img src="icons/arrow.svg" alt="Scroll Down" />
                     </ScrollDownWrap>
-                </Section>
+                </IndexSection>
                 <Section>
                     <Header>projects</Header>
                     <Project>

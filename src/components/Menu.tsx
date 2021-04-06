@@ -13,11 +13,7 @@ const MenuContainer = styled.div<{ open: boolean }>`
 `;
 
 const MenuBtnWrap = styled.div`
-    position: sticky;
-    top: 80px;
     display: flex;
-    align-self: flex-end;
-    justify-content: flex-end;
     align-items: center;
     cursor: pointer;
     z-index: 10000;
@@ -26,7 +22,7 @@ const MenuBtnWrap = styled.div`
 const MenuBtn = styled.span`
     font-family: ${props => props.theme.fontFamilies.roboto};
     font-weight: 300;
-    font-size: 20px;
+    font-size: 25px;
     line-height: 24px;
     margin-left: 5px;
     margin-bottom: 2px;
@@ -66,7 +62,7 @@ export const MenuButton = (props: MenuButtonProps) => (
     </MenuBtnWrap>
 );
 
-interface MenuProps {
+export interface MenuProps {
     /**
      * Whether or not the menu is currently open
      */
@@ -81,16 +77,17 @@ interface MenuProps {
 const Menu = ({ isOpen, setOpen }: MenuProps) => {
     const handleClick = (sectionIndex: number) => {
         setOpen(!isOpen);
+        let offset = 0;
         if (sectionIndex > 0) {
-            document
-                .getElementsByTagName('section')
-                [sectionIndex]?.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            window.scrollTo({
-                behavior: 'smooth',
-                top: 0
-            });
+            const section = document.getElementsByTagName('section')[
+                sectionIndex
+            ];
+            offset = section?.offsetTop - 98; // Navbar compensation
         }
+        window.scrollTo({
+            behavior: 'smooth',
+            top: offset
+        });
     };
 
     return (
