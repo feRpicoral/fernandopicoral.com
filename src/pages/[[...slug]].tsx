@@ -39,17 +39,8 @@ const scrollToSection = (sectionIndex: number) => {
 const Index = () => {
     const [isMenuOpen, setMenuOpen] = useState(false);
 
-    // Disable scrolling when the menu is open - using toggle caused a rerender thus the scroll position was lost
-    useEffect(() => {
-        if (isMenuOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'auto';
-        }
-    }, [isMenuOpen]);
-
     const router = useRouter();
-    const slug = (router.query.slug as string[]) || ['home'];
+    const slug = (router.query.slug as string[]) || [];
 
     // Scroll based on the query
     useEffect(() => {

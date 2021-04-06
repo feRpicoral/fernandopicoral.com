@@ -95,7 +95,7 @@ const Menu = ({ isOpen, setOpen }: MenuProps) => {
     return (
         <MenuContainer open={isOpen}>
             <MenuItemWrap>
-                <MenuItem onClick={() => handleClick('/')}>home</MenuItem>
+                <MenuItem onClick={() => handleClick('/home')}>home</MenuItem>
                 <MenuItem onClick={() => handleClick('/projects')}>
                     projects
                 </MenuItem>
