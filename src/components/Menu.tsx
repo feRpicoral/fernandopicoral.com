@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
+import MenuIcon from '@icons/menu.svg';
 
 const MenuContainer = styled.div<{ open: boolean }>`
     position: fixed;
@@ -9,7 +10,7 @@ const MenuContainer = styled.div<{ open: boolean }>`
     right: ${props => (props.open ? '0' : '-100vw')};
     transition: all 0.5s;
     z-index: 1000;
-    background-color: white;
+    background-color: ${props => props.theme.colors.background};
 `;
 
 const MenuBtnWrap = styled.div`
@@ -44,7 +45,13 @@ const MenuItemWrap = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 20%;
+    margin-top: 200px;
+`;
+
+const StyledIcon = styled(MenuIcon)`
+    & g {
+        fill: ${props => props.theme.colors.text};
+    }
 `;
 
 interface MenuButtonProps {
@@ -57,7 +64,8 @@ interface MenuButtonProps {
 
 export const MenuButton = (props: MenuButtonProps) => (
     <MenuBtnWrap onClick={props.onClick}>
-        <img src="icons/menu.svg" alt="Menu" />
+        {/* <img src="icons/menu.svg" alt="Menu" />*/}
+        <StyledIcon />
         <MenuBtn>menu</MenuBtn>
     </MenuBtnWrap>
 );

@@ -11,8 +11,8 @@ const Nav = styled.nav`
     align-items: center;
     flex-wrap: wrap;
     height: 98px;
-    background-color: ${props => props.theme.colors.background};
-    /* background-color: #f8f8f8; */
+    background-color: ${props => props.theme.colors.navBackground};
+    color: ${props => props.theme.colors.text};
     z-index: 1000;
     padding: 30px;
 `;

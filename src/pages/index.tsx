@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
 import Menu from '@components/Menu';
 import Navbar from '@components/Navbar';
+import ArrowIcon from '@icons/arrow.svg';
 import Head from 'next/head';
 
 const Container = styled.div`
@@ -165,6 +166,12 @@ const IndexSection = styled(Section)`
     margin-top: 100px;
 `;
 
+const StyledArrow = styled(ArrowIcon)`
+    & > path {
+        stroke: ${props => props.theme.colors.text};
+    }
+`;
+
 const Home = () => {
     const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -192,7 +199,7 @@ const Home = () => {
                     </TitleWrap>
                     <ScrollDownWrap>
                         <ScrollDown>scroll down</ScrollDown>
-                        <img src="icons/arrow.svg" alt="Scroll Down" />
+                        <StyledArrow />
                     </ScrollDownWrap>
                 </IndexSection>
                 <Section>

@@ -28,11 +28,13 @@
     "paths": {
       "@themes/*": ["src/themes/*"],
       "@components/*": ["src/components/*"],
-      "@pages/*": ["src/pages/*"]
+      "@pages/*": ["src/pages/*"],
+      "@icons/*": ["src/icons/*"]
     }
   },
   "include": [
     "src",
+    "public",
     "next-env.d.ts"
   ],
   "exclude": [

@@ -5,6 +5,7 @@ declare module 'styled-components' {
         colors: {
             text: string;
             background: string;
+            navBackground: string;
         };
         fontFamilies: {
             roboto: string;

@@ -1,9 +1,8 @@
-import React from 'react';
-import { SWRConfig } from 'swr';
+import React, { useEffect, useState } from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import light from '@themes/light';
 import { AppProps } from 'next/app';
-import axios from 'axios';
+import dark from '@themes/dark';
 
 const GlobalStyle = createGlobalStyle`
   html, 
@@ -22,24 +21,29 @@ const GlobalStyle = createGlobalStyle`
   }
   * {
     box-sizing: border-box;
-  }
+  } 
 `;
 
-const swrFetcher = (url: string) =>
-    axios({
-        url,
-        method: 'GET'
-    }).then(res => res.data);
+const App = ({ Component, pageProps }: AppProps) => {
+    const [theme, setTheme] = useState(light);
 
-const App = ({ Component, pageProps }: AppProps) => (
-    <>
-        <ThemeProvider theme={light}>
-            <GlobalStyle />
-            <SWRConfig value={{ fetcher: swrFetcher }}>
+    useEffect(() => {
+        if (
+            window.matchMedia &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches
+        ) {
+            setTheme(dark);
+        }
+    }, []);
+
+    return (
+        <>
+            <ThemeProvider theme={theme}>
+                <GlobalStyle />
                 <Component {...pageProps} />
-            </SWRConfig>
-        </ThemeProvider>
-    </>
-);
+            </ThemeProvider>
+        </>
+    );
+};
 
 export default App;
