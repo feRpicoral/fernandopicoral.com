@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import light from '@themes/light';
-import { AppProps } from 'next/app';
 import dark from '@themes/dark';
+import smoothscroll from 'smoothscroll-polyfill';
+import { AppProps } from 'next/app';
 
 const GlobalStyle = createGlobalStyle`
   html, 
@@ -34,6 +35,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         ) {
             setTheme(dark);
         }
+        smoothscroll.polyfill();
     }, []);
 
     return (
