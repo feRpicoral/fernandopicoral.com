@@ -43,6 +43,11 @@ export default class MyDocument extends Document {
         return (
             <Html>
                 <Head>
+                    <meta
+                        name="description"
+                        content="Fernando Picoral's portfolio website. I'm a full stack web developer with experience in React & Javascript"
+                    />
+                    <meta name="robots" content="notranslate" />
                     <link rel="preconnect" href="https://fonts.gstatic.com" />
                     <link
                         href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Roboto:wght@100;300&display=swap"

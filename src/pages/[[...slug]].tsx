@@ -78,7 +78,7 @@ const Index = () => {
     return (
         <>
             <Head>
-                <title>Picoral</title>
+                <title>Fernando Picoral</title>
             </Head>
             <Menu isOpen={isMenuOpen} setOpen={setMenuOpen} />
             <Navbar isOpen={isMenuOpen} setOpen={setMenuOpen} />
