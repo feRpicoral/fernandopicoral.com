@@ -4,7 +4,6 @@
   "env": {
     "browser": true,
     "es6": true,
-    "jest": true,
     "node": true
   },
   "ignorePatterns": [
@@ -14,14 +13,12 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:jest/recommended",
     "prettier",
     "plugin:prettier/recommended"
   ],
   "plugins": [
     "react",
     "@typescript-eslint",
-    "jest",
     "prettier"
   ],
   "rules": {
