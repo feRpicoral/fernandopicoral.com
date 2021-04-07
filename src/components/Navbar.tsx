@@ -1,6 +1,6 @@
 import { MenuButton, MenuProps } from '@components/Menu';
 import React from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 
 const Nav = styled.nav`
     position: fixed;
@@ -23,21 +23,13 @@ const Logo = styled.h1`
     margin: 0;
 `;
 
-const OverflowClasses = createGlobalStyle`
-  .overflow-h {
-    overflow: hidden !important;
-  }
-`;
-
 const Navbar = ({ isOpen, setOpen }: MenuProps) => {
     const toggleMenu = () => {
         setOpen(!isOpen);
-        document.body.classList.toggle('overflow-h');
     };
 
     return (
         <Nav>
-            <OverflowClasses />
             <Logo>picoral</Logo>
             <MenuButton onClick={toggleMenu} />
         </Nav>

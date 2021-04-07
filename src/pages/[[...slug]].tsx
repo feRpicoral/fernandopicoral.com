@@ -42,6 +42,14 @@ const Index = () => {
     const router = useRouter();
     const slug = (router.query.slug as string[]) || [];
 
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'visible';
+        }
+    }, [isMenuOpen]);
+
     // Scroll based on the query
     useEffect(() => {
         if (slug.length === 1) {
