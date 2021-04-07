@@ -11,5 +11,6 @@ declare module 'styled-components' {
             roboto: string;
             quicksand: string;
         };
+        isDarkMode: boolean;
     }
 }

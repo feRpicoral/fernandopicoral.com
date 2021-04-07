@@ -4,6 +4,7 @@ import styled, { keyframes } from 'styled-components';
 import ArrowIcon from '@icons/arrow.svg';
 
 const IndexSection = styled(Section)`
+    min-height: 80vh;
     margin-top: 100px;
 `;
 
