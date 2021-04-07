@@ -9,7 +9,8 @@ const light: DefaultTheme = {
     fontFamilies: {
         roboto: "'Roboto', sans-serif",
         quicksand: "'Quicksand', sans-serif"
-    }
+    },
+    isDarkMode: false
 };
 
 export default light;

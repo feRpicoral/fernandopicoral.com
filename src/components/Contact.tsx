@@ -1,6 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Header, Section } from '@components/styles';
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
+import { SectionContent, Section, SectionHeader } from '@components/styles';
+import UrlIcon from '@icons/url.svg';
+import EmailIcon from '@icons/email.svg';
+import LinkedinIcon from '@icons/linkedin.svg';
 
 const ContactSection = styled(Section)`
     padding-bottom: 10vh;
@@ -23,6 +26,9 @@ const ContactTitle = styled.span`
 `;
 
 const ContactLink = styled.a`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 24px;
     line-height: 32px;
     font-weight: 100;
@@ -33,34 +39,69 @@ const ContactLink = styled.a`
     }
 `;
 
-const Contact = () => (
-    <ContactSection>
-        <Header>contact</Header>
-        <ContactItem>
-            <ContactTitle>Email</ContactTitle>
-            <ContactLink
-                href="mailto:fernando.picoral@colorado.edu"
-                target="_blank"
-            >
-                fernando.picoral@colorado.edu
-            </ContactLink>
-        </ContactItem>
-        <ContactItem>
-            <ContactTitle>Linkedin</ContactTitle>
-            <ContactLink
-                href="https://www.linkedin.com/in/picoral/"
-                target="_blank"
-            >
-                @picoral
-            </ContactLink>
-        </ContactItem>
-        <ContactItem>
-            <ContactTitle>GitHub</ContactTitle>
-            <ContactLink href="https://github.com/feRpicoral/" target="_blank">
-                feRpicoral
-            </ContactLink>
-        </ContactItem>
-    </ContactSection>
-);
+const svgCss = css`
+    /* stylelint-disable-next-line */
+    & {
+        margin: 2px 0 0 8px;
+        fill: ${props => props.theme.colors.text};
+        width: 20px;
+    }
+`;
+
+const StyledURLIcon = styled(UrlIcon)`
+    ${svgCss};
+    /* stylelint-disable-next-line */
+    & {
+        opacity: ${props => (props.theme.isDarkMode ? 1 : 0.65)};
+    }
+`;
+
+const StyledEmailIcon = styled(EmailIcon)`
+    ${svgCss};
+`;
+
+const StyledLinkedinIcon = styled(LinkedinIcon)`
+    ${svgCss};
+`;
+
+const Contact = () => {
+    const [isOpen, setOpen] = useState(false);
+    return (
+        <ContactSection>
+            <SectionHeader onClick={() => setOpen(!isOpen)}>
+                contact
+            </SectionHeader>
+            <SectionContent open={isOpen}>
+                <ContactItem>
+                    <ContactTitle>Email</ContactTitle>
+                    <ContactLink
+                        href="mailto:fernando.picoral@colorado.edu"
+                        target="_blank"
+                    >
+                        fernando.picoral@colorado.edu <StyledEmailIcon />
+                    </ContactLink>
+                </ContactItem>
+                <ContactItem>
+                    <ContactTitle>Linkedin</ContactTitle>
+                    <ContactLink
+                        href="https://www.linkedin.com/in/picoral/"
+                        target="_blank"
+                    >
+                        @picoral <StyledLinkedinIcon />
+                    </ContactLink>
+                </ContactItem>
+                <ContactItem>
+                    <ContactTitle>GitHub</ContactTitle>
+                    <ContactLink
+                        href="https://github.com/feRpicoral/"
+                        target="_blank"
+                    >
+                        feRpicoral <StyledURLIcon />{' '}
+                    </ContactLink>
+                </ContactItem>
+            </SectionContent>
+        </ContactSection>
+    );
+};
 
 export default Contact;
