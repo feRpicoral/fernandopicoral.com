@@ -52,10 +52,10 @@ const Projects = () => {
             <SectionContent open={isOpen}>
                 <Project>
                     <ProjectTitle
-                        href="https://github.com/feRpicoral/stockvio"
+                        href="https://github.com/stockvio"
                         target="_blank"
                     >
-                        Stockvio
+                        Stockvio <StyledGithub />
                     </ProjectTitle>
                     <ProjectDescription>
                         A platform designed to keep track of investments in the
