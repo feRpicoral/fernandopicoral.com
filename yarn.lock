@@ -1035,7 +1035,7 @@
   resolved "https://registry.yarnpkg.com/@opentelemetry/context-base/-/context-base-0.14.0.tgz#c67fc20a4d891447ca1a855d7d70fa79a3533001"
   integrity sha512-sDOAZcYwynHFTbLo6n8kIbLiVF3a3BLkrmehJUyEbT9F+Smbi47kLGS2gG2g0fjBLR/Lr1InPD7kXL7FaTqEkw==
 
-"@stockvio/eslint-config@^1.0.1":
+"@stockvio/eslint-config@latest":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@stockvio/eslint-config/-/eslint-config-1.0.1.tgz#c72e4139c3035500a04013361f764763563565c8"
   integrity sha512-7MY01h+gsDpdFQJlNoQ4tzWRdZrc6hdQ0r+usW412aLfHqr3NyKkOOBwKkRbBqwW1tazByi3s99FYnPC/0EJdA==
@@ -5134,9 +5134,9 @@ tr46@^1.0.1:
     punycode "^2.1.0"
 
 trim-newlines@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/trim-newlines/-/trim-newlines-3.0.0.tgz#79726304a6a898aa8373427298d54c2ee8b1cb30"
-  integrity sha512-C4+gOpvmxaSMKuEf9Qc134F1ZuOHVXKRbtEflf4NTtuuJDEIJ9p5PXsalL8SkeRw+qit1Mo+yuvMPAKwWg/1hA==
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/trim-newlines/-/trim-newlines-3.0.1.tgz#260a5d962d8b752425b32f3a7db0dcacd176c144"
+  integrity sha512-c1PTsA3tYrIsLGkJkzHF+w9F2EyxfXGo4UyJc4pFL++FMjnq0HJS69T3M7d//gKrFKwy429bouPescbjecU+Zw==
 
 trough@^1.0.0:
   version "1.0.5"
