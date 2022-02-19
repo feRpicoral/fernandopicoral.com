@@ -1158,8 +1158,8 @@
 
 "@stockvio/eslint-config@^3.1.2":
   version "3.1.2"
-  resolved "https://npm.pkg.github.com/download/@stockvio/eslint-config/3.1.2/9ac4477242b801d37130473ee28b1305c56ce9b4b8b3d628af81da840d769e52#51a1df3525d4760aa34fcaff369b46b3220bc2f7"
-  integrity sha512-Iii6wB0VRrejdRPueU6+0/sRQLLon8uxftw0PsaW+JvgjchC/mzxgRcYkRBk0nlXXFRNk9HI+AM/WhDfXbMmJw==
+  resolved "https://registry.yarnpkg.com/@stockvio/eslint-config/-/eslint-config-3.1.2.tgz#8570622e989dc87399b5fc300034bc170ac3606a"
+  integrity sha512-lpSJZPVIqv1dIsjo4ijQsLyJsysN9tFZgsbiEIUGGuTyT77jp60YAZncD2d4LNfvViyvS0sERJQ0eNlO/hne6w==
   dependencies:
     "@typescript-eslint/eslint-plugin" ">=4.21.0"
     "@typescript-eslint/parser" ">=4.21.0"
