@@ -1,7 +1,7 @@
 import { Section, Title } from '@components/styles';
+import ArrowIcon from '@icons/arrow.svg';
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import ArrowIcon from '@icons/arrow.svg';
 
 const IndexSection = styled(Section)`
     min-height: 80vh;

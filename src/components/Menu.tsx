@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import React from 'react';
 import MenuIcon from '@icons/menu.svg';
 import { useRouter } from 'next/router';
+import React from 'react';
+import styled from 'styled-components';
 
 const MenuContainer = styled.div<{ open: boolean }>`
     position: fixed;
@@ -89,7 +89,7 @@ const Menu = ({ isOpen, setOpen }: MenuProps) => {
     const handleClick = (url: string) => {
         setOpen(!isOpen);
         // Change the URL without reloading/re-rendering the page
-        router.push(url, undefined, { shallow: true });
+        void router.push(url, undefined, { shallow: true });
     };
 
     return (
