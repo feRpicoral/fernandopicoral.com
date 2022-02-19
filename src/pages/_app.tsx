@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import light from '@themes/light';
 import dark from '@themes/dark';
-import smoothscroll from 'smoothscroll-polyfill';
+import light from '@themes/light';
 import { AppProps } from 'next/app';
+import React, { useEffect, useState } from 'react';
+import smoothscroll from 'smoothscroll-polyfill';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   html, 

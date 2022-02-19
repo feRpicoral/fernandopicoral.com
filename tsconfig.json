@@ -1,40 +1,44 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "jsx": "preserve",
+    "module": "esnext",
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
     "allowJs": true,
-    "skipLibCheck": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "removeComments": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitAny": true,
-    "sourceMap": true,
+    "isolatedModules": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
+    "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@themes/*": ["src/themes/*"],
-      "@components/*": ["src/components/*"],
-      "@pages/*": ["src/pages/*"],
-      "@icons/*": ["src/icons/*"]
+      "@themes/*": [
+        "src/themes/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@pages/*": [
+        "src/pages/*"
+      ],
+      "@icons/*": [
+        "src/icons/*"
+      ]
     }
   },
   "include": [
     "src",
-    "public",
     "next-env.d.ts"
   ],
   "exclude": [

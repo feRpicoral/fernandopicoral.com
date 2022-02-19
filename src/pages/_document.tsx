@@ -11,9 +11,8 @@ import { ServerStyleSheet } from 'styled-components';
  * SSR config for styled components
  * https://github.com/vercel/next.js/blob/master/examples/with-styled-components/pages/_document.js
  */
-
 export default class MyDocument extends Document {
-    static async getInitialProps(ctx: DocumentContext) {
+    static override async getInitialProps(ctx: DocumentContext) {
         const sheet = new ServerStyleSheet();
         const originalRenderPage = ctx.renderPage;
 
@@ -39,7 +38,7 @@ export default class MyDocument extends Document {
         }
     }
 
-    render() {
+    override render() {
         return (
             <Html>
                 <Head>

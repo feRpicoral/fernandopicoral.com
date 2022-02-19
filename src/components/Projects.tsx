@@ -1,7 +1,7 @@
 import { Section, SectionContent, SectionHeader } from '@components/styles';
+import GithubIcon from '@icons/github.svg';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import GithubIcon from '@icons/github.svg';
 
 const Project = styled.div`
     margin-top: 30px;
