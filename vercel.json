@@ -1,9 +1,0 @@
-{
-  "public": false,
-  "routes": [
-    {
-      "src": "/sitemap.xml",
-      "dest": "/_next/static/sitemap.xml"
-    }
-  ]
-}

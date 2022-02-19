@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import About from '@components/About';
+import Contact from '@components/Contact';
+import Home from '@components/Home';
 import Menu from '@components/Menu';
 import Navbar from '@components/Navbar';
+import Projects from '@components/Projects';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Contact from '@components/Contact';
-import About from '@components/About';
-import Projects from '@components/Projects';
-import Home from '@components/Home';
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 const Container = styled.div`
     margin: 0 auto;
@@ -67,12 +67,13 @@ const Index = () => {
                     scrollToSection(3);
                     break;
                 default:
-                    router.push('/', undefined, { shallow: true });
+                    void router.push('/', undefined, { shallow: true });
             }
         } else if (slug.length > 1) {
             // When the path matches /x/y/z and so on, redirect to /
-            router.push('/', undefined, { shallow: true });
+            void router.push('/', undefined, { shallow: true });
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [slug]);
 
     return (

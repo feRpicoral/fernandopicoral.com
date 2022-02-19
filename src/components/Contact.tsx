@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
-import { SectionContent, Section, SectionHeader } from '@components/styles';
-import UrlIcon from '@icons/url.svg';
+import { Section, SectionContent, SectionHeader } from '@components/styles';
 import EmailIcon from '@icons/email.svg';
 import LinkedinIcon from '@icons/linkedin.svg';
+import UrlIcon from '@icons/url.svg';
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
 
 const ContactSection = styled(Section)`
     padding-bottom: 10vh;
