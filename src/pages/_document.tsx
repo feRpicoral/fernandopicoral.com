@@ -44,7 +44,7 @@ export default class MyDocument extends Document {
                 <Head>
                     <meta
                         name="description"
-                        content="Fernando Picoral's portfolio website. I'm a full stack web developer with experience in React & Javascript"
+                        content="Fernando Picoral's portfolio website. I'm a full stack web developer with experience in React, Angular & Javascript"
                     />
                     <meta name="robots" content="notranslate" />
                     <link rel="preconnect" href="https://fonts.gstatic.com" />

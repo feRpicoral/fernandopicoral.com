@@ -1,6 +1,10 @@
-import { MenuButton, MenuProps } from '@components/Menu';
-import React from 'react';
-import styled from 'styled-components';
+import { MenuButton } from '@components/Menu';
+import MoonIcon from '@icons/moon.svg';
+import SunIconRaw from '@icons/sun.svg';
+import darkTheme from '@themes/dark';
+import lightTheme from '@themes/light';
+import React, { useContext } from 'react';
+import styled, { DefaultTheme, ThemeContext } from 'styled-components';
 
 const Nav = styled.nav`
     position: fixed;
@@ -23,15 +27,56 @@ const Logo = styled.h1`
     margin: 0;
 `;
 
-const Navbar = ({ isOpen, setOpen }: MenuProps) => {
+const ThemeIconWrapper = styled.div`
+    display: inline-block;
+    margin-right: 30px;
+    cursor: pointer;
+    width: 20px;
+`;
+
+const SunIcon = styled(SunIconRaw)`
+    fill: white;
+`;
+
+const RightSection = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+export interface NavBarProps {
+    setTheme: React.Dispatch<React.SetStateAction<DefaultTheme>>;
+    isMenuOpen: boolean;
+    setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Navbar = ({ isMenuOpen, setMenuOpen, setTheme }: NavBarProps) => {
     const toggleMenu = () => {
-        setOpen(!isOpen);
+        setMenuOpen(!isMenuOpen);
+    };
+
+    const theme = useContext(ThemeContext);
+
+    const changeTheme = () => {
+        if (theme.isDarkMode) {
+            setTheme(lightTheme);
+        } else {
+            setTheme(darkTheme);
+        }
     };
 
     return (
         <Nav>
             <Logo>picoral</Logo>
-            <MenuButton onClick={toggleMenu} />
+            <RightSection>
+                <ThemeIconWrapper
+                    onClick={changeTheme}
+                    aria-label={'Toggle dark mode'}
+                    title={'Toggle dark mode'}
+                >
+                    {theme.isDarkMode ? <SunIcon /> : <MoonIcon />}
+                </ThemeIconWrapper>
+                <MenuButton onClick={toggleMenu} />
+            </RightSection>
         </Nav>
     );
 };
