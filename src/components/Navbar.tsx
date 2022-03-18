@@ -1,6 +1,7 @@
-import { MenuButton, MenuProps } from '@components/Menu';
-import React from 'react';
-import styled from 'styled-components';
+import { MenuButton } from '@components/Menu';
+import ThemeButton from '@components/ThemeButton';
+import React, { useEffect, useState } from 'react';
+import styled, { DefaultTheme } from 'styled-components';
 
 const Nav = styled.nav`
     position: fixed;
@@ -23,15 +24,44 @@ const Logo = styled.h1`
     margin: 0;
 `;
 
-const Navbar = ({ isOpen, setOpen }: MenuProps) => {
+const RightSection = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 30px;
+`;
+
+export interface NavBarProps {
+    setTheme: React.Dispatch<React.SetStateAction<DefaultTheme>>;
+    isMenuOpen: boolean;
+    setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Navbar = ({ isMenuOpen, setMenuOpen, setTheme }: NavBarProps) => {
+    const [width, setWidth] = useState(Number.MAX_SAFE_INTEGER);
+
     const toggleMenu = () => {
-        setOpen(!isOpen);
+        setMenuOpen(!isMenuOpen);
     };
+
+    useEffect(() => {
+        const calculateWidth = () => setWidth(window.innerWidth);
+        calculateWidth();
+
+        window.addEventListener('resize', calculateWidth);
+        return () => window.removeEventListener('resize', calculateWidth);
+    }, []);
 
     return (
         <Nav>
-            <Logo>picoral</Logo>
-            <MenuButton onClick={toggleMenu} />
+            {width <= 560 ? (
+                <ThemeButton setTheme={setTheme} />
+            ) : (
+                <Logo>picoral</Logo>
+            )}
+            <RightSection>
+                {width >= 560 && <ThemeButton setTheme={setTheme} />}
+                <MenuButton onClick={toggleMenu} />
+            </RightSection>
         </Nav>
     );
 };

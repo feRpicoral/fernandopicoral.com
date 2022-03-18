@@ -1,9 +1,13 @@
-import dark from '@themes/dark';
+import { getPreferredTheme } from '@themes/heler';
 import light from '@themes/light';
 import { AppProps } from 'next/app';
 import React, { useEffect, useState } from 'react';
 import smoothscroll from 'smoothscroll-polyfill';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import {
+    createGlobalStyle,
+    DefaultTheme,
+    ThemeProvider
+} from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   html, 
@@ -25,16 +29,15 @@ const GlobalStyle = createGlobalStyle`
   } 
 `;
 
+export type PageProps<P = Record<string, never>> = P & {
+    setTheme: React.Dispatch<React.SetStateAction<DefaultTheme>>;
+};
+
 const App = ({ Component, pageProps }: AppProps) => {
     const [theme, setTheme] = useState(light);
 
     useEffect(() => {
-        if (
-            window.matchMedia &&
-            window.matchMedia('(prefers-color-scheme: dark)').matches
-        ) {
-            setTheme(dark);
-        }
+        setTheme(getPreferredTheme());
         smoothscroll.polyfill();
     }, []);
 
@@ -42,7 +45,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <>
             <ThemeProvider theme={theme}>
                 <GlobalStyle />
-                <Component {...pageProps} />
+                <Component {...pageProps} setTheme={setTheme} />
             </ThemeProvider>
         </>
     );

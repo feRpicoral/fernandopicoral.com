@@ -4,6 +4,7 @@ import Home from '@components/Home';
 import Menu from '@components/Menu';
 import Navbar from '@components/Navbar';
 import Projects from '@components/Projects';
+import { PageProps } from '@pages/_app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -36,7 +37,7 @@ const scrollToSection = (sectionIndex: number) => {
     });
 };
 
-const Index = () => {
+const Index = ({ setTheme }: PageProps) => {
     const [isMenuOpen, setMenuOpen] = useState(false);
 
     const router = useRouter();
@@ -82,7 +83,11 @@ const Index = () => {
                 <title>Fernando Picoral</title>
             </Head>
             <Menu isOpen={isMenuOpen} setOpen={setMenuOpen} />
-            <Navbar isOpen={isMenuOpen} setOpen={setMenuOpen} />
+            <Navbar
+                isMenuOpen={isMenuOpen}
+                setMenuOpen={setMenuOpen}
+                setTheme={setTheme}
+            />
             <Container>
                 <Home />
                 <Projects />
