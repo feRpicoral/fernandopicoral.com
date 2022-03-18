@@ -41,8 +41,9 @@ const About = () => {
                 <AboutItem>
                     <AboutTitle>Web</AboutTitle>
                     <AboutDescription>
-                        HTML, CSS, React, Redux, Next, Node, Express, Bootstrap,
-                        jQuery and Styled Components
+                        Node, Express, Nest, HTML, CSS, React, Styled
+                        Components, Angular, AngularJS, Next, Redux, and
+                        Bootstrap
                     </AboutDescription>
                 </AboutItem>
                 <AboutItem>
@@ -52,7 +53,7 @@ const About = () => {
                 <AboutItem>
                     <AboutTitle>Other</AboutTitle>
                     <AboutDescription>
-                        Figma, AdobeXD, Linux, Vercel, Git, GitHub & GitHub
+                        Figma, AdobeXD, Linux, Vercel, AWS, Git, GitHub & GitHub
                         Actions
                     </AboutDescription>
                 </AboutItem>
@@ -60,7 +61,7 @@ const About = () => {
                     <AboutTitle>Education</AboutTitle>
                     <AboutDescription>
                         University of Colorado - Boulder (Class 2026)
-                        <div style={{ marginTop: 10 }} />
+                        <br />
                         Computer Science, BS
                     </AboutDescription>
                 </AboutItem>
