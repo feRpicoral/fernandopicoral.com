@@ -1,7 +1,7 @@
-import dark from '@themes/dark';
+import { getPreferredTheme } from '@themes/heler';
 import light from '@themes/light';
 import { AppProps } from 'next/app';
-import React, { PropsWithChildren, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import smoothscroll from 'smoothscroll-polyfill';
 import {
     createGlobalStyle,
@@ -37,12 +37,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     const [theme, setTheme] = useState(light);
 
     useEffect(() => {
-        if (
-            window.matchMedia &&
-            window.matchMedia('(prefers-color-scheme: dark)').matches
-        ) {
-            setTheme(dark);
-        }
+        setTheme(getPreferredTheme());
         smoothscroll.polyfill();
     }, []);
 

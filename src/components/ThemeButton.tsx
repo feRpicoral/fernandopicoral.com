@@ -1,6 +1,11 @@
 import MoonIcon from '@icons/moon.svg';
 import SunIconRaw from '@icons/sun.svg';
 import darkTheme from '@themes/dark';
+import {
+    DARK_THEME_VALUE,
+    LIGHT_THEME_VALUE,
+    THEME_LOCAL_STORAGE_KEY
+} from '@themes/heler';
 import lightTheme from '@themes/light';
 import React, { useContext } from 'react';
 import styled, { DefaultTheme, ThemeContext } from 'styled-components';
@@ -25,8 +30,10 @@ const ThemeButton = ({ setTheme }: ThemeButtonProps) => {
     const changeTheme = () => {
         if (theme.isDarkMode) {
             setTheme(lightTheme);
+            localStorage.setItem(THEME_LOCAL_STORAGE_KEY, LIGHT_THEME_VALUE);
         } else {
             setTheme(darkTheme);
+            localStorage.setItem(THEME_LOCAL_STORAGE_KEY, DARK_THEME_VALUE);
         }
     };
 
