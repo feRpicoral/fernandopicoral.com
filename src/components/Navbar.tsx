@@ -1,10 +1,7 @@
 import { MenuButton } from '@components/Menu';
-import MoonIcon from '@icons/moon.svg';
-import SunIconRaw from '@icons/sun.svg';
-import darkTheme from '@themes/dark';
-import lightTheme from '@themes/light';
-import React, { useContext } from 'react';
-import styled, { DefaultTheme, ThemeContext } from 'styled-components';
+import ThemeButton from '@components/ThemeButton';
+import React, { useEffect, useState } from 'react';
+import styled, { DefaultTheme } from 'styled-components';
 
 const Nav = styled.nav`
     position: fixed;
@@ -27,20 +24,10 @@ const Logo = styled.h1`
     margin: 0;
 `;
 
-const ThemeIconWrapper = styled.div`
-    display: inline-block;
-    margin-right: 30px;
-    cursor: pointer;
-    width: 20px;
-`;
-
-const SunIcon = styled(SunIconRaw)`
-    fill: white;
-`;
-
 const RightSection = styled.div`
     display: flex;
     align-items: center;
+    gap: 30px;
 `;
 
 export interface NavBarProps {
@@ -50,31 +37,29 @@ export interface NavBarProps {
 }
 
 const Navbar = ({ isMenuOpen, setMenuOpen, setTheme }: NavBarProps) => {
+    const [width, setWidth] = useState(Number.MAX_SAFE_INTEGER);
+
     const toggleMenu = () => {
         setMenuOpen(!isMenuOpen);
     };
 
-    const theme = useContext(ThemeContext);
+    useEffect(() => {
+        const calculateWidth = () => setWidth(window.innerWidth);
+        calculateWidth();
 
-    const changeTheme = () => {
-        if (theme.isDarkMode) {
-            setTheme(lightTheme);
-        } else {
-            setTheme(darkTheme);
-        }
-    };
+        window.addEventListener('resize', calculateWidth);
+        return () => window.removeEventListener('resize', calculateWidth);
+    }, []);
 
     return (
         <Nav>
-            <Logo>picoral</Logo>
+            {width <= 560 ? (
+                <ThemeButton setTheme={setTheme} />
+            ) : (
+                <Logo>picoral</Logo>
+            )}
             <RightSection>
-                <ThemeIconWrapper
-                    onClick={changeTheme}
-                    aria-label={'Toggle dark mode'}
-                    title={'Toggle dark mode'}
-                >
-                    {theme.isDarkMode ? <SunIcon /> : <MoonIcon />}
-                </ThemeIconWrapper>
+                {width >= 560 && <ThemeButton setTheme={setTheme} />}
                 <MenuButton onClick={toggleMenu} />
             </RightSection>
         </Nav>
