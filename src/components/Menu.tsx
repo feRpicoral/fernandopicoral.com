@@ -72,15 +72,8 @@ export const MenuButton = (props: MenuButtonProps) => (
 );
 
 export interface MenuProps {
-    /**
-     * Whether or not the menu is currently open
-     */
     isOpen: boolean;
-
-    /**
-     * Function to change the state of the menu when the user clicks on one of the items
-     */
-    setOpen: (state: boolean) => void;
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Menu = ({ isOpen, setOpen }: MenuProps) => {
