@@ -11,12 +11,6 @@ const ContactSection = styled(Section)`
 
 const ContactItem = styled.div`
     margin-top: 30px;
-    font-family: ${props => props.theme.fontFamilies.roboto};
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    max-width: 650px;
 `;
 
 const ContactTitle = styled.span`
@@ -32,7 +26,6 @@ const ContactLink = styled.a`
     font-size: 24px;
     line-height: 32px;
     font-weight: 100;
-    color: ${props => props.theme.colors.text};
     text-decoration: none;
     :hover {
         text-decoration: underline;

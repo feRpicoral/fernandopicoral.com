@@ -1,13 +1,15 @@
 import About from '@components/About';
 import Contact from '@components/Contact';
+import Experience from '@components/Experience';
 import Home from '@components/Home';
 import Navbar from '@components/Navbar';
 import Projects from '@components/Projects';
 import VerticalMenu, { Sections } from '@components/VerticalMenu';
+import useWidth from '@hooks/width.hook';
 import { PageProps } from '@pages/_app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -15,7 +17,6 @@ const Container = styled.div`
     min-width: 100%;
     min-height: 100%;
     text-align: center;
-    color: ${props => props.theme.colors.text};
     padding: 0 15px;
 `;
 
@@ -39,17 +40,9 @@ const scrollToSection = (sectionIndex: number) => {
 
 const Index = ({ setTheme }: PageProps) => {
     const router = useRouter();
-    const [width, setWidth] = useState(Number.MAX_SAFE_INTEGER);
+    const width = useWidth();
 
     const slug = (router.query.slug as string[]) || [];
-
-    useEffect(() => {
-        const calculateWidth = () => setWidth(window.innerWidth);
-        calculateWidth();
-
-        window.addEventListener('resize', calculateWidth);
-        return () => window.removeEventListener('resize', calculateWidth);
-    }, []);
 
     // Scroll based on the query
     useEffect(() => {
@@ -87,9 +80,10 @@ const Index = ({ setTheme }: PageProps) => {
                 <title>Fernando Picoral</title>
             </Head>
             <Navbar setTheme={setTheme} />
+            {width >= 1020 && <VerticalMenu />}
             <Container>
-                {width >= 560 && <VerticalMenu />}
                 <Home />
+                <Experience />
                 <Projects />
                 <About />
                 <Contact />

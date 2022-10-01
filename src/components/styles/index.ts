@@ -9,7 +9,7 @@ export const Section = styled.section`
     margin-bottom: 10vh;
 `;
 
-export const Title = styled.h1`
+export const PageTitle = styled.h1`
     font-family: ${props => props.theme.fontFamilies.quicksand};
     font-weight: 300;
     font-size: 120px;
@@ -17,16 +17,13 @@ export const Title = styled.h1`
     margin: 0;
 `;
 
-export const Header = styled(Title)`
-    font-size: 80px;
-    margin-bottom: 55px;
-`;
-
-export const SectionHeader = styled(Header)<{
+export const SectionHeader = styled(PageTitle)<{
     onClick: (e: React.MouseEvent<HTMLHeadingElement>) => void;
 }>`
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.1s ease;
+    font-size: 80px;
+    margin-bottom: 55px;
     :hover {
         font-size: 100px;
     }
@@ -36,4 +33,15 @@ export const SectionContent = styled.div<{ open: boolean }>`
     max-height: ${props => (props.open ? '1000px' : 0)};
     overflow: hidden;
     transition: max-height 0.8s ease-in-out;
+    max-width: 650px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-family: ${props => props.theme.fontFamilies.roboto};
+
+    div:not(:last-of-type) {
+        margin-bottom: 30px;
+    }
 `;

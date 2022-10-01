@@ -3,13 +3,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const AboutItem = styled.div`
-    margin-top: 30px;
-    font-family: ${props => props.theme.fontFamilies.roboto};
     display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: center;
-    max-width: 650px;
 `;
 
 const AboutTitle = styled.span`

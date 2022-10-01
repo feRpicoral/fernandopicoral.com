@@ -11,7 +11,6 @@ const Nav = styled.nav`
     align-items: center;
     flex-wrap: wrap;
     background-color: ${props => props.theme.colors.navBackground};
-    color: ${props => props.theme.colors.text};
     z-index: 1;
     padding: 30px;
 `;

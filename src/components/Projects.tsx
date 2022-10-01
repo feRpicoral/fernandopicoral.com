@@ -3,15 +3,6 @@ import GithubIcon from '@icons/github.svg';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const Project = styled.div`
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    max-width: 650px;
-    font-family: ${props => props.theme.fontFamilies.roboto};
-`;
-
 const ProjectTitle = styled.a`
     display: flex;
     justify-content: center;
@@ -20,7 +11,6 @@ const ProjectTitle = styled.a`
     font-weight: 300;
     margin: 30px 0;
     text-decoration: none;
-    color: ${props => props.theme.colors.text};
     :hover {
         color: inherit;
         text-decoration: underline;
@@ -50,7 +40,7 @@ const Projects = () => {
                 projects
             </SectionHeader>
             <SectionContent open={isOpen}>
-                <Project>
+                <div>
                     <ProjectTitle
                         href="https://github.com/stockvio"
                         target="_blank"
@@ -63,8 +53,8 @@ const Projects = () => {
                         Typescript, allows the investor to have the info related
                         to all his equities in on place
                     </ProjectDescription>
-                </Project>
-                <Project>
+                </div>
+                <div>
                     <ProjectTitle
                         href="https://github.com/open-collaboration"
                         target="_blank"
@@ -77,8 +67,8 @@ const Projects = () => {
                         with NextJS with Typescript for the frontend and GO for
                         the backend
                     </ProjectDescription>
-                </Project>
-                <Project>
+                </div>
+                <div>
                     <ProjectTitle
                         href="https://github.com/feRpicoral/fernandopicoral.com"
                         target="_blank"
@@ -87,10 +77,10 @@ const Projects = () => {
                     </ProjectTitle>
                     <ProjectDescription>
                         This website. Previously built with vanilla JS & CSS
-                        with a litte help from Bootsrap, was recently refactored
-                        to NextJS with React and deployed with Vercel
+                        with a little help from Bootsrap, was recently
+                        refactored to NextJS with React and deployed with Vercel
                     </ProjectDescription>
-                </Project>
+                </div>
             </SectionContent>
         </Section>
     );

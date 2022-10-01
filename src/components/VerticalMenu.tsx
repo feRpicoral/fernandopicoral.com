@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
     position: fixed;
     text-align: left;
-    margin-left: 15px;
+    margin-left: 30px;
     display: flex;
     gap: 20px;
     flex-direction: column;

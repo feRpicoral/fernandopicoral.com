@@ -27,6 +27,7 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
     transition: all .2s ease-in-out; // smooth transition when changing theme
+    color: ${props => props.theme.colors.text};
   } 
 `;
 
