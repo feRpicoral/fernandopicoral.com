@@ -36,6 +36,7 @@ const MenuButton = styled.a<{ selected?: boolean }>`
 
     &:hover {
         transform: scale(1.05);
+        text-decoration: underline;
     }
 `;
 
