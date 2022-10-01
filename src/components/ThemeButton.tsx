@@ -5,7 +5,7 @@ import {
     DARK_THEME_VALUE,
     LIGHT_THEME_VALUE,
     THEME_LOCAL_STORAGE_KEY
-} from '@themes/heler';
+} from '@themes/helper';
 import lightTheme from '@themes/light';
 import React, { useContext } from 'react';
 import styled, { DefaultTheme, ThemeContext } from 'styled-components';
