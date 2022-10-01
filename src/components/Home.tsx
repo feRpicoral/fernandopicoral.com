@@ -50,7 +50,7 @@ const Subtitle = styled.h2`
     font-weight: 100;
     font-size: 30px;
     line-height: 35px;
-    margin: 15px 0 0 0;
+    margin: 15px 0;
 `;
 
 const Home = () => (
