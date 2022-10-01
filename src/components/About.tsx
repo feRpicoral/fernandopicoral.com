@@ -12,6 +12,10 @@ const AboutTitle = styled.span`
     font-size: 30px;
     font-weight: 300;
     margin: 30px 0;
+
+    :first-of-type {
+        margin-top: 0;
+    }
 `;
 
 const AboutDescription = styled.span`
@@ -27,19 +31,19 @@ const About = () => {
             <SectionHeader onClick={() => setOpen(!isOpen)}>
                 about
             </SectionHeader>
-            <SectionContent open={isOpen}>
+            <SectionContent open={isOpen} height={1500}>
                 <AboutItem>
                     <AboutTitle>Languages</AboutTitle>
                     <AboutDescription>
-                        Javascript, Typescript and Java
+                        Typescript, Javascript, Java, C++ & Kotlin
                     </AboutDescription>
                 </AboutItem>
                 <AboutItem>
                     <AboutTitle>Web</AboutTitle>
                     <AboutDescription>
-                        Node, Express, Nest, HTML, CSS, React, Styled
-                        Components, Angular, AngularJS, Next, Redux, and
-                        Bootstrap
+                        Node, Express, Nest, Next, HTML, CSS, SCSS, React,
+                        Styled Components, Angular, AngularJS, Redux, Elastic
+                        UI, Webpack, and Bootstrap
                     </AboutDescription>
                 </AboutItem>
                 <AboutItem>
@@ -49,8 +53,8 @@ const About = () => {
                 <AboutItem>
                     <AboutTitle>Other</AboutTitle>
                     <AboutDescription>
-                        Figma, AdobeXD, Linux, Vercel, AWS, Git, GitHub & GitHub
-                        Actions
+                        Figma, AdobeXD, Docker, Linux/Unix, Vercel, AWS, Git,
+                        GitHub & GitHub Actions
                     </AboutDescription>
                 </AboutItem>
                 <AboutItem>

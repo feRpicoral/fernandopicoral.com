@@ -2,17 +2,13 @@ import { Section, SectionContent, SectionHeader } from '@components/styles';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const ExperienceSection = styled(SectionContent)`
-    max-height: ${props => (props.open ? '3000px' : 0)};
-`;
-
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
 
     :not(:last-of-type) {
-        margin-bottom: 60px !important;
+        margin-bottom: 80px !important;
     }
 `;
 
@@ -64,7 +60,7 @@ const Experience = () => {
             <SectionHeader onClick={() => setOpen(!isOpen)}>
                 experience
             </SectionHeader>
-            <ExperienceSection open={isOpen}>
+            <SectionContent open={isOpen} height={3000}>
                 <Wrapper>
                     <Title>Brain, AI, and Child Laboratory</Title>
                     <SubTitle>Research Assistant Intern</SubTitle>
@@ -176,7 +172,7 @@ const Experience = () => {
                         </List>
                     </Description>
                 </Wrapper>
-            </ExperienceSection>
+            </SectionContent>
         </Section>
     );
 };

@@ -10,13 +10,16 @@ const ContactSection = styled(Section)`
 `;
 
 const ContactItem = styled.div`
-    margin-top: 30px;
+    &:not(:first-of-type) {
+        margin-top: 30px;
+    }
 `;
 
 const ContactTitle = styled.span`
     font-size: 30px;
     font-weight: 300;
-    margin: 30px 0;
+    margin-bottom: 30px;
+    display: inline-block;
 `;
 
 const ContactLink = styled.a`

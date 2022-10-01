@@ -29,8 +29,8 @@ export const SectionHeader = styled(PageTitle)<{
     }
 `;
 
-export const SectionContent = styled.div<{ open: boolean }>`
-    max-height: ${props => (props.open ? '1000px' : 0)};
+export const SectionContent = styled.div<{ open: boolean; height?: number }>`
+    max-height: ${props => (props.open ? `${props.height ?? 1000}px` : 0)};
     overflow: hidden;
     transition: max-height 0.8s ease-in-out;
     max-width: 650px;
@@ -42,6 +42,6 @@ export const SectionContent = styled.div<{ open: boolean }>`
     font-family: ${props => props.theme.fontFamilies.roboto};
 
     div:not(:last-of-type) {
-        margin-bottom: 30px;
+        margin-bottom: 80px;
     }
 `;
