@@ -17,7 +17,7 @@
     "url": "https://fernandopicoral.com"
   },
   "engines": {
-    "node": "^14"
+    "node": "^16"
   },
   "dependencies": {
     "next": "12.1.0",
