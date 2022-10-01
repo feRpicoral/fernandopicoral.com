@@ -59,16 +59,16 @@ const Projects = () => {
                         should be installed.
                         <br />
                         <br />
-                        The goal of the study is to compare the performance of
-                        constructions workers when provided with AR glasses
+                        The study&rsquo;s goal is to compare the performance of
+                        construction workers when provided with AR glasses
                         instead of only blueprints. Among the variables are the
                         years of experience in the field of the participant and
                         whether they have previous experience with AR.
                         <br />
                         <br />
-                        In this project I am responsible for developing and
+                        In this project, I am responsible for developing and
                         maintaining the software that the researchers use to see
-                        in real time what the participant can see through the AR
+                        in real-time what the participant can see through the AR
                         glasses.
                     </ProjectDescription>
                 </div>

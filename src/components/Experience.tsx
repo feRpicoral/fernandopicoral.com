@@ -66,9 +66,9 @@ const Experience = () => {
                     <SubTitle>Research Assistant Intern</SubTitle>
                     <Date>08/2022 - Present</Date>
                     <Description>
-                        During the second week of classes at CU Boulder I was
-                        invited by my computer science professor, Dr. Tom Yeh,
-                        to join his laboratory as research assistant intern.
+                        During the second week of classes at CU Boulder, my
+                        computer science professor, Dr. Tom Yeh, invited me to
+                        join his laboratory as a research assistant intern.
                         <br />
                         <br />
                         The BAIC lab has around ten research projects
@@ -88,12 +88,12 @@ const Experience = () => {
                     <Date>06/2021 - 06/2022</Date>
                     <Description>
                         Poatek, one of the WillowTree branches, is an IT
-                        boutique based in Brazil, with high-end clients from all
+                        boutique based in Brazil, with high-end clients from
                         around the globe.
                         <br />
                         <br />
-                        During the year I worked there, I mostly worked with an
-                        asset management firm from Florida as a full stack
+                        During the year I worked there, I mainly worked with an
+                        asset management firm in Florida as a full-stack
                         software engineer. Among my accomplishments, a few that
                         are worth mentioning are:
                         <br />
@@ -101,7 +101,7 @@ const Experience = () => {
                         <List>
                             <li>
                                 Implemented a new dashboard used by the whole
-                                user-base in a daily basis;
+                                user base daily;
                             </li>
                             <li>
                                 Developed multiple high-performance endpoints in
@@ -141,14 +141,14 @@ const Experience = () => {
                         <br />
                         <br />
                         When I started investing in the Brazilian stock market
-                        back in 2020, I realized how complicated, tedious, and
-                        error-prone the process to calculate taxes over capital
-                        gains was.
+                        in 2020, I realized how complicated, tedious, and
+                        error-prone the process of calculating taxes over
+                        capital gains was.
                         <br />
                         <br />
-                        With this in mind, I designed a software to automate the
+                        With this in mind, I designed software to automate the
                         whole process, only using the trading receipts provided
-                        by the investor&rsquo;s brokerage. A few of my
+                        by the investor’s brokerage. A few of my
                         responsibilities within the company were:
                         <br />
                         <br />
