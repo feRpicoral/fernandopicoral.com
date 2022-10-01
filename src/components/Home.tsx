@@ -1,4 +1,4 @@
-import { Section, Title } from '@components/styles';
+import { PageTitle, Section } from '@components/styles';
 import ArrowIcon from '@icons/arrow.svg';
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
@@ -50,13 +50,13 @@ const Subtitle = styled.h2`
     font-weight: 100;
     font-size: 30px;
     line-height: 35px;
-    margin: 15px 0 0 0;
+    margin: 15px 0;
 `;
 
 const Home = () => (
     <IndexSection>
         <TitleWrap>
-            <Title>picoral</Title>
+            <PageTitle>picoral</PageTitle>
             <Subtitle>i enjoy building things</Subtitle>
         </TitleWrap>
         <ScrollDownWrap>

@@ -1,13 +1,15 @@
 import About from '@components/About';
 import Contact from '@components/Contact';
+import Experience from '@components/Experience';
 import Home from '@components/Home';
-import Menu from '@components/Menu';
 import Navbar from '@components/Navbar';
 import Projects from '@components/Projects';
+import VerticalMenu, { Sections } from '@components/VerticalMenu';
+import useWidth from '@hooks/width.hook';
 import { PageProps } from '@pages/_app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -15,7 +17,6 @@ const Container = styled.div`
     min-width: 100%;
     min-height: 100%;
     text-align: center;
-    color: ${props => props.theme.colors.text};
     padding: 0 15px;
 `;
 
@@ -38,34 +39,30 @@ const scrollToSection = (sectionIndex: number) => {
 };
 
 const Index = ({ setTheme }: PageProps) => {
-    const [isMenuOpen, setMenuOpen] = useState(false);
-
     const router = useRouter();
-    const slug = (router.query.slug as string[]) || [];
+    const width = useWidth();
 
-    useEffect(() => {
-        if (isMenuOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'visible';
-        }
-    }, [isMenuOpen]);
+    const slug = (router.query.slug as string[]) || [];
 
     // Scroll based on the query
     useEffect(() => {
         if (slug.length === 1) {
             switch (slug[0]) {
-                case 'home':
+                case Sections.HOME:
                     scrollToSection(0);
+                    void router.push('/', undefined, { shallow: true });
                     break;
-                case 'projects':
+                case Sections.EXPERIENCE:
                     scrollToSection(1);
                     break;
-                case 'about':
+                case Sections.PROJECTS:
                     scrollToSection(2);
                     break;
-                case 'contact':
+                case Sections.ABOUT:
                     scrollToSection(3);
+                    break;
+                case Sections.CONTACT:
+                    scrollToSection(4);
                     break;
                 default:
                     void router.push('/', undefined, { shallow: true });
@@ -82,14 +79,11 @@ const Index = ({ setTheme }: PageProps) => {
             <Head>
                 <title>Fernando Picoral</title>
             </Head>
-            <Menu isOpen={isMenuOpen} setOpen={setMenuOpen} />
-            <Navbar
-                isMenuOpen={isMenuOpen}
-                setMenuOpen={setMenuOpen}
-                setTheme={setTheme}
-            />
+            <Navbar setTheme={setTheme} />
+            {width >= 1020 && <VerticalMenu />}
             <Container>
                 <Home />
+                <Experience />
                 <Projects />
                 <About />
                 <Contact />
