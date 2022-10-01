@@ -1,4 +1,4 @@
-import { getPreferredTheme } from '@themes/heler';
+import { getPreferredTheme } from '@themes/helper';
 import light from '@themes/light';
 import { AppProps } from 'next/app';
 import React, { useEffect, useState } from 'react';
