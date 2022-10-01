@@ -95,6 +95,12 @@ const Contact = () => {
                         feRpicoral <StyledURLIcon />{' '}
                     </ContactLink>
                 </ContactItem>
+                <ContactItem>
+                    <ContactTitle>Resume</ContactTitle>
+                    <ContactLink href="/Resume.pdf" target="_blank">
+                        Fernando Picoral&rsquo;s CV
+                    </ContactLink>
+                </ContactItem>
             </SectionContent>
         </ContactSection>
     );
