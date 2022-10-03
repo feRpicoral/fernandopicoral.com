@@ -1,6 +1,6 @@
 {
   "name": "fernandopicoral.com",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "private": true,
   "description": "Picoral's portfolio website",
   "scripts": {
@@ -28,13 +28,13 @@
   },
   "devDependencies": {
     "@stockvio/eslint-config": "^3.1.2",
-    "@svgr/webpack": "^6.3.1",
+    "@svgr/webpack": "^6.4.0",
     "@types/node": "^16",
     "@types/react": "^17",
     "@types/react-dom": "^18.0.6",
     "@types/smoothscroll-polyfill": "^0.3.1",
     "@types/styled-components": "^5.1.26",
-    "eslint": "~8.22",
+    "eslint": "^8.24.0",
     "eslint-config-next": "^12.3.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",

@@ -2,18 +2,8 @@ import { Section, SectionContent, SectionHeader } from '@components/styles';
 import EmailIcon from '@icons/email.svg';
 import LinkedinIcon from '@icons/linkedin.svg';
 import UrlIcon from '@icons/url.svg';
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
-
-const ContactSection = styled(Section)`
-    padding-bottom: 10vh;
-`;
-
-const ContactItem = styled.div`
-    &:not(:first-of-type) {
-        margin-top: 30px;
-    }
-`;
 
 const ContactTitle = styled.span`
     font-size: 30px;
@@ -24,8 +14,6 @@ const ContactTitle = styled.span`
 
 const ContactLink = styled.a`
     display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 24px;
     line-height: 32px;
     font-weight: 100;
@@ -60,50 +48,45 @@ const StyledLinkedinIcon = styled(LinkedinIcon)`
     ${svgCss};
 `;
 
-const Contact = () => {
-    const [isOpen, setOpen] = useState(true);
-    return (
-        <ContactSection>
-            <SectionHeader onClick={() => setOpen(!isOpen)}>
-                contact
-            </SectionHeader>
-            <SectionContent open={isOpen}>
-                <ContactItem>
-                    <ContactTitle>Email</ContactTitle>
-                    <ContactLink
-                        href="mailto:fernando.picoral@colorado.edu"
-                        target="_blank"
-                    >
-                        fernando.picoral@colorado.edu <StyledEmailIcon />
-                    </ContactLink>
-                </ContactItem>
-                <ContactItem>
-                    <ContactTitle>Linkedin</ContactTitle>
-                    <ContactLink
-                        href="https://www.linkedin.com/in/picoral/"
-                        target="_blank"
-                    >
-                        @picoral <StyledLinkedinIcon />
-                    </ContactLink>
-                </ContactItem>
-                <ContactItem>
-                    <ContactTitle>GitHub</ContactTitle>
-                    <ContactLink
-                        href="https://github.com/feRpicoral/"
-                        target="_blank"
-                    >
-                        feRpicoral <StyledURLIcon />{' '}
-                    </ContactLink>
-                </ContactItem>
-                <ContactItem>
-                    <ContactTitle>Resume</ContactTitle>
-                    <ContactLink href="/Resume.pdf" target="_blank">
-                        Fernando Picoral&rsquo;s CV
-                    </ContactLink>
-                </ContactItem>
-            </SectionContent>
-        </ContactSection>
-    );
-};
+const Contact = () => (
+    <Section>
+        <SectionHeader>contact</SectionHeader>
+        <SectionContent>
+            <div>
+                <ContactTitle>Email</ContactTitle>
+                <ContactLink
+                    href="mailto:fernando.picoral@colorado.edu"
+                    target="_blank"
+                >
+                    fernando.picoral@colorado.edu <StyledEmailIcon />
+                </ContactLink>
+            </div>
+            <div>
+                <ContactTitle>Linkedin</ContactTitle>
+                <ContactLink
+                    href="https://www.linkedin.com/in/picoral/"
+                    target="_blank"
+                >
+                    @picoral <StyledLinkedinIcon />
+                </ContactLink>
+            </div>
+            <div>
+                <ContactTitle>GitHub</ContactTitle>
+                <ContactLink
+                    href="https://github.com/feRpicoral/"
+                    target="_blank"
+                >
+                    feRpicoral <StyledURLIcon />{' '}
+                </ContactLink>
+            </div>
+            <div>
+                <ContactTitle>Resume</ContactTitle>
+                <ContactLink href="/static/files/Resume.pdf" target="_blank">
+                    Fernando Picoral&rsquo;s CV
+                </ContactLink>
+            </div>
+        </SectionContent>
+    </Section>
+);
 
 export default Contact;
