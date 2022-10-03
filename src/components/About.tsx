@@ -11,6 +11,11 @@ const AboutTitle = styled.span`
     :first-of-type {
         margin-top: 0;
     }
+
+    @media only screen and (max-width: 600px) {
+        font-size: 25px;
+        margin: 15px 0;
+    }
 `;
 
 const AboutDescription = styled.span`
@@ -18,6 +23,10 @@ const AboutDescription = styled.span`
     font-size: 24px;
     line-height: 32px;
     font-weight: 100;
+
+    @media only screen and (max-width: 600px) {
+        font-size: 20px;
+    }
 `;
 
 const About = () => (

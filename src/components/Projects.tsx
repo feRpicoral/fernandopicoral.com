@@ -22,6 +22,11 @@ const ProjectTitle = styled.a`
             text-decoration: underline;
         `}
     }
+
+    @media only screen and (max-width: 600px) {
+        font-size: 25px;
+        margin-bottom: 30px;
+    }
 `;
 
 const ProjectDescription = styled.p`
@@ -29,6 +34,10 @@ const ProjectDescription = styled.p`
     line-height: 30px;
     font-weight: 100;
     margin: 0;
+
+    @media only screen and (max-width: 600px) {
+        font-size: 18px;
+    }
 `;
 
 const StyledGithub = styled(GithubIcon)`
