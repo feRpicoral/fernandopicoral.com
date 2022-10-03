@@ -1,3 +1,4 @@
+import useSwipe, { SwipeDirection } from '@hooks/swipe.hook';
 import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
@@ -45,6 +46,15 @@ export interface MobileMenuProps {
 
 const MobileMenu = ({ isOpen, setOpen }: MobileMenuProps) => {
     const router = useRouter();
+    const swipe = useSwipe();
+
+    if (
+        isOpen &&
+        swipe.direction === SwipeDirection.RIGHT &&
+        swipe.end - swipe.start >= 250
+    ) {
+        setOpen(false);
+    }
 
     const handleClick = (section: string) => {
         setOpen(!isOpen);
