@@ -49,11 +49,9 @@ const Index = ({ setTheme }: PageProps) => {
 
     useEffect(() => {
         if (isMenuOpen) {
-            document.body.style.overflow = 'hidden';
-            document.documentElement.style.overflow = 'hidden';
+            document.body.classList.add('no-scroll');
         } else {
-            document.body.style.overflow = 'auto';
-            document.documentElement.style.overflow = 'auto';
+            document.body.classList.remove('no-scroll');
         }
     }, [isMenuOpen]);
 
