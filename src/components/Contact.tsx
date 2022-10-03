@@ -81,7 +81,7 @@ const Contact = () => (
             </div>
             <div>
                 <ContactTitle>Resume</ContactTitle>
-                <ContactLink href="/Resume.pdf" target="_blank">
+                <ContactLink href="/static/files/Resume.pdf" target="_blank">
                     Fernando Picoral&rsquo;s CV
                 </ContactLink>
             </div>
