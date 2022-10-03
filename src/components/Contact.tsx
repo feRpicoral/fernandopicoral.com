@@ -10,6 +10,11 @@ const ContactTitle = styled.span`
     font-weight: 300;
     margin-bottom: 30px;
     display: inline-block;
+
+    @media only screen and (max-width: 600px) {
+        font-size: 25px;
+        margin-bottom: 15px;
+    }
 `;
 
 const ContactLink = styled.a`
@@ -18,8 +23,13 @@ const ContactLink = styled.a`
     line-height: 32px;
     font-weight: 100;
     text-decoration: none;
+
     :hover {
         text-decoration: underline;
+    }
+
+    @media only screen and (max-width: 600px) {
+        font-size: 20px;
     }
 `;
 

@@ -2,6 +2,7 @@ import About from '@components/About';
 import Contact from '@components/Contact';
 import Experience from '@components/Experience';
 import Home from '@components/Home';
+import MobileMenu from '@components/mobile-menu/Menu';
 import Navbar from '@components/Navbar';
 import Projects from '@components/Projects';
 import VerticalMenu, { Sections } from '@components/VerticalMenu';
@@ -9,7 +10,7 @@ import useWidth from '@hooks/width.hook';
 import { PageProps } from '@pages/_app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -42,7 +43,17 @@ const Index = ({ setTheme }: PageProps) => {
     const router = useRouter();
     const width = useWidth();
 
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     const slug = (router.query.slug as string[]) || [];
+
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.classList.add('no-scroll');
+        } else {
+            document.body.classList.remove('no-scroll');
+        }
+    }, [isMenuOpen]);
 
     // Scroll based on the query
     useEffect(() => {
@@ -79,7 +90,8 @@ const Index = ({ setTheme }: PageProps) => {
             <Head>
                 <title>Fernando Picoral</title>
             </Head>
-            <Navbar setTheme={setTheme} />
+            <Navbar setTheme={setTheme} setMenuOpen={setIsMenuOpen} />
+            <MobileMenu isOpen={isMenuOpen} setOpen={setIsMenuOpen} />
             {width >= 1020 && <VerticalMenu />}
             <Container>
                 <Home />

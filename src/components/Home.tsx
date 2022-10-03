@@ -31,6 +31,10 @@ const ScrollDownWrap = styled.div`
     position: absolute;
     bottom: 0;
     animation: ${MoveUpDown} 1.8s linear infinite;
+
+    @media only screen and (max-width: 600px) {
+        margin-bottom: 80px;
+    }
 `;
 
 const ScrollDown = styled.span`
@@ -43,6 +47,10 @@ const ScrollDown = styled.span`
 
 const TitleWrap = styled.div`
     margin-top: 125px;
+
+    @media only screen and (max-width: 600px) {
+        margin-top: 75px;
+    }
 `;
 
 const Subtitle = styled.h2`
@@ -51,6 +59,11 @@ const Subtitle = styled.h2`
     font-size: 30px;
     line-height: 35px;
     margin: 15px 0;
+
+    @media only screen and (max-width: 600px) {
+        font-size: 25px;
+        margin-top: 0;
+    }
 `;
 
 const Home = () => (
