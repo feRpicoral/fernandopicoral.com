@@ -61,7 +61,7 @@ const StyledLinkedinIcon = styled(LinkedinIcon)`
 `;
 
 const Contact = () => {
-    const [isOpen, setOpen] = useState(false);
+    const [isOpen, setOpen] = useState(true);
     return (
         <ContactSection>
             <SectionHeader onClick={() => setOpen(!isOpen)}>
