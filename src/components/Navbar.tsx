@@ -1,4 +1,6 @@
+import MobileMenuButton from '@components/mobile-menu/Button';
 import ThemeButton from '@components/ThemeButton';
+import useWidth from '@hooks/width.hook';
 import React from 'react';
 import styled, { DefaultTheme } from 'styled-components';
 
@@ -26,15 +28,29 @@ const Logo = styled.h1`
     margin: 0;
 `;
 
+const RightSection = styled.div`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+`;
+
 export interface NavBarProps {
     setTheme: React.Dispatch<React.SetStateAction<DefaultTheme>>;
+    setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Navbar = ({ setTheme }: NavBarProps) => (
-    <Nav>
-        <Logo>picoral</Logo>
-        <ThemeButton setTheme={setTheme} />
-    </Nav>
-);
+const Navbar = ({ setTheme, setMenuOpen }: NavBarProps) => {
+    const width = useWidth();
+
+    return (
+        <Nav>
+            <Logo>picoral</Logo>
+            <RightSection>
+                <ThemeButton setTheme={setTheme} />
+                {width <= 1020 && <MobileMenuButton setOpen={setMenuOpen} />}
+            </RightSection>
+        </Nav>
+    );
+};
 
 export default Navbar;
