@@ -13,6 +13,10 @@ const Nav = styled.nav`
     background-color: ${props => props.theme.colors.navBackground};
     z-index: 1;
     padding: 30px;
+
+    @media only screen and (max-width: 600px) {
+        padding: 15px 30px;
+    }
 `;
 
 const Logo = styled.h1`

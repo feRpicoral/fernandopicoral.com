@@ -6,28 +6,48 @@ const Title = styled.h1`
     margin: 0 0 10px 0;
     font-weight: 300;
     font-size: 30px;
+
+    @media only screen and (max-width: 600px) {
+        font-size: 25px;
+    }
 `;
 
 const TitleSubscript = styled.span`
     margin: 10px 0;
     font-size: 25px;
     display: inline-block;
+
+    @media only screen and (max-width: 600px) {
+        font-size: 20px;
+    }
 `;
 
 const SubTitle = styled.h2`
     margin: 0 0 20px 0;
     font-weight: 100;
     font-size: 25px;
+
+    @media only screen and (max-width: 600px) {
+        font-size: 20px;
+    }
 `;
 
 const Date = styled(SubTitle)`
     margin: 0 0 50px 0;
     font-size: 20px;
+
+    @media only screen and (max-width: 600px) {
+        font-size: 18px;
+    }
 `;
 
 const Description = styled.div`
     font-weight: 100;
     font-size: 20px;
+
+    @media only screen and (max-width: 600px) {
+        font-size: 18px;
+    }
 `;
 
 const List = styled.ul`
@@ -47,7 +67,11 @@ const Experience = () => (
             <div>
                 <Title>Brain, AI, and Child Laboratory</Title>
                 <SubTitle>Research Assistant Intern</SubTitle>
-                <Date>08/2022 - Present</Date>
+                <Date>
+                    {/* Some portions of the dates are wrapped in a span to avoid iPhones interpreting
+                    them as phone numbers and underlining them*/}
+                    <span>08</span>/2022 - Present
+                </Date>
                 <Description>
                     During the second week of classes at CU Boulder, my computer
                     science professor, Dr. Tom Yeh, invited me to join his
@@ -68,7 +92,9 @@ const Experience = () => (
                     <TitleSubscript>A WillowTree Company</TitleSubscript>
                 </Title>
                 <SubTitle>Software Engineer</SubTitle>
-                <Date>06/2021 - 06/2022</Date>
+                <Date>
+                    <span>06</span>/2021 - 06/2022
+                </Date>
                 <Description>
                     Poatek, one of the WillowTree branches, is an IT boutique
                     based in Brazil, with high-end clients from around the
@@ -116,7 +142,9 @@ const Experience = () => (
             <div>
                 <Title>Stockvio LLC</Title>
                 <SubTitle>Founder & CEO</SubTitle>
-                <Date>11/2020 - 02/2022</Date>
+                <Date>
+                    <span>11</span>/2020 - 02/2022
+                </Date>
                 <Description>
                     Stockvio is a platform where users can automatically
                     calculate their taxes over capital gains in BOVESPA using
