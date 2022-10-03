@@ -2,7 +2,7 @@ import { Section, SectionContent, SectionHeader } from '@components/styles';
 import EmailIcon from '@icons/email.svg';
 import LinkedinIcon from '@icons/linkedin.svg';
 import UrlIcon from '@icons/url.svg';
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 
 const ContactTitle = styled.span`
@@ -48,50 +48,45 @@ const StyledLinkedinIcon = styled(LinkedinIcon)`
     ${svgCss};
 `;
 
-const Contact = () => {
-    const [isOpen, setOpen] = useState(true);
-    return (
-        <Section>
-            <SectionHeader onClick={() => setOpen(!isOpen)}>
-                contact
-            </SectionHeader>
-            <SectionContent open={isOpen}>
-                <div>
-                    <ContactTitle>Email</ContactTitle>
-                    <ContactLink
-                        href="mailto:fernando.picoral@colorado.edu"
-                        target="_blank"
-                    >
-                        fernando.picoral@colorado.edu <StyledEmailIcon />
-                    </ContactLink>
-                </div>
-                <div>
-                    <ContactTitle>Linkedin</ContactTitle>
-                    <ContactLink
-                        href="https://www.linkedin.com/in/picoral/"
-                        target="_blank"
-                    >
-                        @picoral <StyledLinkedinIcon />
-                    </ContactLink>
-                </div>
-                <div>
-                    <ContactTitle>GitHub</ContactTitle>
-                    <ContactLink
-                        href="https://github.com/feRpicoral/"
-                        target="_blank"
-                    >
-                        feRpicoral <StyledURLIcon />{' '}
-                    </ContactLink>
-                </div>
-                <div>
-                    <ContactTitle>Resume</ContactTitle>
-                    <ContactLink href="/Resume.pdf" target="_blank">
-                        Fernando Picoral&rsquo;s CV
-                    </ContactLink>
-                </div>
-            </SectionContent>
-        </Section>
-    );
-};
+const Contact = () => (
+    <Section>
+        <SectionHeader>contact</SectionHeader>
+        <SectionContent>
+            <div>
+                <ContactTitle>Email</ContactTitle>
+                <ContactLink
+                    href="mailto:fernando.picoral@colorado.edu"
+                    target="_blank"
+                >
+                    fernando.picoral@colorado.edu <StyledEmailIcon />
+                </ContactLink>
+            </div>
+            <div>
+                <ContactTitle>Linkedin</ContactTitle>
+                <ContactLink
+                    href="https://www.linkedin.com/in/picoral/"
+                    target="_blank"
+                >
+                    @picoral <StyledLinkedinIcon />
+                </ContactLink>
+            </div>
+            <div>
+                <ContactTitle>GitHub</ContactTitle>
+                <ContactLink
+                    href="https://github.com/feRpicoral/"
+                    target="_blank"
+                >
+                    feRpicoral <StyledURLIcon />{' '}
+                </ContactLink>
+            </div>
+            <div>
+                <ContactTitle>Resume</ContactTitle>
+                <ContactLink href="/Resume.pdf" target="_blank">
+                    Fernando Picoral&rsquo;s CV
+                </ContactLink>
+            </div>
+        </SectionContent>
+    </Section>
+);
 
 export default Contact;
