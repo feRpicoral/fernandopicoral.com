@@ -4,9 +4,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const ProjectTitle = styled.a`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: block;
     font-size: 30px;
     font-weight: 300;
     margin: 50px 0;

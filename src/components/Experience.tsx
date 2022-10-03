@@ -2,16 +2,6 @@ import { Section, SectionContent, SectionHeader } from '@components/styles';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    :not(:last-of-type) {
-        margin-bottom: 80px !important;
-    }
-`;
-
 const Title = styled.h1`
     margin: 0 0 10px 0;
     font-weight: 300;
@@ -41,8 +31,6 @@ const Description = styled.div`
 `;
 
 const List = styled.ul`
-    max-width: 500px;
-    margin: 0 auto;
     text-align: left;
 
     li {
@@ -61,7 +49,7 @@ const Experience = () => {
                 experience
             </SectionHeader>
             <SectionContent open={isOpen} height={3000}>
-                <Wrapper>
+                <div>
                     <Title>Brain, AI, and Child Laboratory</Title>
                     <SubTitle>Research Assistant Intern</SubTitle>
                     <Date>08/2022 - Present</Date>
@@ -76,9 +64,9 @@ const Experience = () => {
                         have highlighted the ones I am most involved with in the
                         Projects section.
                     </Description>
-                </Wrapper>
+                </div>
 
-                <Wrapper>
+                <div>
                     <Title>
                         Poatek IT Consulting
                         <br />
@@ -128,9 +116,9 @@ const Experience = () => {
                             </li>
                         </List>
                     </Description>
-                </Wrapper>
+                </div>
 
-                <Wrapper>
+                <div>
                     <Title>Stockvio LLC</Title>
                     <SubTitle>Founder & CEO</SubTitle>
                     <Date>11/2020 - 02/2022</Date>
@@ -171,7 +159,7 @@ const Experience = () => {
                             </li>
                         </List>
                     </Description>
-                </Wrapper>
+                </div>
             </SectionContent>
         </Section>
     );

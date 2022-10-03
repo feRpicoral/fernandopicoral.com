@@ -38,10 +38,19 @@ export const SectionContent = styled.div<{ open: boolean; height?: number }>`
     display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: center;
+    align-items: baseline;
     font-family: ${props => props.theme.fontFamilies.roboto};
+    text-align: justify;
 
     div:not(:last-of-type) {
         margin-bottom: 80px;
+    }
+
+    &:last-of-type {
+        padding-bottom: 10vh;
+    }
+
+    @media only screen and (min-width: 1020px) {
+        min-width: 650px;
     }
 `;

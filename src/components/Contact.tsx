@@ -5,16 +5,6 @@ import UrlIcon from '@icons/url.svg';
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 
-const ContactSection = styled(Section)`
-    padding-bottom: 10vh;
-`;
-
-const ContactItem = styled.div`
-    &:not(:first-of-type) {
-        margin-top: 30px;
-    }
-`;
-
 const ContactTitle = styled.span`
     font-size: 30px;
     font-weight: 300;
@@ -24,8 +14,6 @@ const ContactTitle = styled.span`
 
 const ContactLink = styled.a`
     display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 24px;
     line-height: 32px;
     font-weight: 100;
@@ -63,12 +51,12 @@ const StyledLinkedinIcon = styled(LinkedinIcon)`
 const Contact = () => {
     const [isOpen, setOpen] = useState(true);
     return (
-        <ContactSection>
+        <Section>
             <SectionHeader onClick={() => setOpen(!isOpen)}>
                 contact
             </SectionHeader>
             <SectionContent open={isOpen}>
-                <ContactItem>
+                <div>
                     <ContactTitle>Email</ContactTitle>
                     <ContactLink
                         href="mailto:fernando.picoral@colorado.edu"
@@ -76,8 +64,8 @@ const Contact = () => {
                     >
                         fernando.picoral@colorado.edu <StyledEmailIcon />
                     </ContactLink>
-                </ContactItem>
-                <ContactItem>
+                </div>
+                <div>
                     <ContactTitle>Linkedin</ContactTitle>
                     <ContactLink
                         href="https://www.linkedin.com/in/picoral/"
@@ -85,8 +73,8 @@ const Contact = () => {
                     >
                         @picoral <StyledLinkedinIcon />
                     </ContactLink>
-                </ContactItem>
-                <ContactItem>
+                </div>
+                <div>
                     <ContactTitle>GitHub</ContactTitle>
                     <ContactLink
                         href="https://github.com/feRpicoral/"
@@ -94,15 +82,15 @@ const Contact = () => {
                     >
                         feRpicoral <StyledURLIcon />{' '}
                     </ContactLink>
-                </ContactItem>
-                <ContactItem>
+                </div>
+                <div>
                     <ContactTitle>Resume</ContactTitle>
                     <ContactLink href="/Resume.pdf" target="_blank">
                         Fernando Picoral&rsquo;s CV
                     </ContactLink>
-                </ContactItem>
+                </div>
             </SectionContent>
-        </ContactSection>
+        </Section>
     );
 };
 
