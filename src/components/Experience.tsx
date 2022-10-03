@@ -53,7 +53,7 @@ const List = styled.ul`
 `;
 
 const Experience = () => {
-    const [isOpen, setOpen] = useState(false);
+    const [isOpen, setOpen] = useState(true);
 
     return (
         <Section>

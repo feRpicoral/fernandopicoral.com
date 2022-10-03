@@ -41,7 +41,7 @@ const StyledGithub = styled(GithubIcon)`
 `;
 
 const Projects = () => {
-    const [isOpen, setOpen] = useState(false);
+    const [isOpen, setOpen] = useState(true);
     return (
         <Section>
             <SectionHeader onClick={() => setOpen(!isOpen)}>
